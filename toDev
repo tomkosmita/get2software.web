@@ -1,0 +1,234 @@
+
+Specyfikacja Funkcjonalna: get2BHPRent (SaaS)
+1. Architektura Systemu i Multi-tenancy
+* Model: SaaS (Software as a Service) z izolacją danych klientów.
+* Struktura Magazynowa: Drzewiasta struktura magazynów.
+    * Magazyny Własne: Centralny, Buforowy, Reklamacyjny.
+    * Magazyny Zewnętrzne (Wirtualne): "Sklep XYZ", "Magazyn u Klienta A", "Pralnia".
+    * Magazyn "Pracownik": Każdy pracownik kontrahenta jest traktowany jako końcowy punkt składowy (miejsce powierzenia mienia).
+2. Obieg Dokumentów i Gospodarka Magazynowa (Core)
+Każdy ruch towaru musi być usankcjonowany dokumentem systemowym. To klucz do inwentaryzacji i rozliczeń.
+* PZ (Przyjęcie Zewnętrzne): Przyjęcie towaru od dostawców do Twojego magazynu centralnego.
+* MM (Przesunięcie Międzymagazynowe): Przesunięcie towaru np. z Magazynu Centralnego do "Sklepu XYZ" lub do szaf u klienta.
+* WZ (Wydanie Zewnętrzne): Dokument wydania odzieży konkretnemu pracownikowi klienta. Powoduje zdjęcie ze stanu magazynowego klienta i przypisanie do "kartoteki osobowej".
+* PZ-Zwrot (Przyjęcie z zewnątrz): Dokument zwrotu odzieży od pracownika (np. przy rozwiązaniu umowy). Towar trafia na "Magazyn Kwarantanna" lub "Magazyn Używane".
+* Protokół Reklamacyjny: Dokument techniczny zmieniający status towaru na "Uszkodzony/W naprawie".
+3. Kartoteka Pracownika i Limity (Ewidencja ŚOI)
+* Profil Pracownika: Przypisanie do firmy, działu i stanowiska.
+* Normatywy: Definicja, co dany pracownik powinien posiadać (np. 2 pary spodni, 5 koszulek).
+* Saldo Pracownika: Widok wszystkich pobranych sztuk (ilościowo) z datami wydania, co pozwala na rozliczenie "obiegówki" przy zwolnieniu.
+4. Portal Klienta B2B
+Klient loguje się do własnego panelu, gdzie widzi:
+* Stany Magazynowe: Ile odzieży ma "na stanie" w swoich lokalizacjach.
+* Raport Wydań: Lista pracowników wraz z pobranym asortymentem (podstawa do kontroli BHP).
+* Moduł Zamówień: Możliwość wystawienia zapotrzebowania, które w systemie operatora pojawia się jako "Rezerwacja" lub "Zlecenie WZ".
+5. Raportowanie i Rozliczenia
+* Raport Rozliczeniowy (Miesięczny): Zestawienie wszystkich dokumentów WZ/PZ dla danego klienta w danym miesiącu (podstawa do faktury za usługę/najem).
+* Inwentaryzacja: Moduł pozwalający na porównanie stanu systemowego ze stanem faktycznym w dowolnym magazynie (w tym u pracownika).
+
+Specyfikacja Funkcjonalna i Techniczna: get2BHPRent (SaaS)
+1. Architektura i Założenia Główne
+* Model Dystrybucji: Aplikacja webowa w modelu SaaS z architekturą Multi-tenant, gwarantująca całkowitą izolację danych pomiędzy klientami docelowymi.
+* Architektura Bazy Danych (Future-proofing): Ewidencja w wersji MVP opiera się na bilansowaniu ilości (bez konieczności skanowania sztuk), jednak struktura tabel musi zapisywać wydania jako atomowe rekordy. Pozwoli to w przyszłości na płynne dodanie kolumn z unikalnymi identyfikatorami (UID/Kody QR/RFID) bez konieczności refaktoryzacji całego systemu.
+* Zgodność Lokalna: System uwzględnia specyfikę polskiego Prawa Pracy, w tym wymogi PIP dotyczące ewidencji Środków Ochrony Indywidualnej (ŚOI) oraz odzieży roboczej.
+
+2. Uprawnienia i Profile Użytkowników
+* Super Administrator: Właściciel systemu (Twoja firma). Posiada pełny dostęp do konfiguracji tenantów, cenników globalnych, zarządzania operatorami oraz słowników systemu.
+* Operator Wypożyczalni: Pracownik logistyki, magazynu lub Biura Obsługi Klienta. Wykonuje operacje wydawania, przyjmowania zwrotów, rejestracji reklamacji i obsługi dokumentów magazynowych.
+* Administrator Klienta (B2B): Przedstawiciel firmy docelowej (np. Kierownik, Specjalista BHP). Posiada dostęp wyłącznie do portalu własnej firmy, swoich MPK oraz matrycy własnych pracowników.
+
+3. Logika Magazynowa i Obieg Dokumentów
+* Drzewo Magazynów: Obsługa magazynu centralnego wypożyczalni, magazynów wirtualnych (np. "Sklep u klienta", "W praniu") oraz traktowanie każdego pracownika docelowego jako oddzielnego punktu składowego.
+* Dokumenty Systemowe: Ścisła ewidencja oparta na dokumentach: PZ (przyjęcie od dostawcy), MM (przesunięcia między lokalizacjami), WZ (wydanie odzieży pracownikowi), PZ-Zwrot (zwrot od pracownika) oraz Protokół Reklamacyjny.
+* Indeksy Zamienne: Mechanizm pozwalający operatorowi na wydanie asortymentu "B", gdy przypisany w normie asortyment "A" jest niedostępny w magazynie, przy jednoczesnym zaliczeniu tego wydania jako spełnienie normy przydziału dla pracownika.
+
+4. Kartoteka Pracownicza i Normatywy BHP
+* Matryca Rozmiarów: Karta pracownika zawiera dedykowane pola wymiarowe: wzrost, obwód klatki piersiowej, obwód pasa, rozmiar obuwia oraz rozmiar głowy.
+* Tabele Norm: Automatyczne planowanie zapotrzebowania na podstawie przydziałów przypisanych do konkretnego stanowiska pracy i działu.
+* Zawieszanie Czasookresu: Algorytm "zamrażający" czas użytkowania odzieży w przypadku długotrwałej nieobecności pracownika (np. urlop bezpłatny, L4), automatycznie przesuwający datę kolejnego należnego przydziału o liczbę dni nieobecności.
+* Kumulacja Przydziałów: Funkcja podpowiadająca wydanie zwielokrotnionej ilości asortymentu (np. rękawic, maseczek) w przypadku historycznych zaległości w odbiorze przez pracownika.
+
+5. Księgowość i Rozliczenia Finansowe
+* Obsługa MPK: Wymóg przypisania Miejsca Powstawania Kosztów do każdego wydziału oraz indywidualnego pracownika. Wszelkie wydania z magazynu muszą być powiązane z MPK w celu poprawnego księgowania po stronie klienta.
+* Rozdzielnik Kosztów: Narzędzie generujące comiesięczne podsumowanie wartości wydanego sprzętu i odzieży, pogrupowane według kodów MPK. Raport ten stanowi podstawę do fakturowania klienta B2B.
+* Ekwiwalenty i Ryczałty: Zautomatyzowany moduł naliczający należności dla pracowników za pranie odzieży we własnym zakresie oraz wypłaty za przedłużone (ponad normę) użytkowanie własnej odzieży. Moduł generuje gotowe "Polecenia wypłaty".
+
+6. Portal Klienta (Self-Service B2B)
+* Dashboard Menedżerski: Przejrzysty interfejs pokazujący bieżące stany magazynowe w lokalizacjach klienta, liczbę aktywnych pracowników oraz podsumowanie kosztów z bieżącego miesiąca.
+* Zarządzanie Zapotrzebowaniem: Interaktywny formularz pozwalający klientowi zamawiać odzież dla nowo zatrudnionych osób lub zgłaszać konieczność wymiany (np. zmiana rozmiaru, zużycie). Zgłoszenia te pojawiają się u operatorów wypożyczalni jako rezerwacje.
+* Karta Obiegowa (Rozliczenie Zwolnień): Automatyczne zestawienie generowane w momencie wprowadzenia daty zakończenia pracy przez pracownika, pokazujące dokładne ilości i rodzaje odzieży wymagające natychmiastowego zwrotu.
+
+
+Systemy Wzorcowe (Referencje dla Dewelopera)
+Aby agent/deweloper wiedział, na czym się wzorować, powinien przeanalizować następujące rozwiązania:
+1. Studio TCS.net (SoftwareStudio):
+    * Dlaczego: To wzorzec profesjonalnego zarządzania odzieżą w Polsce. Deweloper powinien podpatrzeć u nich strukturę kartoteki odzieży oraz sposób łączenia gospodarki magazynowej z ewidencją wypożyczeń. Mają świetnie opisaną logikę "magazynów wirtualnych".
+2. enova365 (Moduł Zarządzanie Odzieżą Roboczą i BHP):
+    * Dlaczego: Wzorzec poprawności dokumentowej (WZ, PZ, RW). System ten jest budowany przez księgowych i logistyków – deweloper powinien zainspirować się ich logiką generowania dokumentów i rozliczeń finansowych na koniec okresu.
+3. LinenMaster (USA):
+    * Dlaczego: Benchmark dla interfejsu Portalu Klienta (B2B). Pokazuje, jak w prosty sposób prezentować skomplikowane dane o wypożyczeniach klientowi końcowemu (dashboardy, proste raporty zużycia).
+4. WMS Subiekt GT / Nexo:
+    * Dlaczego: Jeśli deweloper chce zrozumieć, jak działa "solidna gospodarka magazynowa" w polskim standardzie (rezerwacje, stany minimalne, dokumenty magazynowe), to jest to najpopularniejszy punkt odniesienia.
+
+get2FSM (Aplikacja typu field services)
+Fork systemu /Users/tomkos/DEV/github/aicomm2-web-react oraz /Users/tomkos/DEV/github/aicomm2Mobile - wyciągnij sobie specyfikację
+Specyfikacja Funkcjonalna Systemu get2FSM
+Model: Field Service Management (FSM) | Technologia: Progressive Web App (PWA)
+1. Przegląd Systemu
+
+
+get2FSM to kompleksowa platforma zaprojektowana dla nowoczesnych zespołów serwisowych i wdrożeniowych. System łączy intuicyjny interfejs z zaawansowaną automatyzacją procesów biznesowych. Z jednej strony ułatwia planowanie i kontrolę zadań przez managerów, z drugiej – drastycznie przyspiesza oraz usprawnia realizację zleceń w terenie przez serwisantów.
+
+Kluczowym wyróżnikiem systemu jest podejście mobile-first oparte na technologii PWA, co zapewnia płynne działanie na każdym urządzeniu bez konieczności instalacji zewnętrznych aplikacji.
+2. Korzyści Biznesowe
+
+
+
+Obszar	Wartość dla firmy
+Wzrost zysków	Szybsza obsługa zleceń pozwala na zwiększenie przepustowości zespołu bez dodatkowych etatów.
+Automatyzacja procesów	Skrócenie czasu od przydzielenia zadania, przez wykonanie, aż do wystawienia faktury.
+Automatyzacja rozliczeń	Precyzyjne zliczanie czasu i kosztów materiałowych eliminuje błędy w księgowaniu.
+Pełna kontrola	Panel zarządzania umożliwia monitorowanie postępów prac w czasie rzeczywistym.
+Wielojęzyczność	Wsparcie dla wielu języków usuwa bariery w kontakcie z pracownikami zagranicznymi.
+3. Role i Uprawnienia
+*   Manager (Kierownik Serwisu): Odpowiada za planowanie, dispatching, nadzór nad marżowością oraz zarządzanie bazą klientów i systemów.
+* Serwisant-Wdrożeniowiec: Użytkownik mobilny realizujący zadania w terenie, dokumentujący postęp i kolekcjonujący koszty.
+* Księgowa: Odpowiada za weryfikację rozliczeń, przygotowanie wsadu do fakturowania oraz generowanie raportów miesięcznych dla kadr.
+4. Funkcjonalności Panelu Zarządzania (Web)
+
+
+Responsywny i intuicyjny interfejs dla managera pozwala na efektywne zarządzanie wieloma funkcjami z poziomu przeglądarki.
+
+Zarządzanie Zleceniami
+* Pulpit/Tablica Zleceń: Przegląd w czterech widokach: Listy, Grup, Kalendarza oraz Archiwum.
+* Szybkie Przypisywanie: Założone zlecenie automatycznie pojawia się w aplikacji mobilnej serwisanta bez opóźnień.
+* Monitoring Realizacji: Podgląd postępu prac w czasie rzeczywistym.
+Administracja i Bazy Danych
+* Baza Klientów: Katalog kontrahentów wraz z ich systemami technicznymi i historią serwisową.
+* Lista Użytkowników: Zarządzanie zespołem oraz przypisanymi do nich stanami magazynowymi.
+* Szablony i Katalogi: Tworzenie szablonów serwisowych, wykazów części oraz ofert dla klientów.
+5. Funkcjonalności Aplikacji Mobilnej (PWA)
+
+
+Aplikacja mobilna zastępuje papierowe tabele i raporty, gromadząc wszystkie funkcje w jednym urządzeniu.
+
+Interfejs i Nawigacja
+* User Experience: Prosty interfejs z trybem dziennym i nocnym; duże, wygodne buttony ułatwiające obsługę w terenie.
+* Pasek Nawigacyjny: Wybór języka, ustawienia konta oraz moduł podpisu elektronicznego.
+* Kalendarz: Dostęp do harmonogramu zleceń obecnych i archiwalnych.
+Realizacja i Koszty
+* Oznaczanie Postępu: Intuicyjne odhaczanie kolejnych etapów zadania (instrukcje przeglądu/instalacji).
+* Ewidencja Wydatków: Szybkie definiowanie kosztów podróży, części zamiennych i kilometrówek z menu wybieralnego.
+* Dokumentacja: Dodawanie zdjęć i filmów bezpośrednio do zlecenia.
+* Raportowanie Czasu: Automatyczne zliczanie czasu pracy spędzonego u klienta.
+6. Rozliczenie i Zamknięcie Zlecenia
+
+
+Proces zamykania zlecenia został zaprojektowany tak, aby zminimalizować pracę administracyjną:
+
+* Generator Raportów: Możliwość podglądu i weryfikacji raportu przez serwisanta przed zamknięciem.
+* Odbiór (Sign-off): Podpisanie dokumentów przez klienta na ekranie urządzenia (e-podpis).
+* Automatyczna Wysyłka: Natychmiastowe przesłanie raportu z wykonanych czynności do klienta drogą mailową.
+* Wsad do Faktury: Automatyczne generowanie zestawień dla księgowości na koniec miesiąca.
+7. Specyfikacja Techniczna Dodatkowa
+*   Działanie offline: Możliwość pracy w miejscach o słabym zasięgu (np. piwnice, hale) z późniejszą synchronizacją danych.
+* Powiadomienia Push: Alertowanie serwisantów o nowych zadaniach w czasie rzeczywistym.
+* Baza Urządzeń: Szybki dostęp do dokumentacji technicznej i historii notatek konkretnego urządzenia serwisowanego.
+
+Dokument stanowi finalne zestawienie wymagań funkcjonalnych dla systemu get2FSM.
+  get2Commissioning  (aplikacja do odbiorów na fabrykach) inspirowana przez mechanizm 
+1. Cel Systemu
+Automatyzacja procesu odbiorów technicznych (commissioning) w środowisku przemysłowym. System ma służyć do sprawnego raportowania usterek, zarządzania ich naprawą oraz generowania dokumentacji powykonawczej niezbędnej do podpisania protokołów zdawczo-odbiorczych.
+2. Persony (Role Użytkowników)
+* Administrator Systemu: Zarządza licencjami, użytkownikami i globalnymi ustawieniami.
+* Manager Projektu (Web Panel): Tworzy projekty, przypisuje zasoby, weryfikuje wykonane prace, generuje raporty końcowe.
+* Pracownik / Podwykonawca (PWA/Mobile): Osoba w terenie zgłaszająca uwagi lub realizująca naprawy przypisanych ticketów.
+
+3. Moduły Funkcjonalne
+3.1. Zarządzanie Projektami i Zespołem (Panel Web)
+* Tworzenie Projektu: Nazwa, lokalizacja (fabryka/hala), ramy czasowe, opcjonalnie wgranie planów/schematów (PDF/JPG).
+* Baza Użytkowników: System zaproszeń (e-mail), definiowanie ról i przypisywanie podwykonawców do konkretnych projektów.
+* Dashboard: Widok zbiorczy statusu wszystkich ticketów (Nowe, W toku, Do weryfikacji, Zamknięte) w formie wykresów.
+3.2. Moduł Terenowy - Tickety (PWA / Mobile)
+* Zgłaszanie uwagi (Inwentaryzacja):
+    * Szybkie dodanie zdjęcia (aparat/galeria).
+    * Markup: Możliwość rysowania po zdjęciu (zaznaczenie usterki kółkiem/strzałką).
+    * Opis tekstowy lub głosowy (zamiana mowy na tekst).
+    * Kategoryzacja (mechanika, elektryka, BHP, software).
+    * Priorytet (Niski, Średni, Krytyczny).
+* Kolejka Zadań: Lista ticketów z filtrowaniem po statusie, dacie i priorytecie.
+* Geolokalizacja/Lokalizacja wewnątrz obiektu: Przypisanie usterki do konkretnego sektora fabryki.
+3.3. Komunikacja i Obsługa Ticketu
+* Przypisanie (Assignment): Manager deleguje zadanie do konkretnej osoby lub firmy podwykonawczej.
+* Chat wewnątrz ticketu:
+    * Wymiana notatek i pytań w czasie rzeczywistym.
+    * Przesyłanie dodatkowych plików (instrukcje, schematy, certyfikaty).
+* Log Zdarzeń (Audit Trail): Automatyczny zapis każdej zmiany (np. "Użytkownik X zmienił status na 'Rozwiązane'", "Dodano zdjęcie wykonanej naprawy").
+3.4. Proces Workflow i Kontrola Jakości (Review)
+1. Zgłoszenie: Status "Open".
+2. Podjęcie prac: Status "In Progress".
+3. Naprawa: Pracownik wrzuca zdjęcie "po naprawie" i zmienia status na "Resolved".
+4. Weryfikacja (Manager):
+    * Akceptacja: Manager zamyka ticket (Status "Closed").
+    * Odrzucenie: Manager dodaje komentarz/zdjęcie z uwagą, status wraca do "In Progress".
+3.5. Raportowanie i Eksport
+* Generator Raportów PDF: Automatyczne tworzenie dokumentu zawierającego:
+    * Podsumowanie statystyczne (ile usterek zgłoszono/zamknięto).
+    * Szczegółową listę z historią, zdjęciami "przed/po" oraz podpisami osób odpowiedzialnych.
+* Eksport danych: Możliwość eksportu do Excel (XLSX) dla dalszej analizy danych.
+
+4. Wymagania Techniczne
+4.1. Perspektywa Mobile (PWA)
+* Tryb Offline: Możliwość robienia zdjęć i opisów w halach z brakiem zasięgu (synchronizacja po wykryciu sieci).
+* Responsywność: Interfejs dostosowany do obsługi jedną ręką.
+* Powiadomienia Push: Informacja o nowym przypisanym zadaniu lub komentarzu w chacie.
+4.2. Perspektywa Web (Manager Panel)
+* Zarządzanie masowe: Edycja wielu ticketów naraz.
+* Filtry zaawansowane: Sortowanie po podwykonawcach, czasie reakcji (SLA) i typie usterki.
+
+5. Przykładowy Proces (User Story)
+Inżynier Jan wchodzi na nową linię produkcyjną. Widzi nieszczelność w układzie pneumatycznym. Otwiera aplikację, robi zdjęcie, zaznacza wyciek czerwoną pętlą, opisuje jako "Wyciek powietrza - zawór V2" i wysyła.
+Manager Marek w panelu web widzi zgłoszenie i przypisuje je do firmy Pneumatix.
+Serwisant z Pneumatix dostaje powiadomienie, wymienia uszczelkę, robi zdjęcie naprawionego elementu i klika "Resolved".
+Marek dostaje info, sprawdza zdjęcie, klika "Closed". Na koniec dnia generuje raport PDF, który jest gotowy do podpięcia pod protokół odbioru fabrycznego.
+
+6. Inspiracje Funkcjonalne z Rynku
+* Fieldwire: Zaawansowane zarządzanie planami (nanoszenie ticketów na rzuty budynków).
+* SnagR: Automatyzacja raportowania wizualnego i bardzo przejrzyste dashboardy KPI.
+* Slack/Teams: Styl komunikacji wewnątrz ticketu (wzmianki @użytkownik).
+
+
+get2Maintenance
+
+Każdy z tych systemów możemy zintegrować z systemem ERP  W utrzymaniu ruchu kluczowa jest nie tylko naprawa, ale ciągłość pracy, historia maszyny oraz szybkość reakcji. Poniżej zaktualizowana specyfikacja funkcjonalna, dostosowana do realiów hal produkcyjnych i działów UR.
+
+Specyfikacja Funkcjonalna: get2Maintenance (UR)
+1. Cel Systemu
+Zapewnienie maksymalnej dostępności parku maszynowego poprzez błyskawiczne raportowanie awarii, ustrukturyzowany proces naprawczy oraz budowanie bazy wiedzy o usterkach (historii serwisowej) dla każdej maszyny.
+2. Architektura Obiektów (Struktura Drzewiasta)
+Zamiast "Projektów", system operuje na strukturze fizycznej fabryki:
+* Lokalizacja: (np. Hala A, Wydział Wtryskarek).
+* Linia Produkcyjna: (np. Linia Montażowa nr 4).
+* Zasób (Asset): Konkretna maszyna/urządzenie posiadające własny Kod QR.
+
+3. Moduły Funkcjonalne
+3.1. Rejestracja i Baza Zasobów (Panel Web)
+* Ewidencja Maszyn: Każda maszyna ma swój profil: nazwa, model, rok produkcji, dokumentacja DTR (PDF), instrukcje stanowiskowe.
+* Generowanie Kodów QR: System generuje unikalny kod dla każdej maszyny. Naklejenie go na obudowę pozwala pracownikowi na natychmiastowe otwarcie ticketu po zeskanowaniu (bez szukania maszyny na liście).
+* Zarządzanie Zespołem: Podział na mechaników, elektryków, automatyków oraz podwykonawców zewnętrznych (serwis zewnętrzny).
+3.2. Moduł Mobilny: Zgłoszenie Awarii/Usterki (PWA)
+* Szybki Start (Scan & Go): Pracownik produkcji lub UR skanuje kod QR na maszynie.
+* Typ zgłoszenia:
+    * Awaria (maszyna stoi – priorytet krytyczny).
+    * Usterka/Uwaga (maszyna pracuje, ale wymaga interwencji).
+    * Przegląd (zadanie planowane).
+* Dokumentacja wizualna: Zdjęcie usterki + opcjonalnie krótkie wideo (np. aby pokazać nietypowy dźwięk pracy łożyska).
+* Opis: Pole tekstowe z podpowiedziami najczęstszych problemów dla danej maszyny.
+3.3. Kolejka Zadań i Workflow
+* Tablica Ticketów: Widok typu Kanban (Nowe | W toku | Oczekiwanie na części | Do weryfikacji | Zamknięte).
+* System Powiadomień: Natychmiastowe info na telefon (Push) dla przypisanych techników, gdy wpada "Awaria".
+* Czas Przestoju: System automatycznie mierzy czas od zgłoszenia awarii do jej usunięcia (wskaźnik MTTR - Mean Time To Repair).
+3.4. Chat i Baza Wiedzy w Tickecie
+* Komunikacja: Możliwość oznaczania osób (@Janusz, zerknij na to ustawienie falownika).
+* Przesyłanie plików: Zdjęcia części zamiennych, screeny z paneli HMI, skany faktur od serwisów zewnętrznych.
+* Notatki techniczne: Opis rozwiązania problemu, który zostaje w systemie "d
