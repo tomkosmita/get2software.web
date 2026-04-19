@@ -13,11 +13,17 @@ export const routeMap: Record<
 > = {
   home: { pl: '/pl/', en: '/en/' },
   about: { pl: '/pl/o-nas/', en: '/en/about/' },
+  /** Zespół: kompetencje i model współpracy z klientem (wdrożenie punktowe lub end-to-end). */
+  team: { pl: '/pl/zespol/', en: '/en/team/' },
   products: { pl: '/pl/produkty/', en: '/en/products/' },
   integrations: { pl: '/pl/integracje/', en: '/en/integrations/' },
   /** Wsparcie utrzymaniowe systemów po wdrożeniu (PL/EN) - hreflang i przełącznik języka. */
   support: { pl: '/pl/wsparcie-systemow/', en: '/en/system-support/' },
-  news: { pl: '/pl/aktualnosci/', en: '/en/news/' },
+  /**
+   * Artykuły / blog — na start treść wyłącznie po polsku; EN menu linkuje do tego samego URL,
+   * żeby nie budować „pustej” podstrony `/en/...` bez treści.
+   */
+  articles: { pl: '/pl/artykuly/', en: '/pl/artykuly/' },
   careers: { pl: '/pl/kariera/', en: '/en/careers/' },
   contact: { pl: '/pl/kontakt/', en: '/en/contact/' },
   privacy: { pl: '/pl/polityka-prywatnosci/', en: '/en/privacy-policy/' },

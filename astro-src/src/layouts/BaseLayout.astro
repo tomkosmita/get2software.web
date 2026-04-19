@@ -10,7 +10,13 @@ type Props = {
   description: string;
   /** Ścieżka kanoniczna bez origin, np. /pl/kontakt/ */
   pathname: string;
-  /** Pełne URL alternatywne dla hreflang (PL i EN tej samej treści). */
+  /**
+   * Tryb hreflang:
+   * - `bilingual` (domyślnie): `hreflangPl` + `hreflangEn` — strona ma odpowiednik w drugim języku.
+   * - `pl-only`: treść wyłącznie po polsku — emitujemy tylko `pl` + `x-default` na kanoniczny URL (bez fałszywego `en`).
+   */
+  hreflangMode?: 'bilingual' | 'pl-only';
+  /** Pełne URL alternatywne dla hreflang (PL i EN tej samej treści). Przy `pl-only` ignorowane w `<head>`. */
   hreflangPl: string;
   hreflangEn: string;
   ogType?: 'website' | 'article';
@@ -25,6 +31,7 @@ const {
   title,
   description,
   pathname,
+  hreflangMode = 'bilingual',
   hreflangPl,
   hreflangEn,
   ogType = 'website',
@@ -38,6 +45,7 @@ const ogImage = ogImagePath.startsWith('http') ? ogImagePath : `${siteOrigin}${o
 const ogLocale = locale === 'pl' ? 'pl_PL' : 'en_US';
 const htmlLang = locale === 'pl' ? 'pl' : 'en';
 const buildSha = (import.meta.env.PUBLIC_BUILD_SHA || 'dev').toString().slice(0, 12);
+const isPlOnly = hreflangMode === 'pl-only';
 ---
 
 <!DOCTYPE html>
@@ -51,9 +59,20 @@ const buildSha = (import.meta.env.PUBLIC_BUILD_SHA || 'dev').toString().slice(0,
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="pl" href={hreflangPl} />
-    <link rel="alternate" hreflang="en" href={hreflangEn} />
-    <link rel="alternate" hreflang="x-default" href={hreflangPl} />
+    {
+      isPlOnly ? (
+        <>
+          <link rel="alternate" hreflang="pl" href={canonical} />
+          <link rel="alternate" hreflang="x-default" href={canonical} />
+        </>
+      ) : (
+        <>
+          <link rel="alternate" hreflang="pl" href={hreflangPl} />
+          <link rel="alternate" hreflang="en" href={hreflangEn} />
+          <link rel="alternate" hreflang="x-default" href={hreflangPl} />
+        </>
+      )
+    }
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

@@ -1,4 +1,6 @@
 ---
+import ErpSystemsCarousel from '../../../components/ErpSystemsCarousel.astro';
+import ErpIntegrationFlow from '../../../components/illustrations/ErpIntegrationFlow.astro';
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
 import { canonicalUrl } from '../../../lib/seo/site';
 import { routeMap } from '../../../lib/i18n/routes';
@@ -7,6 +9,20 @@ const pathname = '/pl/integracje/';
 const title = 'Integracje ERP - get2software.com';
 const description =
   'Integracje ERP dla procesów operacyjnych: spójne dane, rozliczenia bez przepisywania i jeden model pracy dla biznesu i finansów.';
+
+/**
+ * Lista ERP celowo krótka i konkretna:
+ * - bez „listy życzeń”, tylko systemy, które chcemy realnie komunikować na stronie,
+ * - po decyzji biznesowej usuwamy IFS Cloud, żeby nie sugerować wsparcia dla platformy,
+ *   której nie chcemy akcentować w przekazie sprzedażowym,
+ * - IBM Maximo pokazujemy pod aktualną, bardziej precyzyjną nazwą `IBM Maximo Manage`
+ *   (moduł asset management w ramach IBM Maximo Application Suite), żeby brzmienie było aktualne
+ *   i jednocześnie rozpoznawalne dla odbiorcy enterprise.
+ */
+const erpSystems = ['SAP S/4HANA', 'enova365', 'Comarch ERP XL', 'Microsoft Dynamics 365', 'IBM Maximo Manage'] as const;
+
+/** Stabilne id podpisu pod SVG - wykorzystywane przez aria-labelledby w komponencie ilustracji. */
+const erpFlowCaptionId = 'erp-integration-flow-caption-pl';
 ---
 
 <MarketingLayout
@@ -19,17 +35,136 @@ const description =
   alternateHref={routeMap.integrations.en}
   active="integrations"
 >
-  <div class="g2-container py-14 md:py-20">
-    <h1 class="g2-heading-xl">Integracje z ERP</h1>
-    <div class="g2-prose mt-8 max-w-3xl space-y-4">
-      <p>
-        Nasze systemy zamykają proces operacyjny w danych gotowych dla ERP. Rozliczenia, stany magazynowe, zużycie
-        materiałów, raporty wykonania i kosztów trafiają do finansów oraz logistyki w jednym uzgodnionym modelu danych.
+  <div class="g2-container space-y-14 py-14 md:space-y-20 md:py-20">
+    <!--
+      Hero otwieramy teraz WYŁĄCZNIE tekstem.
+      Powód biznesowy i layoutowy:
+      - użytkownik ma najpierw bez rozproszeń przeczytać główną obietnicę wartości,
+      - diagram był wcześniej osadzony obok tekstu i przez swoją wysokość rozwalał proporcje hero,
+      - osobna sekcja pod nagłówkiem daje pełną szerokość na treść oraz stabilniejszy układ desktop/mobile.
+    -->
+    <header class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.24em] text-g2-accent">Integracje ERP</p>
+      <h1 class="g2-heading-xl mt-3 text-balance">Łączymy aplikacje operacyjne z ERP bez ręcznego przepisywania danych</h1>
+      <div class="g2-prose mt-6 max-w-2xl space-y-4">
+        <p class="!mt-0">
+          Nasze systemy zamykają proces operacyjny w danych gotowych dla ERP. Rozliczenia, stany magazynowe, zużycie
+          materiałów, raporty wykonania i kosztów trafiają do finansów oraz logistyki w jednym uzgodnionym modelu danych.
+        </p>
+        <p>
+          W praktyce oznacza to integrację pomiędzy aplikacją zewnętrzną a systemem ERP przez warstwę, która pilnuje
+          mapowania słowników, kompletności rekordów, kolejności zdarzeń i odporności na błędy transmisji. Dzięki temu
+          biznes pracuje w narzędziu dopasowanym do procesu, a ERP otrzymuje dane uporządkowane i audytowalne.
+        </p>
+      </div>
+    </header>
+
+    <!--
+      Diagram dostaje pełnoprawną sekcję zaraz pod hero.
+      Cel każdego elementu:
+      - sekcja utrzymuje logiczną kolejność narracji: najpierw obietnica, potem wizualne wyjaśnienie architektury,
+      - `max-w-6xl` daje ilustracji więcej miejsca w poziomie, więc nie ściska kart i podpisów,
+      - `not-prose` chroni komponent przed typograficznymi stylami prose, które mogłyby zaburzać spacing i rytm UI.
+    -->
+    <section class="not-prose max-w-6xl" aria-label="Diagram przepływu integracji ERP">
+      <ErpIntegrationFlow locale="pl" captionId={erpFlowCaptionId} />
+    </section>
+
+    <!-- Baner-karuzela z nazwami ERP: szybki sygnał rynkowy dla użytkownika, który szuka zgodności z rozpoznawalnymi platformami. -->
+    <ErpSystemsCarousel systems={[...erpSystems]} locale="pl" class="max-w-5xl" />
+
+    <!--
+      Sekcja merytoryczna: rozwijamy treść o konkretne scenariusze i nazwy systemów.
+      Układ 2-kolumnowy na desktopie rozbija „ścianę tekstu”: po lewej opis współpracy, po prawej lista ERP.
+    -->
+    <section aria-labelledby="erp-systems-heading" class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+      <div class="g2-prose max-w-3xl space-y-4">
+        <h2 id="erp-systems-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text md:text-3xl">
+          Z jakimi systemami ERP najczęściej planujemy integrację
+        </h2>
+        <p>
+          Projektujemy integracje do systemów ERP obecnych zarówno w firmach działających lokalnie, jak i w organizacjach
+          wielooddziałowych. Po stronie polskiego rynku bardzo często pojawiają się <strong>enova365</strong> oraz
+          <strong>Comarch ERP XL</strong>, a w środowiskach korporacyjnych lub wielooddziałowych regularnie spotykamy
+          <strong>SAP S/4HANA</strong>, <strong>Microsoft Dynamics 365</strong> oraz <strong>IBM Maximo Manage</strong>
+          w organizacjach, gdzie kluczowa jest ewidencja majątku, utrzymanie i planowanie pracy wokół asset management.
+        </p>
+        <p>
+          Nie zakładamy jednego „sztywnego” sposobu integracji dla wszystkich tych platform. W zależności od dojrzałości
+          procesu oraz możliwości po stronie klienta uruchamiamy wymianę przez API, webhooki, pliki pośrednie albo
+          kolejki integracyjne. Kluczowe jest to, by dane wysyłane do ERP miały spójną semantykę i dawały się łatwo
+          rozliczyć po stronie finansów, logistyki lub kontrolingu.
+        </p>
+        <p>
+          Taki model dobrze sprawdza się tam, gdzie standardowy ekran ERP jest zbyt ciężki dla pracy terenowej, serwisowej,
+          magazynowej lub produkcyjnej, ale organizacja nadal chce zachować jeden porządek danych referencyjnych i jeden
+          punkt księgowego domknięcia procesu.
+        </p>
+      </div>
+
+      <!--
+        Karty po prawej stronie mają być maksymalnie proste:
+        - sama nazwa ERP jako główny nagłówek,
+        - krótki opis użycia,
+        - bez sztucznych etykiet typu „rynek międzynarodowy”, które nic nie wnoszą i obniżają ton strony.
+      -->
+      <aside class="grid gap-4 self-start sm:grid-cols-2 lg:grid-cols-1">
+        {erpSystems.map((system) => (
+          <article class="g2-glass p-5">
+            <h3 class="font-display text-xl font-semibold text-g2-text">{system}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-g2-muted">
+              {system === 'enova365' &&
+                'Częsty wybór firm w Polsce, gdy potrzeba elastycznego połączenia procesów operacyjnych z finansami, kadrami lub handlem.'}
+              {system === 'Comarch ERP XL' &&
+                'Popularny w organizacjach produkcyjnych i dystrybucyjnych, gdzie integracja dotyka magazynu, dokumentów i rozliczeń.'}
+              {system === 'SAP S/4HANA' &&
+                'Typowy kierunek dla większych organizacji, które oczekują silnej kontroli danych podstawowych i przewidywalnego księgowania.'}
+              {system === 'Microsoft Dynamics 365' &&
+                'Często wybierany tam, gdzie proces operacyjny ma współpracować z ekosystemem Microsoft oraz nowoczesnymi API biznesowymi.'}
+              {system === 'IBM Maximo Manage' &&
+                'Rozpoznawalny wybór w organizacjach asset-intensive, gdzie integracja dotyka utrzymania majątku, zleceń pracy, historii serwisowej i danych technicznych.'}
+            </p>
+          </article>
+        ))}
+      </aside>
+    </section>
+
+    <!-- Pas korzyści: trzy konkretne efekty wdrożenia zamiast ogólnego „integrujemy wszystko ze wszystkim”. -->
+    <section aria-labelledby="erp-outcomes-heading" class="g2-section-band rounded-3xl py-10 md:py-12">
+      <div class="g2-container">
+        <h2 id="erp-outcomes-heading" class="g2-heading-lg max-w-3xl text-balance">
+          Co daje dobrze zaprojektowana integracja aplikacji z ERP
+        </h2>
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <article class="g2-glass h-full p-5">
+            <h3 class="font-display text-xl font-semibold text-g2-text">Jedno źródło rozliczeń</h3>
+            <p class="mt-3 text-sm leading-relaxed text-g2-muted">
+              ERP dostaje kompletne dane o wykonaniu procesu, dzięki czemu zespół finansowy nie skleja ręcznie informacji z kilku narzędzi.
+            </p>
+          </article>
+          <article class="g2-glass h-full p-5">
+            <h3 class="font-display text-xl font-semibold text-g2-text">Mniej błędów operacyjnych</h3>
+            <p class="mt-3 text-sm leading-relaxed text-g2-muted">
+              Walidacja i mapowanie po drodze ograniczają powstawanie duplikatów, braków w dokumentach i rozjazdów słowników.
+            </p>
+          </article>
+          <article class="g2-glass h-full p-5">
+            <h3 class="font-display text-xl font-semibold text-g2-text">Lepszy UX dla użytkownika</h3>
+            <p class="mt-3 text-sm leading-relaxed text-g2-muted">
+              Operacja pracuje w prostszej aplikacji dopasowanej do procesu, zamiast wykonywać każdy krok bezpośrednio w ERP.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Zamknięcie strony: krótka deklaracja zakresu + CTA sprzedażowe. -->
+    <footer class="max-w-3xl space-y-6 border-t border-g2-border pt-10 not-prose">
+      <p class="g2-prose text-g2-muted">
+        Jeśli chcesz sprawdzić, jak połączyć aplikację operacyjną z Twoim ERP i gdzie najlepiej umieścić logikę mapowania
+        danych, przygotujemy propozycję architektury integracyjnej dopasowaną do procesu i ograniczeń Twojego środowiska.
       </p>
-      <p>
-        W zależności od procesu uruchamiamy eksporty plikowe, integracje API albo konektory projektowe. Efekt jest jeden:
-        operacje pracują szybciej, a ERP dostaje uporządkowane dane bez ręcznego składania informacji z kilku narzędzi.
-      </p>
-    </div>
+      <a href={routeMap.contact.pl} class="g2-btn-primary inline-flex">Porozmawiajmy o integracji</a>
+    </footer>
   </div>
 </MarketingLayout>

@@ -15,6 +15,8 @@ const PATHNAMES = [
   '/en/',
   '/pl/o-nas/',
   '/en/about/',
+  '/pl/zespol/',
+  '/en/team/',
   '/pl/produkty/',
   '/en/products/',
   '/pl/produkty/get2-bhp-rent/',
@@ -29,14 +31,15 @@ const PATHNAMES = [
   '/en/integrations/',
   '/pl/wsparcie-systemow/',
   '/en/system-support/',
-  '/pl/aktualnosci/',
-  '/en/news/',
   '/pl/kariera/',
   '/en/careers/',
   '/pl/kontakt/',
   '/en/contact/',
   '/pl/polityka-prywatnosci/',
-  '/en/privacy-policy/'
+  '/en/privacy-policy/',
+  '/pl/artykuly/',
+  '/pl/artykuly/enova365-integracje-przewodnik/',
+  '/pl/artykuly/proces-zdawczo-odbiorczy-linia-produkcyjna-get2-commissioning/'
 ];
 
 function pathnameToFile(pathname) {

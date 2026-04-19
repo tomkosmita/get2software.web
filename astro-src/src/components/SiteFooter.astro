@@ -4,10 +4,12 @@ import { routeMap } from '../lib/i18n/routes';
 
 type Props = {
   locale: Locale;
-  alternateHref: string;
+  /** Gdy brak — sekcja bez odpowiednika językowego (np. artykuły PL-only). */
+  alternateHref?: string;
+  showLanguageSwitch?: boolean;
 };
 
-const { locale, alternateHref } = Astro.props;
+const { locale, alternateHref, showLanguageSwitch = true } = Astro.props;
 
 const t =
   locale === 'pl'
@@ -29,10 +31,12 @@ const t =
 const otherLocale: Locale = locale === 'pl' ? 'en' : 'pl';
 const home = routeMap.home[locale];
 const about = routeMap.about[locale];
+const team = routeMap.team[locale];
 const products = routeMap.products[locale];
 const integrations = routeMap.integrations[locale];
 /** Link do podstrony wsparcia - ta sama sekcja „Firma” co O nas / Kontakt dla spójnej IA. */
 const support = routeMap.support[locale];
+const articles = routeMap.articles[locale];
 const contact = routeMap.contact[locale];
 const privacy = routeMap.privacy[locale];
 ---
@@ -50,10 +54,16 @@ const privacy = routeMap.privacy[locale];
       <p class="text-xs font-semibold uppercase tracking-wider text-g2-muted">{t.company}</p>
       <ul class="mt-3 space-y-2 text-sm">
         <li><a href={about} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'O nas' : 'About'}</a></li>
+        <li>
+          <a href={team} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Zespół' : 'Team'}</a>
+        </li>
         <li><a href={contact} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Kontakt' : 'Contact'}</a></li>
         <li><a href={integrations} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Integracje' : 'Integrations'}</a></li>
         <li>
           <a href={support} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Wsparcie' : 'Support'}</a>
+        </li>
+        <li>
+          <a href={articles} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Artykuły' : 'Articles (PL)'}</a>
         </li>
       </ul>
     </div>
@@ -88,14 +98,16 @@ const privacy = routeMap.privacy[locale];
     <p>© {new Date().getFullYear()} get2software.com - {t.rights}</p>
     <div class="flex flex-wrap gap-4">
       <a href={privacy} class="hover:text-g2-accent">{t.privacy}</a>
-      <a
-        href={alternateHref}
-        class="rounded-lg border border-g2-glass-border px-3 py-1 text-xs hover:bg-g2-hover"
-        hreflang={otherLocale}
-        lang={otherLocale}
-      >
-        {locale === 'pl' ? 'English version' : 'Wersja polska'}
-      </a>
+      {showLanguageSwitch && alternateHref ? (
+        <a
+          href={alternateHref}
+          class="rounded-lg border border-g2-glass-border px-3 py-1 text-xs hover:bg-g2-hover"
+          hreflang={otherLocale}
+          lang={otherLocale}
+        >
+          {locale === 'pl' ? 'English version' : 'Wersja polska'}
+        </a>
+      ) : null}
     </div>
   </div>
 </footer>

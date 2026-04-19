@@ -14,6 +14,10 @@
   --color-g2-accent: oklch(60% 0.13 200);
   /* Drugi akcent: indygo zbliżone do błękitu (diagramy, tytuły produktów) - nie konkuruje z cyanem. */
   --color-g2-accent-2: oklch(56% 0.11 262);
+  /* Delikatne tło dla guzików drugorzędnych - odcina je od bieli sekcji bez udawania kolejnego „primary”. */
+  --color-g2-accent-soft: oklch(60% 0.13 200 / 0.12);
+  /* Hover drugorzędnych CTA: trochę mocniejszy cyan, żeby stan interakcji był widoczny także na jasnym motywie. */
+  --color-g2-accent-soft-hover: oklch(60% 0.13 200 / 0.18);
   /* Tekst główny: głęboki slate - czytelność na jasnym tle bez czarnej „dziury”. */
   --color-g2-text: oklch(28% 0.035 255);
   /* Tekst drugorzędny / prose - wyraźnie podrzędny wobec g2-text. */
@@ -76,10 +80,11 @@
   }
 
   /*
-   * Przycisk drugi: obramowanie + powierzchnia - hover jak „tapnięcie” atramentu (g2-hover).
+   * Przycisk drugi: nie jest już biały - dostaje miękki cyanowy tint,
+   * żeby na jasnych kartach wyglądał jak intencjonalny CTA pomocniczy, a nie domyślny button przeglądarki.
    */
   .g2-btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-g2-glass-border bg-g2-surface px-5 py-3 text-sm font-semibold text-g2-text shadow-sm transition hover:bg-g2-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-g2-accent;
+    @apply inline-flex items-center justify-center rounded-xl border border-g2-accent/20 bg-g2-accent-soft px-5 py-3 text-sm font-semibold text-g2-text shadow-sm transition hover:border-g2-accent/30 hover:bg-g2-accent-soft-hover hover:text-g2-accent-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-g2-accent;
   }
 
   .g2-heading-xl {
@@ -96,6 +101,50 @@
 
   .g2-prose strong {
     @apply font-semibold text-g2-text;
+  }
+
+  /**
+   * Treść artykułów Markdown: hierarchia nagłówków + listy — bez importu `@tailwindcss/typography` (lekki zestaw klas).
+   * Cel: długie teksty pozostają czytelne w ramach istniejącego design systemu (Inter + Space Grotesk).
+   */
+  .g2-article-prose :where(h2) {
+    @apply mt-10 scroll-mt-24 font-display text-2xl font-semibold tracking-tight text-g2-text first:mt-0;
+  }
+
+  .g2-article-prose :where(h3) {
+    @apply mt-8 scroll-mt-24 font-display text-xl font-semibold tracking-tight text-g2-text;
+  }
+
+  .g2-article-prose :where(p) {
+    @apply mt-4 first:mt-0;
+  }
+
+  .g2-article-prose :where(ul, ol) {
+    @apply mt-4 space-y-2 pl-5;
+  }
+
+  .g2-article-prose :where(ul) {
+    @apply list-disc;
+  }
+
+  .g2-article-prose :where(ol) {
+    @apply list-decimal;
+  }
+
+  .g2-article-prose :where(li)::marker {
+    @apply text-g2-accent;
+  }
+
+  .g2-article-prose :where(a) {
+    @apply font-medium text-g2-accent underline decoration-g2-accent/35 underline-offset-2 transition hover:decoration-g2-accent;
+  }
+
+  .g2-article-prose :where(hr) {
+    @apply my-10 border-g2-border;
+  }
+
+  .g2-article-prose :where(blockquote) {
+    @apply border-l-4 border-g2-accent/50 bg-g2-muted/[0.06] py-3 pl-4 pr-3 text-sm italic text-g2-muted;
   }
 
   /*

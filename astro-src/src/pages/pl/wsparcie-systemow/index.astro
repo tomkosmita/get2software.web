@@ -1,17 +1,26 @@
 ---
 /**
  * Podstrona usług wsparcia dla wdrożonych systemów operacyjnych (PL).
- * Cel biznesowy: pokazać ciągłość utrzymania po starcie, indywidualne SLA oraz elastyczność modelu hostingu (SaaS → chmura / DC).
- * Layout: MarketingLayout + prosty blok prose jak na integracjach/o nas - spójność wizualna serwisu B2B.
+ * Cel biznesowy: ciągłość po wdrożeniu, indywidualne SLA, elastyczność hostingu (SaaS → chmura / DC).
+ * Layout: hero siatka + sekcje z ilustracjami (pliki lokalne w /public/images/support/) — czytelny B2B, mniej „ściana tekstu”.
  */
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import SupportPortalFlow from '../../../components/illustrations/SupportPortalFlow.astro';
 import { canonicalUrl } from '../../../lib/seo/site';
 import { routeMap } from '../../../lib/i18n/routes';
+
+/** Id podpisu diagramu — aria-labelledby na <figure> w komponencie SupportPortalFlow. */
+const supportPortalCaptionId = 'support-portal-flow-caption-pl';
 
 const pathname = '/pl/wsparcie-systemow/';
 const title = 'Wsparcie systemów - get2software.com';
 const description =
   'Utrzymanie i rozwój systemów operacyjnych po wdrożeniu: incydenty, zmiany, integracje z ERP. SLA dopasowujemy do potrzeb klienta. SaaS z możliwością przeniesienia do chmury publicznej, prywatnej lub data center.';
+
+/** Ścieżki do ilustracji rasterowych w repozytorium (stabilny URL, brak hotlinkowania). */
+const imgTeam = '/images/support/team-collaboration.jpg';
+const imgServer = '/images/support/server-ops.jpg';
+const imgCloud = '/images/support/cloud-globe.jpg';
 ---
 
 <MarketingLayout
@@ -24,31 +33,49 @@ const description =
   alternateHref={routeMap.support.en}
   active="support"
 >
-  <!--
-    g2-container: max-width + padding poziomy zgodne z resztą serwisu.
-    py-14 md:py-20: większy odstęp na desktopie pod nagłówkiem H1 (hierarchia wizualna jak na innych podstronach).
-  -->
-  <div class="g2-container py-14 md:py-20">
-    <h1 class="g2-heading-xl">Wsparcie dla naszych systemów</h1>
-
+  <div class="g2-container space-y-14 py-14 md:space-y-20 md:py-20">
     <!--
-      g2-prose: typografia treści (interlinia, listy, nagłówki sekcji) bez ręcznego stylowania każdego akapitu.
-      max-w-3xl: wąski kolumnowy blok - łatwiejsze czytanie długiego opisu usług B2B.
-      space-y-8: wyraźne rozdzielenie sekcji tematycznych (percepcja „kart” bez osobnych kart UI).
+      Hero: dwukolumnowy układ na lg — tekst (lewa kolumna) + duża ilustracja (prawa).
+      Cel graficzny: pierwszy ekran „ludzki” i operacyjny, nie tylko nagłówek H1 na pustym tle.
     -->
-    <div class="g2-prose mt-8 max-w-3xl space-y-8">
-      <p>
-        Po wdrożeniu system operacyjny musi działać niezawodnie: użytkownicy w terenie i w biurze liczą na spójne dane,
-        a finanse i logistyka na to, że informacje trafiają do ERP w uzgodnionym modelu. Wsparcie get2software.com
-        obejmuje utrzymanie działania aplikacji, obsługę zmian procesowych oraz rozwój funkcji tam, gdzie proces się
-        rozszerza.
-      </p>
+    <header class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h1 class="g2-heading-xl text-balance">Wsparcie dla naszych systemów</h1>
+        <div class="g2-prose mt-6 max-w-xl">
+          <p class="!mt-0">
+            Po wdrożeniu system operacyjny musi działać niezawodnie: użytkownicy w terenie i w biurze liczą na spójne
+            dane, a finanse i logistyka na to, że informacje trafiają do ERP w uzgodnionym modelu. Wsparcie
+            get2software.com obejmuje utrzymanie działania aplikacji, obsługę zmian procesowych oraz rozwój funkcji tam,
+            gdzie proces się rozszerza.
+          </p>
+        </div>
+      </div>
+      <div
+        class="not-prose overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card"
+        data-layout="support-hero-visual"
+      >
+        <!-- aspect-[4/3]: stabilny prostokąt wizualny; object-cover: kadrowanie bez deformacji zdjęcia -->
+        <img
+          src={imgTeam}
+          alt="Zespół przy wspólnej pracy przy komputerach — metafora wsparcia i utrzymania systemów biznesowych"
+          width={1600}
+          height={1067}
+          class="aspect-[4/3] w-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </header>
 
-      <section aria-labelledby="support-scope-heading">
-        <h2 id="support-scope-heading" class="!mt-0 text-balance">Zakres wsparcia</h2>
+    <!-- Zakres: klasyczny wąski blok typografii pod hero — treść „merytoryczna” bez rozpraszacza obrazem -->
+    <section aria-labelledby="support-scope-heading" class="max-w-3xl">
+      <div class="g2-prose space-y-4">
+        <h2 id="support-scope-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text">
+          Zakres wsparcia
+        </h2>
         <p>
-          Działamy jak zespół produktowo-wdrożeniowy po starcie produkcyjnym, a nie tylko „helpdesk od licencji”.
-          Typowe obszary współpracy:
+          Działamy jak zespół produktowo-wdrożeniowy po starcie produkcyjnym, a nie tylko „helpdesk od licencji”. Typowe
+          obszary współpracy:
         </p>
         <ul>
           <li>
@@ -72,22 +99,71 @@ const description =
             obiegu informacji operacyjnych.
           </li>
         </ul>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="support-sla-heading">
-        <h2 id="support-sla-heading" class="text-balance">SLA dopasowane do potrzeb</h2>
+    <!--
+      Diagram wektorowy: ten sam wzorzec co na stronach produktów (ProductVisuals) — oś kroków + legenda pod spodem.
+      Biznesowo: pokazujemy, że użytkownik końcowy zgłasza sprawę przez portal wewnętrzny, a wsparcie domyka ją w ramach SLA.
+    -->
+    <section aria-labelledby="support-portal-heading" class="max-w-4xl">
+      <h2 id="support-portal-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+        Zgłoszenie przez portal wewnętrzny
+      </h2>
+      <p class="g2-prose mt-3 max-w-3xl text-g2-muted">
+        W naszych systemach operacyjnych typowa ścieżka kontaktu z pomocą techniczną prowadzi przez portal dostępny
+        użytkownikom po zalogowaniu: tam rejestrowane jest zgłoszenie, nadawany jest priorytet, a zespół wsparcia pracuje na
+        jednym zgłoszeniu w systemie aż do rozwiązania i potwierdzenia zgodnie z uzgodnionym SLA.
+      </p>
+      <div class="not-prose mt-8">
+        <SupportPortalFlow locale="pl" captionId={supportPortalCaptionId} />
+      </div>
+    </section>
+
+    <!--
+      SLA + obraz: na lg obraz po lewej (zmiana rytmu względem hero), tekst po prawej — „serwerownia” kojarzy się z SLA/czasem pracy usług.
+    -->
+    <section
+      aria-labelledby="support-sla-heading"
+      class="grid gap-10 lg:grid-cols-2 lg:items-center"
+      data-layout="support-sla-split"
+    >
+      <div
+        class="not-prose order-2 overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card lg:order-1"
+      >
+        <img
+          src={imgServer}
+          alt="Szafa serwerowa w oświetlonym pomieszczeniu — infrastruktura i utrzymanie systemów"
+          width={1600}
+          height={898}
+          class="aspect-[16/9] w-full object-cover lg:aspect-[4/3]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="g2-prose order-1 max-w-xl lg:order-2">
+        <h2 id="support-sla-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text">
+          SLA dopasowane do potrzeb
+        </h2>
         <p>
-          Nie narzucamy jednego, sztywnego pakietu czasu reakcji dla wszystkich klientów. <strong
-            >SLA dopasowujemy indywidualnie</strong
-          >
+          Nie narzucamy jednego, sztywnego pakietu czasu reakcji dla wszystkich klientów. <strong>SLA dopasowujemy indywidualnie</strong>
           do krytyczności procesu, skali organizacji, okien serwisowych i tego, czy system pracuje w jednej lokalizacji,
           czy w sieci oddziałów. Wspólnie ustalamy priorytety incydentów, kanał zgłoszeń oraz oczekiwany czas reakcji i
           eskalacji — tak, żeby model był realny dla operacji i zrozumiały dla IT po stronie klienta.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="support-hosting-heading">
-        <h2 id="support-hosting-heading" class="text-balance">SaaS i elastyczność wdrożenia</h2>
+    <!-- Hosting: obraz po prawej jak w hero — symetria wizualna strony, temat chmury/światowej dostępności -->
+    <section
+      aria-labelledby="support-hosting-heading"
+      class="grid gap-10 lg:grid-cols-2 lg:items-center"
+      data-layout="support-hosting-split"
+    >
+      <div class="g2-prose max-w-xl">
+        <h2 id="support-hosting-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text">
+          SaaS i elastyczność wdrożenia
+        </h2>
         <p>
           Aplikacje udostępniamy w modelu <strong>SaaS</strong> jako domyślny, szybki sposób startu. Jednocześnie, dla
           każdej aplikacji możemy zaplanować i wykonać <strong>przeniesienie do chmury publicznej</strong>, do
@@ -99,18 +175,27 @@ const description =
           architektura pozwala utrzymać ten sam produkt i proces wsparcia przy zmianie środowiska uruchomieniowego, bez
           „przepisywania systemu od zera”.
         </p>
-      </section>
+      </div>
+      <div class="not-prose overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card">
+        <img
+          src={imgCloud}
+          alt="Ziemia oświetlona punktami światła z kosmosu — globalna dostępność i chmura obliczeniowa"
+          width={1600}
+          height={1065}
+          class="aspect-[4/3] w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
 
-      <p>
+    <!-- Zamknięcie + CTA: wąski blok + przycisk primary jak na innych podstronach marketingowych -->
+    <footer class="max-w-3xl space-y-6 border-t border-g2-border pt-10 not-prose">
+      <p class="g2-prose text-g2-muted">
         Jeśli chcesz omówić zakres wsparcia, SLA oraz docelowe środowisko dla swoich systemów — napisz. Przygotujemy
         propozycję dopasowaną do Twojego procesu i infrastruktury.
       </p>
-
-      <!--
-        CTA poza flow „prose linków”: przycisk primary jak na karierze/aktualnościach - wyraźna akcja kończąca stronę.
-        routeMap.contact: jedna prawda o URL kontaktu (PL) dla SEO i spójności nawigacji.
-      -->
-      <a href={routeMap.contact.pl} class="g2-btn-primary mt-8 inline-flex">Porozmawiajmy o wsparciu</a>
-    </div>
+      <a href={routeMap.contact.pl} class="g2-btn-primary inline-flex">Porozmawiajmy o wsparciu</a>
+    </footer>
   </div>
 </MarketingLayout>

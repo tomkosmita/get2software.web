@@ -1,11 +1,105 @@
 ---
+/**
+ * Careers page (EN).
+ *
+ * Business goal:
+ * - explain which capabilities the company is actively growing now,
+ * - mirror the "Team" narrative so candidates understand the end-to-end delivery model,
+ * - convert a generic careers placeholder into a more concrete recruitment landing page.
+ *
+ * Layout mirrors PL:
+ * - top banner for student internships (separate CTA from experienced hiring),
+ * - hero with team-growth message,
+ * - context section explaining the hiring logic,
+ * - role cards for the current priority hires,
+ * - closing CTA for candidates with adjacent or hybrid profiles.
+ */
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
 import { canonicalUrl } from '../../../lib/seo/site';
 import { routeMap } from '../../../lib/i18n/routes';
 
 const pathname = '/en/careers/';
 const title = 'Careers - get2software.com';
-const description = 'We are growing the team behind operational software for industry and service businesses.';
+const description =
+  'Join get2software: student internships and open roles — analysts, implementation consultants, project manager, and B2B sales.';
+
+/**
+ * Role cards are data-driven so the hiring page can evolve without restructuring the layout.
+ * Each card combines:
+ * - a quick category label,
+ * - the role title,
+ * - business impact summary,
+ * - 3 concrete signals of what the work looks like in practice.
+ */
+const roleCards = [
+  {
+    eyebrow: 'Analysis',
+    title: 'Business / Process Analyst',
+    summary:
+      'We are looking for people who can translate the client’s operation into requirements, work scenarios, and a coherent solution model.',
+    bullets: [
+      'Lead discovery, workshops, and requirements alignment with business stakeholders and operational users.',
+      'Map processes, exceptions, statuses, roles, and dependencies with ERP and neighbouring systems.',
+      'Work closely with development and implementation so analytical decisions turn into stable rollout outcomes.'
+    ]
+  },
+  {
+    eyebrow: 'Implementation',
+    title: 'Implementation Consultant',
+    summary:
+      'We need people who know how to bridge the gap between a ready solution and real day-to-day adoption on the client side.',
+    bullets: [
+      'Configure the system, support pilots, prepare go-live, and help organise input data before launch.',
+      'Train users, communicate with the client team, and surface operational risks ahead of production start.',
+      'Collaborate closely with analysts, the PM, and the technical team during rollout and stabilisation.'
+    ]
+  },
+  {
+    eyebrow: 'Delivery',
+    title: 'Project Manager',
+    summary:
+      'We are looking for someone who can keep the project rhythm, ownership, and communication aligned across the client, analysis, implementation, and development.',
+    bullets: [
+      'Own timeline, priorities, decisions, and risk visibility in B2B implementation projects.',
+      'Connect the client’s business perspective with the day-to-day work of the product and implementation team.',
+      'Make sure the project delivers not only scope, but also organisational readiness for launch.'
+    ]
+  },
+  {
+    eyebrow: 'Growth',
+    title: 'Sales / Business Development',
+    summary:
+      'We are expanding the sales team and looking for people who can discuss process, implementation, and business value with clients, not only product features.',
+    bullets: [
+      'Build pipeline and run conversations with companies in industry, field services, and B2B operations.',
+      'Diagnose client needs together with the analysis and implementation team.',
+      'Own the journey from first conversation to a well-structured scope and collaboration start.'
+    ]
+  }
+] as const;
+
+/**
+ * These supporting cards filter for the operating style we value.
+ * The page is not only about hard skills: it also signals that get2software works close to operations,
+ * close to clients, and across functions rather than in isolated silos.
+ */
+const fitHighlights = [
+  {
+    title: 'Close to client operations',
+    description:
+      'We work where operations, software, and implementation meet. We value people who want to understand how the client’s real work happens.'
+  },
+  {
+    title: 'One team, not silos',
+    description:
+      'Sales, analysis, delivery, and implementation work together. We look for people who enjoy cross-functional collaboration and ownership of the final result.'
+  },
+  {
+    title: 'B2B, ERP, accountability',
+    description:
+      'We build operational systems that must stay stable and close the data loop for the business. Process-oriented and dependable people tend to thrive here.'
+  }
+] as const;
 ---
 
 <MarketingLayout
@@ -18,12 +112,179 @@ const description = 'We are growing the team behind operational software for ind
   alternateHref={routeMap.careers.pl}
   active="careers"
 >
-  <div class="g2-container py-14 md:py-20">
-    <h1 class="g2-heading-xl">Careers</h1>
-    <p class="g2-prose mt-4 max-w-2xl">
-      We are growing the product and implementation team behind operational software for industrial and B2B service
-      environments. If you work across product, rollout, integration, or operations, get in touch.
-    </p>
-    <a href="/en/contact/" class="g2-btn-primary mt-8 inline-flex">Start a conversation</a>
+  <div class="g2-container space-y-14 py-14 md:space-y-20 md:py-20">
+    <!--
+      Student internships — first on page, distinct from experienced-hire messaging; own CTA to contact.
+    -->
+    <section
+      aria-labelledby="careers-internships-heading"
+      class="not-prose rounded-2xl border border-g2-accent/30 bg-gradient-to-br from-g2-surface to-g2-muted/[0.06] p-6 shadow-g2-card ring-1 ring-g2-accent/15 md:p-8"
+      data-layout="careers-student-internships"
+    >
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-g2-accent">Students</p>
+          <h2 id="careers-internships-heading" class="mt-3 font-display text-xl font-semibold tracking-tight text-g2-text md:text-2xl">
+            Student internships
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-g2-muted md:text-base">
+            We welcome students who want hands-on exposure to operational software implementations, process analysis, and ERP
+            integrations — in a model close to real B2B delivery work.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-g2-muted md:text-base">
+            Please mention <strong class="text-g2-text">“student internship”</strong> in your message, along with your field of study and year.
+          </p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 lg:items-stretch">
+          <a href={routeMap.contact.en} class="g2-btn-primary inline-flex justify-center px-6 text-center whitespace-nowrap">
+            Apply for an internship
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      Hero:
+      - left column explains why the team is growing,
+      - right column gives a fast scan of the priority hiring areas.
+      This helps both active candidates and referred prospects quickly understand what matters now.
+    -->
+    <header class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)] lg:items-start">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wider text-g2-accent">Careers</p>
+        <h1 class="g2-heading-xl mt-3 max-w-4xl text-balance">
+          We are growing the team that sells, designs, and implements operational systems
+        </h1>
+        <div class="g2-prose mt-6 max-w-3xl space-y-4">
+          <p class="!mt-0">
+            On the <strong>Team</strong> page we explain how we support clients from discovery to rollout and post-go-live
+            growth. Right now, we are strengthening the exact capabilities that connect that journey from first
+            conversation to stable production use.
+          </p>
+          <p>
+            Our biggest priority today is people who can enter the real client context, structure requirements, lead
+            implementation, or grow consultative B2B sales.
+          </p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={routeMap.contact.en} class="g2-btn-primary inline-flex">Start a conversation</a>
+          <a href={routeMap.team.en} class="g2-btn-secondary inline-flex">See how the team works</a>
+        </div>
+      </div>
+
+      <!--
+        Side panel:
+        - acts as a summary for fast scanners,
+        - reinforces the immediate hiring priorities without forcing the user to read all sections first.
+      -->
+      <aside class="g2-glass p-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-g2-accent">Hiring priorities</p>
+        <ul class="mt-5 space-y-3 text-sm leading-relaxed text-g2-muted">
+          <li><strong class="text-g2-text">Analysts</strong> for discovery, process mapping, and requirements.</li>
+          <li><strong class="text-g2-text">Implementation consultants</strong> for configuration, rollout, and client work.</li>
+          <li><strong class="text-g2-text">Project manager</strong> for delivery orchestration across business and team.</li>
+          <li><strong class="text-g2-text">Sales team</strong> for consultative growth and pipeline development.</li>
+        </ul>
+      </aside>
+    </header>
+
+    <!--
+      Context section:
+      Explains that these are not random vacancies, but roles that directly support the company delivery model.
+      This keeps the careers narrative aligned with the "Team" page.
+    -->
+    <section aria-labelledby="careers-now-heading" class="max-w-3xl">
+      <h2 id="careers-now-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+        Who we need now
+      </h2>
+      <div class="g2-prose mt-4 space-y-4">
+        <p>
+          We are growing around the roles that materially shape project outcomes: understanding the client process,
+          structuring the implementation, and developing the commercial relationship. We are not only filling
+          vacancies, we are building a <strong>coherent end-to-end delivery model</strong>.
+        </p>
+        <p>
+          If you thrive where clear communication, ownership, and real operational context matter, there is a good chance
+          we will work well together.
+        </p>
+      </div>
+    </section>
+
+    <!--
+      Main roles grid:
+      - each card represents a core growth pillar,
+      - bullets help candidates self-qualify faster than a generic paragraph,
+      - ordering follows the company value chain: analysis -> implementation -> delivery -> growth.
+    -->
+    <section aria-labelledby="careers-roles-heading" class="space-y-8">
+      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 id="careers-roles-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+            Core roles we are growing
+          </h2>
+          <p class="g2-prose mt-3 max-w-3xl text-g2-muted">
+            These are the areas that matter most to us now. Think of them less as a rigid corporate org chart and more as
+            a map of capabilities we want to strengthen.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        {roleCards.map((role) => (
+          <article class="g2-glass h-full p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-g2-accent">{role.eyebrow}</p>
+            <h3 class="mt-3 font-display text-xl font-semibold text-g2-text">{role.title}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-g2-muted">{role.summary}</p>
+            <ul class="mt-5 space-y-3 text-sm leading-relaxed text-g2-muted">
+              {role.bullets.map((bullet) => (
+                <li class="flex gap-3">
+                  <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-g2-accent"></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!--
+      Fit section:
+      Helps candidates understand the working style and operating environment.
+      This is important because success here depends on both role expertise and comfort with B2B implementation realities.
+    -->
+    <section aria-labelledby="careers-fit-heading" class="g2-section-band -mx-4 px-4 py-14 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="g2-container !px-0">
+        <h2 id="careers-fit-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+          How we work
+        </h2>
+        <p class="g2-prose mt-4 max-w-3xl">
+          People who do best with us usually combine process thinking with practical delivery and feel comfortable working
+          close to the client.
+        </p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {fitHighlights.map((item) => (
+            <article class="g2-glass h-full p-6">
+              <h3 class="font-display text-lg font-semibold text-g2-text">{item.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-g2-muted">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!--
+      Closing CTA:
+      We intentionally keep the entry point broad, because hybrid profiles can be very valuable here
+      (for example analyst-implementation or PM-consulting combinations).
+    -->
+    <footer class="max-w-3xl space-y-6 border-t border-g2-border pt-10 not-prose">
+      <p class="g2-prose text-g2-muted">
+        If you see yourself in one of these areas, or across several of them, get in touch. We are happy to talk even if
+        your current job title is slightly different from what we use here.
+      </p>
+      <a href={routeMap.contact.en} class="g2-btn-primary inline-flex">Contact us</a>
+    </footer>
   </div>
 </MarketingLayout>

@@ -1,11 +1,104 @@
 ---
+/**
+ * Podstrona „Kariera” (PL).
+ *
+ * Cel biznesowy:
+ * - pokazać, że get2software rozwija zespół wokół realnych ról potrzebnych do sprzedaży, analizy i wdrożeń,
+ * - zamienić ogólne „napisz do nas” w bardziej konkretny komunikat rekrutacyjny,
+ * - spiąć narrację strony z podstroną „Zespół”, gdzie opisujemy model pracy end-to-end.
+ *
+ * Layout:
+ * - na górze: osobny panel CTA dla praktyk studenckich (inna ścieżka niż rekrutacja doświadczonych),
+ * - hero z komunikatem o kierunku rozwoju zespołu i prostym CTA rekrutacyjnym,
+ * - sekcja wyjaśniająca, jakich kompetencji szukamy teraz,
+ * - siatka głównych ról z krótkim opisem odpowiedzialności i profilu kandydata,
+ * - domknięcie CTA dla osób, które pasują do modelu pracy, nawet jeśli nie widzą 1:1 swojej nazwy stanowiska.
+ */
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
 import { canonicalUrl } from '../../../lib/seo/site';
 import { routeMap } from '../../../lib/i18n/routes';
 
 const pathname = '/pl/kariera/';
 const title = 'Kariera - get2software.com';
-const description = 'Rozwijamy zespół budujący i wdrażający oprogramowanie operacyjne dla przemysłu i usług.';
+const description =
+  'Rozbudowujemy zespół get2software: praktyki studenckie oraz rekrutacja — analitycy, wdrożeniowcy, project manager, sprzedaż B2B.';
+
+/**
+ * Główne role rozpisujemy jako dane, żeby łatwo rozwijać stronę wraz ze zmianą potrzeb rekrutacyjnych.
+ * Każda karta ma 3 warstwy komunikatu:
+ * - nazwę roli dla szybkiego skanu,
+ * - opis wpływu biznesowego,
+ * - krótkie punkty „na czym polega rola”, które pomagają kandydatowi samodzielnie ocenić dopasowanie.
+ */
+const roleCards = [
+  {
+    eyebrow: 'Analiza',
+    title: 'Analityk biznesowo-procesowy',
+    summary:
+      'Szukamy osób, które potrafią przełożyć operację klienta na wymagania, scenariusze pracy i logiczny model rozwiązania.',
+    bullets: [
+      'Prowadzenie discovery, warsztatów i porządkowanie wymagań z biznesem oraz użytkownikami operacyjnymi.',
+      'Rozpisywanie procesów, wyjątków, statusów, ról i zależności z ERP oraz systemami sąsiednimi.',
+      'Współpraca z developmentem i wdrożeniem tak, aby decyzje analityczne przekładały się na stabilny rollout.'
+    ]
+  },
+  {
+    eyebrow: 'Wdrożenia',
+    title: 'Konsultant wdrożeniowy / Wdrożeniowiec',
+    summary:
+      'Potrzebujemy ludzi, którzy umieją domknąć przejście od gotowego rozwiązania do realnej pracy po stronie klienta.',
+    bullets: [
+      'Konfiguracja systemu, wsparcie pilotażu, przygotowanie startu produkcyjnego i porządkowanie danych wejściowych.',
+      'Szkolenia użytkowników, komunikacja z klientem i wychwytywanie ryzyk operacyjnych przed go-live.',
+      'Bliska współpraca z analitykami, PM-em i zespołem technicznym podczas rolloutów oraz stabilizacji.'
+    ]
+  },
+  {
+    eyebrow: 'Delivery',
+    title: 'Project Manager',
+    summary:
+      'Szukamy osoby, która utrzyma rytm projektu, odpowiedzialności i komunikację między klientem, analityką, wdrożeniem i developmentem.',
+    bullets: [
+      'Prowadzenie harmonogramu, priorytetów, ustaleń i ryzyk w projektach wdrożeniowych B2B.',
+      'Spajanie perspektywy biznesowej klienta z pracą zespołu produktowo-wdrożeniowego.',
+      'Pilnowanie, żeby projekt dowoził nie tylko zakres, ale też gotowość organizacji do uruchomienia systemu.'
+    ]
+  },
+  {
+    eyebrow: 'Growth',
+    title: 'Sales / Business Development',
+    summary:
+      'Rozbudowujemy zespół sprzedaży i szukamy osób, które potrafią rozmawiać z klientami o procesie, wdrożeniu i wartości biznesowej, a nie tylko o funkcjach.',
+    bullets: [
+      'Budowanie pipeline’u i prowadzenie rozmów z firmami z obszaru przemysłu, usług terenowych i operacji B2B.',
+      'Diagnozowanie potrzeb klienta wspólnie z zespołem analityczno-wdrożeniowym.',
+      'Prowadzenie procesu od pierwszego kontaktu do dobrze ułożonego scope’u i startu współpracy.'
+    ]
+  }
+] as const;
+
+/**
+ * Dodatkowe karty wyjaśniają kandydatowi, w jakim modelu działa firma.
+ * To ważne, bo szukamy osób, które odnajdują się w pracy blisko klienta i blisko wdrożenia,
+ * a nie wyłącznie w wąskiej, oderwanej specjalizacji.
+ */
+const fitHighlights = [
+  {
+    title: 'Blisko procesu klienta',
+    description:
+      'Pracujemy na styku operacji, systemu i wdrożenia. Cenimy osoby, które chcą rozumieć, jak wygląda rzeczywista praca po stronie klienta.'
+  },
+  {
+    title: 'Jedna drużyna, nie silosy',
+    description:
+      'Łączymy sprzedaż, analizę, delivery i wdrożenie. Szukamy ludzi, którzy lubią współpracę międzyfunkcyjną i biorą odpowiedzialność za efekt końcowy.'
+  },
+  {
+    title: 'B2B, ERP, rozliczalność',
+    description:
+      'Budujemy systemy operacyjne, które muszą działać stabilnie i domykać dane dla biznesu. Dobrze odnajdą się u nas osoby myślące procesowo i odpowiedzialnie.'
+  }
+] as const;
 ---
 
 <MarketingLayout
@@ -18,12 +111,163 @@ const description = 'Rozwijamy zespół budujący i wdrażający oprogramowanie 
   alternateHref={routeMap.careers.en}
   active="careers"
 >
-  <div class="g2-container py-14 md:py-20">
-    <h1 class="g2-heading-xl">Kariera</h1>
-    <p class="g2-prose mt-4 max-w-2xl">
-      Rozwijamy zespół produktowy i wdrożeniowy wokół systemów operacyjnych dla przemysłu i usług B2B. Jeśli masz
-      doświadczenie w produktach, wdrożeniach, integracjach albo procesach operacyjnych, napisz do nas.
-    </p>
-    <a href="/pl/kontakt/" class="g2-btn-primary mt-8 inline-flex">Porozmawiajmy</a>
+  <div class="g2-container space-y-14 py-14 md:space-y-20 md:py-20">
+    <!--
+      Praktyki studenckie — pierwszy element strony:
+      - osobny panel wizualny (obramowanie akcentem), żeby odróżnić ścieżkę od głównej rekrutacji,
+      - własne CTA kierujące do kontaktu; w treści prosimy o oznaczenie wiadomości jako praktyki,
+      - cel biznesowy: pozyskanie osób uczących się przy realnych projektach wdrożeniowych / produktowych.
+    -->
+    <section
+      aria-labelledby="careers-internships-heading"
+      class="not-prose rounded-2xl border border-g2-accent/30 bg-gradient-to-br from-g2-surface to-g2-muted/[0.06] p-6 shadow-g2-card ring-1 ring-g2-accent/15 md:p-8"
+      data-layout="careers-student-internships"
+    >
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-g2-accent">Studenci</p>
+          <h2 id="careers-internships-heading" class="mt-3 font-display text-xl font-semibold tracking-tight text-g2-text md:text-2xl">
+            Praktyki studenckie
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-g2-muted md:text-base">
+            Zapraszamy osoby na studiach, które chcą poznać pracę przy wdrożeniach oprogramowania operacyjnego, analizie
+            procesów i integracjach z ERP — w modelu bliskim rzeczywistym projektom B2B.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-g2-muted md:text-base">
+            W treści zgłoszenia prosimy o dopisek <strong class="text-g2-text">„praktyki studenckie”</strong> oraz
+            informację o kierunku i roku studiów.
+          </p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 lg:items-stretch">
+          <a href={routeMap.contact.pl} class="g2-btn-primary inline-flex justify-center px-6 text-center whitespace-nowrap">
+            Zgłoś się na praktyki
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      Hero:
+      - uproszczony do jednego głównego bloku treści,
+      - bez sztucznego panelu bocznego, żeby komunikat był bardziej naturalny i mniej „landing-page’owy”.
+      Głównym celem jest szybkie wyjaśnienie, kogo szukamy i zaproszenie do formularza kontaktowego.
+    -->
+    <header class="max-w-4xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-g2-accent">Kariera</p>
+      <h1 class="g2-heading-xl mt-3 text-balance">Rozbudowujemy zespół, który sprzedaje, projektuje i wdraża systemy operacyjne</h1>
+      <div class="g2-prose mt-6 max-w-3xl space-y-4">
+        <p class="!mt-0">
+          Na podstronie <strong>Zespół</strong> pokazujemy, że wspieramy klienta od discovery po rollout i rozwój po
+          wdrożeniu. Teraz rozbudowujemy właśnie te kluczowe kompetencje, które spinają proces od pierwszej rozmowy po
+          stabilne działanie systemu.
+        </p>
+        <p>
+          Najbardziej zależy nam dziś na osobach, które potrafią wejść w realny kontekst klienta, uporządkować wymagania,
+          poprowadzić wdrożenie albo rozwijać sprzedaż konsultacyjną w środowisku B2B.
+        </p>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={routeMap.contact.pl} class="g2-btn-primary inline-flex">Aplikuj</a>
+        <a href={routeMap.team.pl} class="g2-btn-secondary inline-flex">Zobacz, jak pracuje zespół</a>
+      </div>
+    </header>
+
+    <!--
+      Sekcja kontekstowa:
+      Wyjaśnia, że nie publikujemy przypadkowej listy stanowisk, tylko rozwijamy role wynikające z modelu delivery firmy.
+      To zwiększa spójność przekazu między stronami „Zespół” i „Kariera”.
+    -->
+    <section aria-labelledby="careers-now-heading" class="max-w-3xl">
+      <h2 id="careers-now-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+        Kogo potrzebujemy teraz
+      </h2>
+      <div class="g2-prose mt-4 space-y-4">
+        <p>
+          Rośniemy wokół tych ról, które realnie wpływają na wynik projektu: od zrozumienia procesu klienta, przez
+          uporządkowanie wdrożenia, aż po rozwój relacji sprzedażowej. Nie szukamy wyłącznie „stanowisk do obsadzenia”,
+          tylko ludzi, którzy chcą współtworzyć <strong>spójny model pracy end-to-end</strong>.
+        </p>
+        <p>
+          Jeśli dobrze odnajdujesz się w środowisku, gdzie liczy się klarowna komunikacja, odpowiedzialność za efekt i
+          bliskość realnych procesów operacyjnych, prawdopodobnie będziemy nadawać na podobnych falach.
+        </p>
+      </div>
+    </section>
+
+    <!--
+      Główna siatka ról:
+      - każda karta opisuje osobny filar wzrostu,
+      - lista punktów zamiast lakonicznego akapitu ułatwia samoocenę dopasowania,
+      - kolejność kart odpowiada łańcuchowi wartości firmy: analiza -> wdrożenie -> delivery -> sprzedaż.
+    -->
+    <section aria-labelledby="careers-roles-heading" class="space-y-8">
+      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 id="careers-roles-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+            Główne role w zespole
+          </h2>
+          <p class="g2-prose mt-3 max-w-3xl text-g2-muted">
+            Poniżej opisujemy obszary, które są dziś dla nas najważniejsze. To nie jest sztywna korporacyjna siatka
+            stanowisk, tylko mapa kompetencji, które chcemy wzmacniać.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        {roleCards.map((role) => (
+          <article class="g2-glass h-full p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-g2-accent">{role.eyebrow}</p>
+            <h3 class="mt-3 font-display text-xl font-semibold text-g2-text">{role.title}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-g2-muted">{role.summary}</p>
+            <ul class="mt-5 space-y-3 text-sm leading-relaxed text-g2-muted">
+              {role.bullets.map((bullet) => (
+                <li class="flex gap-3">
+                  <span aria-hidden="true" class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-g2-accent"></span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!--
+      Sekcja „dopasowanie” filtruje oczekiwania kulturowe i operacyjne.
+      Dzięki temu kandydat rozumie, że ważna jest nie tylko specjalizacja, ale też styl współpracy oraz gotowość do pracy przy wdrożeniach B2B.
+    -->
+    <section aria-labelledby="careers-fit-heading" class="g2-section-band -mx-4 px-4 py-14 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div class="g2-container !px-0">
+        <h2 id="careers-fit-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+          W jakim stylu pracujemy
+        </h2>
+        <p class="g2-prose mt-4 max-w-3xl">
+          Najlepiej odnajdują się u nas osoby, które lubią łączyć myślenie procesowe z dowożeniem konkretu i dobrze czują
+          się w środowisku blisko klienta.
+        </p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {fitHighlights.map((item) => (
+            <article class="g2-glass h-full p-6">
+              <h3 class="font-display text-lg font-semibold text-g2-text">{item.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-g2-muted">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!--
+      Footer CTA:
+      Celowo nie zamykamy strony formularzem stanowisk 1:1, bo firma rośnie dynamicznie.
+      CTA ma otworzyć kontakt również dla osób hybrydowych, np. analityk-wdrożeniowiec albo PM z mocnym consulting background.
+    -->
+    <footer class="max-w-3xl space-y-6 border-t border-g2-border pt-10 not-prose">
+      <p class="g2-prose text-g2-muted">
+        Jeśli widzisz siebie w jednym z tych obszarów, albo łączysz kilka z tych kompetencji, odezwij się. Chętnie
+        porozmawiamy nawet wtedy, gdy Twoja obecna nazwa stanowiska jest trochę inna niż na tej stronie.
+      </p>
+      <a href={routeMap.contact.pl} class="g2-btn-primary inline-flex">Aplikuj</a>
+    </footer>
   </div>
 </MarketingLayout>

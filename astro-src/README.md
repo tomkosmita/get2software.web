@@ -32,6 +32,12 @@ Sekrety (`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`) tylko w Workerze, nie w repo.
 
 Bez tych zmiennych przycisk „Wyślij” w formularzu pozostaje nieaktywny; użytkownik ma **link mailto** do `kontakt@get2software.com`.
 
+## Artykuły (blog)
+
+- Treść: `src/content/articles/*.md` (frontmatter + Markdown), kolekcja `articles` w `src/content.config.ts`.
+- Strony: `src/pages/pl/artykuly/index.astro`, `src/pages/pl/artykuly/[slug].astro`.
+- Po dodaniu nowego wpisu dopisz ścieżkę do `scripts/verify-seo.mjs` (`PATHNAMES`).
+
 ## Plik `.env`
 
 Skopiuj `.env.example` → `.env` i uzupełnij po przygotowaniu workera.

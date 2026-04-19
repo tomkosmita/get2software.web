@@ -1,0 +1,179 @@
+---
+/**
+ * Diagram wektorowy (SVG) — uproszczony przepływ zgłoszenia przez portal wewnętrzny do wsparcia.
+ * Cel wizualny: ten sam „język” co ProductVisuals (węzły 1→N, strzałki, ikony w prostokątach, kolory marki),
+ * ale osobna semantyka procesu utrzymaniowego (portal → ticket → triage → zespół → SLA).
+ * Layout: viewBox liczony jak w ProductVisuals — skalowanie przez class w=full h-auto.
+ */
+type Locale = 'pl' | 'en';
+
+type Props = {
+  locale: Locale;
+  /** Klasy Tailwind na kontenerze <figure> (np. max-w-3xl mx-auto). */
+  class?: string;
+  /** Stabilne id podpisów dla a11y (aria-labelledby na <svg> i id na <figcaption>). */
+  captionId: string;
+};
+
+const { locale, class: className = '', captionId } = Astro.props;
+
+const stroke = '#1f2937';
+const strokeSoft = '#64748b';
+const acc = 'oklch(60% 0.13 200)';
+const acc2 = 'oklch(56% 0.11 262)';
+
+/** Kolejność kroków na osi — zgodna z numeracją w legendzie poniżej SVG. */
+const steps = ['portal', 'ticket', 'classify', 'team', 'sla'] as const;
+
+const legend =
+  locale === 'pl'
+    ? [
+        'Wejście do portalu wewnętrznego',
+        'Zgłoszenie problemu',
+        'Klasyfikacja i priorytet',
+        'Obsługa przez zespół wsparcia',
+        'Domknięcie według SLA'
+      ]
+    : [
+        'Internal portal sign-in',
+        'Issue submission',
+        'Triage and priority',
+        'Support team handling',
+        'Close-out under SLA'
+      ];
+
+const lead =
+  locale === 'pl'
+    ? 'Uproszczony łańcuch od zalogowania użytkownika do zamknięcia sprawy — numery na diagramie odpowiadają opisowi kroków.'
+    : 'A simplified chain from portal access to case closure — numbers on the diagram match the step list below.';
+
+const nodeW = 96;
+const nodeH = 78;
+const gap = 30;
+const padX = 28;
+const topY = 72;
+const centerY = topY + nodeH / 2;
+const vbW = padX * 2 + steps.length * nodeW + (steps.length - 1) * gap;
+const vbH = 192;
+const markerId = 'support-portal-flow-arrow';
+---
+
+<figure class:list={['g2-glass overflow-hidden p-6 md:p-8', className]} aria-labelledby={captionId}>
+  <svg
+    viewBox={`0 0 ${vbW} ${vbH}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-auto w-full max-w-3xl text-g2-text/35"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <marker id={markerId} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M0 0 L8 4 L0 8 Z" fill={stroke} opacity="0.75" />
+      </marker>
+    </defs>
+
+    {
+      steps.map((_, idx) => {
+        if (idx === steps.length - 1) return null;
+        const x1 = padX + idx * (nodeW + gap) + nodeW;
+        const x2 = padX + (idx + 1) * (nodeW + gap) - 6;
+        return (
+          <path
+            d={`M${x1} ${centerY}H${x2}`}
+            stroke={stroke}
+            stroke-width="2.2"
+            marker-end={`url(#${markerId})`}
+            opacity="0.86"
+          />
+        );
+      })
+    }
+
+    {
+      steps.map((step, idx) => {
+        const x = padX + idx * (nodeW + gap);
+        const iconColor = idx % 2 === 0 ? acc : acc2;
+        return (
+          <g>
+            <rect
+              x={x}
+              y={topY}
+              width={nodeW}
+              height={nodeH}
+              rx="12"
+              stroke={stroke}
+              stroke-width="2.4"
+              fill="#ffffff"
+              fill-opacity="0.7"
+            />
+            <circle cx={x + nodeW / 2} cy={30} r="11" fill="#ffffff" stroke={iconColor} stroke-width="2" />
+            <text x={x + nodeW / 2} y={34} text-anchor="middle" font-size="11" font-weight="700" fill={stroke}>
+              {idx + 1}
+            </text>
+
+            {step === 'portal' && (
+              <g stroke={iconColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                {/* Okno „przeglądarki” z paskiem adresu — metafora portalu webowego (bez tekstu w SVG). */}
+                <rect x={x + 28} y={topY + 22} width="40" height="38" rx="7" />
+                <rect x={x + 32} y={topY + 26} width="32" height="5" rx="1.5" opacity="0.9" />
+                <rect x={x + 34} y={topY + 36} width="12" height="10" rx="1.5" opacity="0.85" />
+                <rect x={x + 50} y={topY + 36} width="14" height="16" rx="1.5" opacity="0.85" />
+                <path d={`M${x + 38} ${topY + 50}h20`} opacity="0.75" />
+              </g>
+            )}
+            {step === 'ticket' && (
+              <g stroke={iconColor} stroke-width="2" stroke-linecap="round">
+                <path
+                  d={`M${x + 26} ${topY + 28}h44v10c-4 0-6 3-6 6s2 6 6 6v10h-44v-10c4 0 6-3 6-6s-2-6-6-6z`}
+                />
+              </g>
+            )}
+            {step === 'classify' && (
+              <g stroke={iconColor} stroke-width="2" stroke-linecap="round">
+                <circle cx={x + 34} cy={topY + 44} r="5" />
+                <circle cx={x + 62} cy={topY + 34} r="5" />
+                <circle cx={x + 62} cy={topY + 54} r="5" />
+                <path d={`M${x + 39} ${topY + 44}h18M${x + 52} ${topY + 41}l6-5M${x + 52} ${topY + 47}l6 5`} />
+              </g>
+            )}
+            {step === 'team' && (
+              <g stroke={iconColor} stroke-width="2" stroke-linecap="round">
+                <circle cx={x + 40} cy={topY + 35} r="7" />
+                <circle cx={x + 56} cy={topY + 35} r="7" />
+                <path d={`M${x + 30} ${topY + 56}c6-7 14-7 20 0M${x + 46} ${topY + 56}c6-7 14-7 20 0`} />
+              </g>
+            )}
+            {step === 'sla' && (
+              <g stroke={iconColor} stroke-width="2.2" stroke-linecap="round">
+                <circle cx={x + 48} cy={topY + 43} r="15" />
+                <path d={`M${x + 48} ${topY + 34}v10l8 5`} />
+              </g>
+            )}
+
+            <path
+              d={`M${x + 24} ${topY + nodeH - 14}H${x + nodeW - 24}`}
+              stroke={strokeSoft}
+              stroke-width="1.4"
+              opacity="0.35"
+            />
+          </g>
+        );
+      })
+    }
+  </svg>
+
+  <figcaption id={captionId} class="mt-6 border-t border-g2-border pt-5">
+    <p class="g2-prose max-w-3xl text-sm text-g2-muted">{lead}</p>
+    <ol class="mt-4 grid gap-2 text-left text-sm text-g2-muted sm:grid-cols-2 lg:grid-cols-3">
+      {legend.map((label, idx) => (
+        <li class="flex items-start gap-2 rounded-md border border-g2-border/60 bg-white/40 px-3 py-2">
+          <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-g2-border text-[11px] font-semibold text-g2-text">
+            {idx + 1}
+          </span>
+          <span>{label}</span>
+        </li>
+      ))}
+    </ol>
+  </figcaption>
+</figure>

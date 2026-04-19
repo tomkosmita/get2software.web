@@ -1,0 +1,88 @@
+---
+/**
+ * Lista artykułów (PL-only): karty jak na /produkty/, ale z filarem tematycznym i datą — bliżej „mapy treści” niż katalogu SKU.
+ */
+import { getCollection } from 'astro:content';
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const articles = await getCollection('articles');
+const sorted = articles.sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+const pathname = '/pl/artykuly/';
+const title = 'Artykuły - get2software.com';
+const description =
+  'Publikacje o wdrożeniach oprogramowania operacyjnego: integracja z ERP i systemami towarzyszącymi, procesy na obiektach, dokumentacja oraz zamknięcie etapów projektowych.';
+
+const collectionLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: canonicalUrl(pathname),
+  isPartOf: { '@type': 'WebSite', name: 'get2software.com', url: canonicalUrl('/pl/') },
+  /** Lista pozycji — uproszczona (tytuł + URL); pełne Article jest na stronie wpisu. */
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: sorted.map((entry, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: canonicalUrl(`/pl/artykuly/${entry.data.slug}/`),
+      name: entry.data.title
+    }))
+  }
+};
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangMode="pl-only"
+  hreflangPl={canonicalUrl(pathname)}
+  hreflangEn={canonicalUrl(routeMap.home.en)}
+  active="articles"
+  structuredData={[collectionLd]}
+>
+  <div class="g2-container py-14 md:py-20">
+    <!-- Nagłówek sekcji: prosty, jak w typowych centrach treści B2B — bez hasła marketingowego w H1, lead w 3. osobie / bezosobowo. -->
+    <h1 class="g2-heading-xl">Artykuły</h1>
+    <p class="g2-prose mt-4 max-w-3xl text-lg">
+      Publikacje porządkują zagadnienia przydatne przy planowaniu i utrzymaniu wdrożeń oprogramowania operacyjnego — m.in.
+      architekturę wymiany danych z systemami klasy ERP i narzędziami towarzyszącymi, organizację pracy na obiektach,
+      odbiory techniczne oraz obieg dokumentacji przy zamykaniu etapów projektowych. Treść ma charakter informacyjny;
+      decyzje inwestycyjne, wdrożeniowe i formalnoprawne wymagają samodzielnej oceny w danej organizacji.
+    </p>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {sorted.map((entry) => {
+        const variant = entry.data.coverVariant;
+        const borderClass =
+          variant === 'integrations'
+            ? 'border-l-g2-accent'
+            : variant === 'commissioning'
+              ? 'border-l-g2-accent-2'
+              : 'border-l-g2-border';
+        const dateLabel = entry.data.publishedAt.toLocaleDateString('pl-PL', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        return (
+          <a
+            class:list={['g2-glass block border-l-4 p-6 transition hover:brightness-[1.02]', borderClass]}
+            href={`/pl/artykuly/${entry.data.slug}/`}
+          >
+            <p class="text-xs font-semibold uppercase tracking-wider text-g2-muted">{entry.data.category}</p>
+            <h2 class="font-display mt-2 text-xl font-semibold text-g2-accent">{entry.data.title}</h2>
+            <p class="mt-2 text-sm text-g2-muted">{entry.data.excerpt}</p>
+            <p class="mt-4 text-xs text-g2-muted">{dateLabel}</p>
+            <span class="mt-4 inline-block text-sm font-medium text-g2-text">Czytaj artykuł →</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</MarketingLayout>

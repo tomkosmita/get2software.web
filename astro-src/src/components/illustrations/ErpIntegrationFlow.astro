@@ -1,0 +1,213 @@
+---
+/**
+ * Diagram architektury integracji dla strony marketingowej ERP.
+ *
+ * Cel biznesowy komponentu:
+ * - w 3 krokach pokazać klientowi, że proces NIE zapisuje danych bezpośrednio do ERP,
+ * - nazwać odpowiedzialności pośredniej warstwy integracyjnej,
+ * - zbudować prostą mentalną mapę: aplikacja operacyjna -> integracja -> ERP.
+ * - pokazać znane na rynku standardy integracyjne (REST API, Kafka, kolejki, pliki wymiany),
+ *   zamiast abstrakcyjnych etykiet technicznych, które nie budują zaufania handlowego.
+ *
+ * Decyzja layoutowa:
+ * - poprzednia wersja była jednym dużym SVG z osadzonym tekstem; na mobile napisy robiły się za małe
+ *   i traciły czytelność przy skalowaniu całej grafiki,
+ * - nowa wersja zostawia tylko proste ikony SVG, a CAŁĄ treść biznesową przenosi do HTML,
+ * - dzięki temu karty mogą układać się pionowo na małych ekranach, a tekst zawija się naturalnie
+ *   bez „mikroskopijnej” typografii wewnątrz rysunku.
+ */
+type Locale = 'pl' | 'en';
+
+type Props = {
+  locale: Locale;
+  captionId: string;
+  class?: string;
+};
+
+const { locale, captionId, class: className = '' } = Astro.props;
+
+const labels =
+  locale === 'pl'
+    ? {
+        titleExternal: 'Aplikacja zewnętrzna',
+        titleLayer: 'Warstwa integracyjna',
+        titleErp: 'ERP',
+        noteExternal: 'Zdarzenia operacyjne, dokumenty i statusy procesu',
+        noteLayer: 'REST API, webhooki, Kafka, kolejki i pliki wymiany',
+        noteErp: 'Magazyn, finanse, rozliczenia i controlling',
+        channelOne: 'REST API / webhook',
+        channelTwo: 'Kafka / queue / file',
+        integrationStandards: ['REST API', 'Webhook', 'Kafka', 'Queue', 'SFTP / CSV'],
+        lead:
+          'Najczęściej nie łączymy użytkownika bezpośrednio z ERP. Dane przechodzą przez kontrolowaną warstwę integracyjną, która porządkuje strukturę i moment zapisu.',
+        legend: [
+          'Aplikacja operacyjna zbiera dane bliżej procesu niż klasyczny ekran ERP.',
+          'Warstwa integracyjna pilnuje translacji kodów, walidacji i odporności na błędy transportowe.',
+          'ERP dostaje dane już uzgodnione semantycznie, dzięki czemu maleje liczba ręcznych korekt.'
+        ]
+      }
+    : {
+        titleExternal: 'External application',
+        titleLayer: 'Integration layer',
+        titleErp: 'ERP',
+        noteExternal: 'Operational events, documents, and process statuses',
+        noteLayer: 'REST APIs, webhooks, Kafka, queues, and exchange files',
+        noteErp: 'Inventory, finance, billing, and controlling',
+        channelOne: 'REST API / webhook',
+        channelTwo: 'Kafka / queue / file',
+        integrationStandards: ['REST API', 'Webhook', 'Kafka', 'Queue', 'SFTP / CSV'],
+        lead:
+          'Users usually do not work against ERP directly. Data moves through a controlled integration layer that structures payloads and determines the correct write timing.',
+        legend: [
+          'The operational application captures data closer to the real process than a classic ERP screen.',
+          'The integration layer owns code translation, validation, and resilience against transport failures.',
+          'ERP receives semantically aligned records, which reduces manual corrections and reconciliation work.'
+        ]
+      };
+---
+
+<figure class:list={['g2-glass overflow-hidden p-6 md:p-8', className]} aria-labelledby={captionId}>
+  <!--
+    Część „diagramowa” jest teraz zwykłym HTML-em:
+    - desktop: 3 karty w jednym wierszu połączone strzałkami,
+    - mobile: te same karty układają się pionowo, a strzałki obracają się w dół.
+    Dzięki temu tekst zachowuje realny rozmiar typografii zamiast skaluje się jako fragment SVG.
+  -->
+  <div class="relative isolate">
+    <!-- Miękka poświata w tle wzmacnia kierunek procesu, ale pozostaje dekoracyjna i nie wpływa na czytelność treści. -->
+    <div
+      class="pointer-events-none absolute inset-x-[8%] top-1/2 -z-10 hidden h-36 -translate-y-1/2 rounded-full bg-g2-accent/8 blur-3xl lg:block"
+      aria-hidden="true"
+    ></div>
+
+    <!--
+      Krytyczna decyzja breakpointowa:
+      komponent siedzi w PRAWEJ kolumnie hero, więc jego realna szerokość jest dużo mniejsza niż cały viewport.
+      Wcześniejsze `lg:*` włączało poziomy układ już przy desktopowym oknie, ale wtedy sama kolumna nadal była zbyt wąska
+      i podpisy zaczynały nachodzić na siebie. Dlatego pełny układ "3 karty w jednym rzędzie" uruchamiamy dopiero od `2xl`,
+      gdy komponent ma faktycznie dość miejsca na czytelną typografię i etykiety transportu.
+    -->
+    <div class="flex flex-col gap-3 2xl:grid 2xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1.08fr)_auto_minmax(0,1fr)] 2xl:items-center 2xl:gap-4">
+      <!-- Karta 1: źródło procesu biznesowego i operacyjnego. -->
+      <article class="rounded-[1.6rem] border border-g2-text/15 bg-white/90 px-4 py-4 shadow-sm sm:px-5">
+        <div class="flex items-start gap-3">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-g2-accent bg-white">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-g2-accent" aria-hidden="true" fill="none">
+              <rect x="5" y="3.5" width="14" height="17" rx="3" stroke="currentColor" stroke-width="1.9" />
+              <path d="M8 17.5h8M8 6.8h8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-display text-lg font-semibold text-g2-text">{labels.titleExternal}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-g2-muted">{labels.noteExternal}</p>
+          </div>
+        </div>
+
+        <!-- Paski na dole karty są dekoracyjną metaforą list/rekordów generowanych przez aplikację operacyjną. -->
+        <div class="mt-4 space-y-2" aria-hidden="true">
+          <div class="flex gap-2">
+            <span class="h-2.5 w-[4.5rem] rounded-full bg-g2-accent/15"></span>
+            <span class="h-2.5 w-12 rounded-full bg-g2-accent-2/12"></span>
+          </div>
+          <span class="block h-2.5 w-[7rem] rounded-full bg-g2-text/8"></span>
+        </div>
+      </article>
+
+      <!-- Łącznik 1: etykieta kanału transportowego + strzałka kierunku przepływu. -->
+      <div class="flex flex-col items-center justify-center gap-2 py-1 text-center" aria-hidden="true">
+        <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-g2-muted">{labels.channelOne}</span>
+        <svg viewBox="0 0 40 20" class="h-5 w-8 rotate-90 text-g2-text/70 2xl:rotate-0" fill="none">
+          <path d="M2 10h30" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <!--
+        Karta 2: środek diagramu, czyli miejsce "tłumaczenia" świata operacyjnego na model ERP.
+        Ta karta jest minimalnie większa, bo biznesowo zawiera najważniejszą logikę i odpowiada na pytanie
+        "co właściwie dzieje się pomiędzy aplikacją a ERP?".
+      -->
+      <article class="rounded-[1.8rem] border border-g2-text/18 bg-white/92 px-4 py-4 shadow-sm sm:px-5 2xl:py-5">
+        <div class="flex items-start gap-3">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-g2-accent-2 bg-white">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-g2-accent-2" aria-hidden="true" fill="none">
+              <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.9" />
+              <path d="M12 5.5v13M5.5 12h13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-display text-lg font-semibold text-g2-text">{labels.titleLayer}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-g2-muted">{labels.noteLayer}</p>
+          </div>
+        </div>
+
+        <!--
+          Środek karty pokazuje teraz rozpoznawalne standardy integracyjne zamiast wewnętrznej terminologii.
+          To ważne sprzedażowo: odbiorca enterprise szybciej ufa diagramowi, gdy widzi znane kanały i technologie
+          spotykane w realnych integracjach z ERP oraz systemami maintenance / asset management.
+        -->
+        <div class="mt-4 flex flex-wrap gap-2" aria-hidden="true">
+          {labels.integrationStandards.map((item) => (
+            <span class="rounded-xl border border-g2-text/16 bg-white px-3 py-2 text-[11px] font-semibold tracking-[0.06em] text-g2-text">
+              {item}
+            </span>
+          ))}
+        </div>
+      </article>
+
+      <!-- Łącznik 2: drugi etap transportu - dane są już po walidacji i mogą zostać zapisane po stronie ERP. -->
+      <div class="flex flex-col items-center justify-center gap-2 py-1 text-center" aria-hidden="true">
+        <span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-g2-muted">{labels.channelTwo}</span>
+        <svg viewBox="0 0 40 20" class="h-5 w-8 rotate-90 text-g2-text/70 2xl:rotate-0" fill="none">
+          <path d="M2 10h30" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <!-- Karta 3: miejsce księgowego / magazynowego domknięcia procesu. -->
+      <article class="rounded-[1.6rem] border border-g2-text/15 bg-white/90 px-4 py-4 shadow-sm sm:px-5">
+        <div class="flex items-start gap-3">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-g2-accent bg-white">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-g2-accent" aria-hidden="true" fill="none">
+              <ellipse cx="12" cy="6.5" rx="5.5" ry="2.4" stroke="currentColor" stroke-width="1.9" />
+              <path d="M6.5 6.5v8c0 1.3 2.5 2.4 5.5 2.4s5.5-1.1 5.5-2.4v-8" stroke="currentColor" stroke-width="1.9" />
+              <path d="M6.5 10.5c0 1.3 2.5 2.4 5.5 2.4s5.5-1.1 5.5-2.4" stroke="currentColor" stroke-width="1.9" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 class="font-display text-lg font-semibold text-g2-text">{labels.titleErp}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-g2-muted">{labels.noteErp}</p>
+          </div>
+        </div>
+
+        <!-- Dolne paski sygnalizują, że ERP dostaje już uporządkowany i przewidywalny zapis końcowy. -->
+        <div class="mt-4 space-y-2" aria-hidden="true">
+          <div class="flex gap-2">
+            <span class="h-2.5 w-14 rounded-full bg-g2-accent-2/12"></span>
+            <span class="h-2.5 w-[5.5rem] rounded-full bg-g2-accent/15"></span>
+          </div>
+          <span class="block h-2.5 w-32 rounded-full bg-g2-text/8"></span>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <figcaption id={captionId} class="mt-6 border-t border-g2-border pt-5">
+    <p class="g2-prose max-w-3xl text-sm text-g2-muted">{labels.lead}</p>
+    <!--
+      Legenda korzysta z tej samej zasady co górny diagram:
+      dopóki komponent jest osadzony w wąskiej kolumnie hero, pojedyncza kolumna czyta się lepiej niż trzy mikro-kafelki.
+      Dopiero na bardzo szerokich desktopach rozbijamy opis na 3 kolumny.
+    -->
+    <ol class="mt-4 grid gap-2 text-left text-sm text-g2-muted 2xl:grid-cols-3">
+      {labels.legend.map((item, idx) => (
+        <li class="flex items-start gap-2 rounded-md border border-g2-border/60 bg-white/40 px-3 py-2">
+          <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-g2-border text-[11px] font-semibold text-g2-text">
+            {idx + 1}
+          </span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ol>
+  </figcaption>
+</figure>

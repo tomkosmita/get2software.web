@@ -1,17 +1,23 @@
 ---
 /**
- * System support and managed continuity page (EN).
- * Business goal: mirror PL messaging — post-go-live care, tailored SLA, SaaS default with optional migration to public cloud,
- * customer private cloud, or traditional data center. Layout matches other informational MarketingLayout pages.
+ * System support page (EN): same assets and layout rhythm as PL for bilingual parity.
+ * Images: local JPEGs under /public/images/support/.
  */
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import SupportPortalFlow from '../../../components/illustrations/SupportPortalFlow.astro';
 import { canonicalUrl } from '../../../lib/seo/site';
 import { routeMap } from '../../../lib/i18n/routes';
+
+const supportPortalCaptionId = 'support-portal-flow-caption-en';
 
 const pathname = '/en/system-support/';
 const title = 'System support - get2software.com';
 const description =
   'Post-go-live support for operational software: incidents, change requests, ERP-side integrations. SLAs tailored to your needs. SaaS by default with optional move to public cloud, private cloud, or a traditional data center.';
+
+const imgTeam = '/images/support/team-collaboration.jpg';
+const imgServer = '/images/support/server-ops.jpg';
+const imgCloud = '/images/support/cloud-globe.jpg';
 ---
 
 <MarketingLayout
@@ -24,19 +30,39 @@ const description =
   alternateHref={routeMap.support.pl}
   active="support"
 >
-  <!-- Same vertical rhythm as PL/support peers: container width + section padding under sticky header. -->
-  <div class="g2-container py-14 md:py-20">
-    <h1 class="g2-heading-xl">Support for our systems</h1>
+  <div class="g2-container space-y-14 py-14 md:space-y-20 md:py-20">
+    <header class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h1 class="g2-heading-xl text-balance">Support for our systems</h1>
+        <div class="g2-prose mt-6 max-w-xl">
+          <p class="!mt-0">
+            After go-live, operational software must stay dependable: field and office teams need consistent data, while
+            finance and logistics need information delivered to ERP in an agreed data model. get2software.com support
+            covers application continuity, process-driven change, and feature evolution where the operation grows.
+          </p>
+        </div>
+      </div>
+      <div
+        class="not-prose overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card"
+        data-layout="support-hero-visual"
+      >
+        <img
+          src={imgTeam}
+          alt="Team collaborating at laptops — a visual metaphor for ongoing product and operations support"
+          width={1600}
+          height={1067}
+          class="aspect-[4/3] w-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </header>
 
-    <div class="g2-prose mt-8 max-w-3xl space-y-8">
-      <p>
-        After go-live, operational software must stay dependable: field and office teams need consistent data, while
-        finance and logistics need information delivered to ERP in an agreed data model. get2software.com support
-        covers application continuity, process-driven change, and feature evolution where the operation grows.
-      </p>
-
-      <section aria-labelledby="en-support-scope-heading">
-        <h2 id="en-support-scope-heading" class="!mt-0 text-balance">What we cover</h2>
+    <section aria-labelledby="en-support-scope-heading" class="max-w-3xl">
+      <div class="g2-prose space-y-4">
+        <h2 id="en-support-scope-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text">
+          What we cover
+        </h2>
         <p>
           We work as a product and delivery team after production start — not a generic “license-only” helpdesk. Typical
           collaboration areas:
@@ -62,20 +88,55 @@ const description =
             period-close readiness.
           </li>
         </ul>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="en-support-sla-heading">
-        <h2 id="en-support-sla-heading" class="text-balance">SLAs tailored to your needs</h2>
+    <section aria-labelledby="en-support-portal-heading" class="max-w-4xl">
+      <h2 id="en-support-portal-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
+        Intake through the internal portal
+      </h2>
+      <p class="g2-prose mt-3 max-w-3xl text-g2-muted">
+        In our operational products, the common path to technical assistance runs through an authenticated portal: the
+        issue is logged there, prioritised, and the support team works a single ticket through to resolution and
+        confirmation under the agreed SLA.
+      </p>
+      <div class="not-prose mt-8">
+        <SupportPortalFlow locale="en" captionId={supportPortalCaptionId} />
+      </div>
+    </section>
+
+    <section aria-labelledby="en-support-sla-heading" class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div
+        class="not-prose order-2 overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card lg:order-1"
+      >
+        <img
+          src={imgServer}
+          alt="Server racks in a lit data hall — metaphor for reliable infrastructure and service levels"
+          width={1600}
+          height={898}
+          class="aspect-[16/9] w-full object-cover lg:aspect-[4/3]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="g2-prose order-1 max-w-xl lg:order-2">
+        <h2 id="en-support-sla-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text">
+          SLAs tailored to your needs
+        </h2>
         <p>
           We do not force a single, rigid response-time package for every customer. <strong>We tailor SLAs</strong> to
           process criticality, organization scale, maintenance windows, and whether the system runs in one site or
           across branches. Together we define incident priorities, intake channels, and response and escalation
           expectations so the model is workable for operations and clear for your IT team.
         </p>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="en-support-hosting-heading">
-        <h2 id="en-support-hosting-heading" class="text-balance">SaaS and deployment flexibility</h2>
+    <section aria-labelledby="en-support-hosting-heading" class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div class="g2-prose max-w-xl">
+        <h2 id="en-support-hosting-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text">
+          SaaS and deployment flexibility
+        </h2>
         <p>
           Applications are delivered as <strong>SaaS</strong> by default for a fast, standardized start. For each
           application we can also plan and execute a <strong>move to a public cloud</strong>, a <strong>customer private
@@ -87,14 +148,26 @@ const description =
           architecture allows the same product and support model when the runtime environment changes, without rebuilding
           the system from scratch.
         </p>
-      </section>
+      </div>
+      <div class="not-prose overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card">
+        <img
+          src={imgCloud}
+          alt="Earth at night from orbit — metaphor for global reach and cloud-style availability"
+          width={1600}
+          height={1065}
+          class="aspect-[4/3] w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
 
-      <p>
-        If you want to discuss support scope, SLAs, and the target runtime for your systems, get in touch. We will
-        propose an approach aligned with your process and infrastructure.
+    <footer class="max-w-3xl space-y-6 border-t border-g2-border pt-10 not-prose">
+      <p class="g2-prose text-g2-muted">
+        If you want to discuss support scope, SLAs, and the target runtime for your systems, get in touch. We will propose
+        an approach aligned with your process and infrastructure.
       </p>
-
-      <a href={routeMap.contact.en} class="g2-btn-primary mt-8 inline-flex">Talk to us about support</a>
-    </div>
+      <a href={routeMap.contact.en} class="g2-btn-primary inline-flex">Talk to us about support</a>
+    </footer>
   </div>
 </MarketingLayout>

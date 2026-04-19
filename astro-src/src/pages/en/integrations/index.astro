@@ -1,4 +1,6 @@
 ---
+import ErpSystemsCarousel from '../../../components/ErpSystemsCarousel.astro';
+import ErpIntegrationFlow from '../../../components/illustrations/ErpIntegrationFlow.astro';
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
 import { canonicalUrl } from '../../../lib/seo/site';
 import { routeMap } from '../../../lib/i18n/routes';
@@ -7,6 +9,16 @@ const pathname = '/en/integrations/';
 const title = 'ERP integrations - get2software.com';
 const description =
   'ERP integrations for operational processes: consistent data, faster period close, and no manual rekeying between teams.';
+
+/**
+ * Shared ERP shortlist for the sales page:
+ * - intentionally concise, so the section stays credible and focused,
+ * - IFS Cloud is removed on purpose to match the current offer emphasis and avoid overclaiming,
+ * - IBM Maximo is listed under the current product name `IBM Maximo Manage`, which is the
+ *   asset-management application within IBM Maximo Application Suite.
+ */
+const erpSystems = ['SAP S/4HANA', 'enova365', 'Comarch ERP XL', 'Microsoft Dynamics 365', 'IBM Maximo Manage'] as const;
+const erpFlowCaptionId = 'erp-integration-flow-caption-en';
 ---
 
 <MarketingLayout
@@ -19,17 +31,69 @@ const description =
   alternateHref={routeMap.integrations.pl}
   active="integrations"
 >
-  <div class="g2-container py-14 md:py-20">
-    <h1 class="g2-heading-xl">ERP integrations</h1>
-    <div class="g2-prose mt-8 max-w-3xl space-y-4">
-      <p>
-        Our products close operational work in data that ERP can use immediately. Billing bases, inventory positions,
-        material consumption, execution reports, and cost records move to finance and logistics in one agreed data model.
-      </p>
-      <p>
-        Depending on the process, we run file exports, API integrations, or dedicated project connectors. The outcome is
-        the same: operations move faster, while ERP receives structured data without manual reconciliation across tools.
-      </p>
-    </div>
+  <div class="g2-container space-y-14 py-14 md:space-y-20 md:py-20">
+    <header class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-g2-accent">ERP integrations</p>
+        <h1 class="g2-heading-xl mt-3 text-balance">We connect operational applications with ERP without manual rekeying</h1>
+        <div class="g2-prose mt-6 max-w-2xl space-y-4">
+          <p class="!mt-0">
+            Our products close operational work in data that ERP can use immediately. Billing bases, inventory positions,
+            material consumption, execution reports, and cost records move to finance and logistics in one agreed data model.
+          </p>
+          <p>
+            In practice, this means connecting an external application to ERP through a controlled layer that handles field
+            mapping, payload completeness, event ordering, and resilience against transport failures. Operations work in a
+            tool tailored to the process, while ERP receives structured, auditable records.
+          </p>
+        </div>
+      </div>
+
+      <div class="not-prose">
+        <ErpIntegrationFlow locale="en" captionId={erpFlowCaptionId} />
+      </div>
+    </header>
+
+    <ErpSystemsCarousel systems={[...erpSystems]} locale="en" class="max-w-5xl" />
+
+    <section aria-labelledby="erp-systems-heading" class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+      <div class="g2-prose max-w-3xl space-y-4">
+        <h2 id="erp-systems-heading" class="!mt-0 text-balance font-display text-2xl font-semibold text-g2-text md:text-3xl">
+          ERP platforms we most often plan integrations with
+        </h2>
+        <p>
+          We design integrations for ERP platforms used by both local businesses and multi-site organisations. On the Polish
+          market, <strong>enova365</strong> and <strong>Comarch ERP XL</strong> appear frequently, while enterprise or
+          multi-site environments often bring <strong>SAP S/4HANA</strong>, <strong>Microsoft Dynamics 365</strong>, and
+          <strong>IBM Maximo Manage</strong> into the discussion, especially where asset management and maintenance workflows
+          are part of the operating model.
+        </p>
+        <p>
+          We do not force one rigid integration pattern for all of them. Depending on process maturity and platform
+          constraints, we can use APIs, webhooks, exchange files, or queue-based integration. The goal stays the same:
+          ERP should receive semantically aligned data that finance, logistics, and controlling teams can trust.
+        </p>
+      </div>
+
+      <!--
+        Keep the ERP cards visually quiet:
+        - the ERP name is the only heading the user needs here,
+        - supporting copy explains fit,
+        - no category labels above the card, because they add noise without helping decision-making.
+      -->
+      <aside class="grid gap-4 self-start sm:grid-cols-2 lg:grid-cols-1">
+        {erpSystems.map((system) => (
+          <article class="g2-glass p-5">
+            <h3 class="font-display text-xl font-semibold text-g2-text">{system}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-g2-muted">
+              {system !== 'IBM Maximo Manage' &&
+                'Frequently discussed as an ERP target when operational software needs a structured handoff into finance, inventory, billing, or group-level reporting.'}
+              {system === 'IBM Maximo Manage' &&
+                'Frequently discussed in asset-intensive organisations where operational software needs to connect with maintenance plans, work orders, service history, and technical asset data.'}
+            </p>
+          </article>
+        ))}
+      </aside>
+    </section>
   </div>
 </MarketingLayout>

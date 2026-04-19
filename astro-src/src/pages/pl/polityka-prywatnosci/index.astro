@@ -6,7 +6,7 @@ import { routeMap } from '../../../lib/i18n/routes';
 const pathname = '/pl/polityka-prywatnosci/';
 const title = 'Polityka prywatności - get2software.com';
 const description =
-  'Zasady przetwarzania danych osobowych w serwisie get2software.com zgodnie z RODO.';
+  'Informacja o przetwarzaniu danych w serwisie get2software.com: kontakt do administratora, zakres danych, cele, okres przechowywania, cookies i prawa.';
 ---
 
 <MarketingLayout
@@ -18,44 +18,184 @@ const description =
   hreflangEn={canonicalUrl(routeMap.privacy.en)}
   alternateHref={routeMap.privacy.en}
 >
+  <!--
+    Układ: wąski blok max-w-3xl + g2-prose — czytelna „ściana tekstu” prawna bez kart UI.
+    Kolejność rozdziałów celowo odbiega od szablonu „definicje → kto → skąd → cele”: najpierw kontakt i zakres, potem dane i prawo, słownik na końcu.
+  -->
   <div class="g2-container max-w-3xl py-14 md:py-20">
     <h1 class="g2-heading-xl">Polityka prywatności</h1>
-    <div class="g2-prose mt-8 space-y-4">
+    <div class="g2-prose mt-8 space-y-6">
       <p>
-        Niniejsza polityka opisuje sposób przetwarzania danych osobowych użytkowników serwisu get2software.com.
-        Administratorem danych jest podmiot prowadzący serwis get2software.com, wskazywany w danych rejestrowych i
-        kontaktowych publikowanych przez administratora. W sprawach dotyczących danych osobowych można kontaktować się
-        przez adres <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>.
+        Poniżej znajduje się informacja o tym, w jaki sposób w ramach serwisu internetowego{' '}
+        <strong>get2software.com</strong> (dalej: <strong>Serwis</strong>) może dojść do przetwarzania danych osobowych.
+        Opisujemy wyłącznie procesy związane z publikacją treści w Serwisie oraz z kontaktem (formularz lub e-mail).
+        Tekst został przygotowany na potrzeby własne tej witryny i odnosi się tylko do działań opisanych w niniejszym
+        dokumencie.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Cele i podstawy</h2>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Administrator oraz pierwszy kontakt</h2>
       <p>
-        Dane z formularza kontaktowego przetwarzamy w celu odpowiedzi na zapytanie, prowadzenia dalszej korespondencji
-        związanej z wdrożeniem lub ofertą oraz ochrony przed nadużyciami. Podstawą przetwarzania jest uzasadniony interes
-        administratora albo zgoda wyrażona w formularzu, jeśli jest wymagana dla danej czynności.
+        Administratorem danych osobowych w rozumieniu rozporządzenia o ochronie danych (RODO, rozporządzenie UE
+        2016/679) jest podmiot odpowiedzialny za prowadzenie Serwisu <strong>get2software.com</strong>, identyfikowalny z
+        publicznie dostępnych danych rejestrowych i kontaktowych tego podmiotu.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Zakres danych</h2>
       <p>
-        Przetwarzamy dane przekazane w formularzu kontaktowym, w szczególności nazwę firmy, adres e-mail, numer telefonu,
-        temat i treść wiadomości. Dodatkowo możemy przetwarzać podstawowe dane techniczne związane z bezpieczeństwem i
-        działaniem serwisu, takie jak logi systemowe oraz niezbędne pliki cookies.
+        W sprawach ochrony danych osobowych preferujemy pierwszy kontakt drogą elektroniczną:{' '}
+        <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>.
+        W treści wiadomości warto podać, czego dotyczy sprawa (np. korekta danych z formularza, pytanie o zakres logów),
+        co przyspiesza odpowiedź bez zbędnej korespondencji.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Okres przechowywania</h2>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Kogo dotyczy ta informacja</h2>
+      <p>Zakres materiałowy dokumentu obejmuje w praktyce:</p>
+      <ul>
+        <li>
+          osoby przeglądające strony Serwisu — w zakresie danych technicznych powstających przy normalnym żądaniu
+          zasobów oraz ewentualnych mechanizmów bezpieczeństwa;
+        </li>
+        <li>
+          osoby, które zwracają się do nas z zapytaniem — przez formularz na stronie Kontaktu (gdy jest uruchomiony),
+          tradycyjny e-mail albo kontakt telefoniczny w sprawach oferty lub współpracy.
+        </li>
+      </ul>
       <p>
-        Dane przechowujemy przez czas potrzebny do obsługi zapytania, przygotowania oferty, prowadzenia dalszej
-        korespondencji oraz dochodzenia lub obrony roszczeń, jeżeli jest to konieczne. Po tym czasie dane są usuwane albo
-        anonimizowane, o ile dalsze przechowywanie nie wynika z obowiązku prawnego.
+        Nie prowadzimy w ramach tego Serwisu newslettera ani rejestracji na wydarzenia online opisane osobnym
+        regulaminem; jeśli kiedyś pojawią się dodatkowe usługi zbierające dane, opublikujemy osobną klauzulę lub
+        zaktualizujemy niniejszy opis przed rozpoczęciem takiego przetwarzania.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Odbiorcy danych</h2>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Jakie kategorie danych mogą powstać</h2>
+      <p>Rodzaj danych zależy od tego, w jaki sposób wchodzisz z nami w interakcję:</p>
+      <ul>
+        <li>
+          <strong>Kanał kontaktowy</strong> — np. firma, adres e-mail, telefon, temat, treść wiadomości oraz wszystko,
+          co samodzielnie wpiszesz w polach formularza lub w treści maila;
+        </li>
+        <li>
+          <strong>Warstwa techniczna Serwisu</strong> — np. adres IP, znak czasu żądania, informacja o przeglądarce,
+          wpisy diagnostyczne serwera, a także identyfikatory związane z zabezpieczeniem formularza przed automatycznym
+          spamem (konfiguracja zależy od środowiska produkcyjnego).
+        </li>
+      </ul>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Po co przetwarzamy dane i na jakiej podstawie</h2>
       <p>
-        Dane mogą być powierzane podmiotom wspierającym obsługę serwisu i komunikacji, w szczególności dostawcom hostingu,
-        narzędzi do obsługi formularza kontaktowego, poczty elektronicznej oraz zabezpieczeń antyspamowych. Dane są
-        przekazywane wyłącznie w zakresie niezbędnym do realizacji tych usług.
+        <strong>Utrzymanie Serwisu i bezpieczeństwo.</strong> Obsługa ruchu sieciowego, wykrywanie błędów, ograniczanie
+        nadużyć — podstawa z art. 6 ust. 1 lit. f RODO (uzasadniony interes polegający na stabilnym i bezpiecznym
+        udostępnianiu witryny).
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Prawa osób</h2>
       <p>
-        Przysługuje Państwu prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu oraz przenoszenia
-        danych - w zakresie przewidzianym przez RODO. Skargę można złożyć do Prezesa UODO.
+        <strong>Odpowiedź na Twoje pytanie lub ofertę.</strong> Prowadzenie korespondencji, przygotowanie materiałów
+        informacyjnych lub ofertowych — podstawa z art. 6 ust. 1 lit. f RODO; w części objętej zaznaczoną zgodą w
+        formularzu, jeśli jest wymagana dla konkretnej czynności, dodatkowo art. 6 ust. 1 lit. a RODO.
       </p>
+      <p>
+        <strong>Ochrona formularza przed botami.</strong> Krótkotrwała weryfikacja interakcji u użytkownika zewnętrznego
+        dostawcy — podstawa z art. 6 ust. 1 lit. f RODO.
+      </p>
+      <p>
+        <strong>Roszczenia i obowiązki prawne.</strong> Archiwizacja w zakresie koniecznym do obrony przed roszczeniami
+        albo wypełnienia obowiązku ustawowego — odpowiednio art. 6 ust. 1 lit. f lub lit. c RODO, jeśli dany przypadek
+        podlega takiemu uregulowaniu.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Skąd biorą się dane</h2>
+      <p>
+        Zasadniczo pochodzą od Ciebie: wpisujesz je w formularzu albo przekazujesz w mailu lub rozmowie. Część informacji
+        technicznych powstaje automatycznie w infrastrukturze, która serwuje pliki Serwisu — bez tego normalna praca
+        strony WWW nie byłaby możliwa.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Jak długo przechowujemy informacje</h2>
+      <p>
+        Treść zapytań i wiadomości przechowujemy przez czas obsługi sprawy oraz następnie przez okres potrzebny do
+        ewentualnego dochodzenia roszczeń lub spełnienia przepisów o przechowywaniu dokumentów, jeśli ma to zastosowanie w
+        danym przypadku. Po ustaniu celu usuwamy dane lub stosujemy anonimizację, o ile prawo nie wymaga dłuższego
+        archiwum.
+      </p>
+      <p>
+        Okres retencji logów technicznych wynika z ustawień u dostawców hostingu i narzędzi bezpieczeństwa i bywa krótszy
+        niż okres przechowywania samej korespondencji biznesowej.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Kto może otrzymać dostęp jako podwykonawca</h2>
+      <p>
+        Wykorzystujemy zewnętrzne usługi niezbędne do publikacji Serwisu i obsługi kontaktu. Dane przekazujemy wyłącznie w
+        granicach „need to know” dla realizacji konkretnej usługi. Typowo są to m.in.:
+      </p>
+      <ul>
+        <li>hosting lub platforma chmurowa utrzymująca pliki Serwisu;</li>
+        <li>
+          usługa przyjmująca zgłoszenie z formularza (np. funkcja uruchamiana na brzegu sieci) oraz dostawca poczty
+          transakcyjnej doręczający wiadomość;
+        </li>
+        <li>dostawca mechanizmu antyspamowego / potwierdzenia, że formularz wypełnia człowiek;</li>
+        <li>wybrany doradca prawny lub IT — tylko gdy dana sprawa tego wymaga.</li>
+      </ul>
+      <p>
+        Z podmiotami przetwarzającymi dane w naszym imieniu zawieramy umowy powierzenia, jeżeli przepisy tak nakazują.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Przekazywanie poza Europejski Obszar Gospodarczy</h2>
+      <p>
+        Infrastruktura chmurowa lub pocztowa bywa utrzymywana także poza EOG (np. w Stanach Zjednoczonych). W razie
+        takiego przekazania stosujemy instrumenty zgodne z RODO, w praktyce często standardowe klauzule umowne
+        zatwierdzone przez Komisję Europejską albo inne dopuszczone rozwiązania, o ile w danej relacji występują.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Cookies i podobne rozwiązania</h2>
+      <p>
+        Stosujemy wyłącznie rozwiązania techniczne niezbędne do działania Serwisu, bezpieczeństwa lub obsługi formularza.
+        Nie uruchamiamy w tym Serwisie narzędzi reklamowych śledzących użytkownika w modelu wymagającym osobnej,
+        rozbudowanej zgody marketingowej na cookies. Gdybyśmy kiedyś dodali analitykę lub marketingowe pliki cookies,
+        rozszerzymy ten opis i udostępnimy mechanizm wyboru zgodnie z obowiązującym stanem prawnym.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Brak wyłącznie automatycznych decyzji o Tobie</h2>
+      <p>
+        Nie zastosujemy wobec Ciebie wyłącznie zautomatyzowanego przetwarzania, które w rozumieniu art. 22 RODO skutkowałoby
+        dla Ciebie skutkami prawnymi lub w podobny sposób istotnie by na Ciebie wpływało. Same mechanizmy antyspamowe
+        służą odróżnieniu masowych zgłoszeń od kontaktu ludzkiego, a nie budowaniu profilu konsumenckiego.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Prawa i skarga do organu</h2>
+      <p>W granicach przewidzianych przez RODO przysługuje m.in.:</p>
+      <ul>
+        <li>dostęp do danych i wydanie kopii;</li>
+        <li>sprostowanie nieprawidłowych danych;</li>
+        <li>żądanie usunięcia lub ograniczenia przetwarzania, gdy przesłanki są spełnione;</li>
+        <li>przeniesienie danych, jeśli przysługuje ono na podstawie art. 20 RODO;</li>
+        <li>sprzeciw wobec przetwarzania opartego na art. 6 ust. 1 lit. f RODO, w razie spełnienia przesłanek;</li>
+        <li>cofnięcie zgody, jeśli przetwarzanie ją uwzględniało;</li>
+        <li>wniesienie skargi do Prezesa Urzędu Ochrony Danych Osobowych.</li>
+      </ul>
+      <p>
+        Przy realizacji żądań możemy poprosić o informacje pozwalające potwierdzić tożsamość — to zwykła praktyka
+        chroniąca przed ujawnieniem danych osobom nieuprawnionym.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Aktualizacje treści</h2>
+      <p>
+        Niniejszy opis może ulec zmianie, jeśli zmieni się funkcjonalność Serwisu, łańcuch dostawców albo interpretacja
+        przepisów. Obowiązująca wersja znajduje się pod stałym adresem{' '}
+        <a href="/pl/polityka-prywatnosci/" class="text-g2-accent hover:underline">/pl/polityka-prywatnosci/</a>. O
+        istotnych zmianach możemy poinformować komunikatem w Serwisie, jeżeli uznamy to za stosowne.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Znaczenie skrótów</h2>
+      <ul>
+        <li>
+          <strong>RODO</strong> — rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r.
+        </li>
+        <li>
+          <strong>Administrator</strong> — podmiot wskazany powyżej jako odpowiedzialny za Serwis get2software.com.
+        </li>
+        <li>
+          <strong>Serwis</strong> — witryna pod domeną get2software.com, w tym strony informacyjne, produktowe oraz
+          kontakt z formularzem, jeśli jest aktywny.
+        </li>
+      </ul>
+
       <p>
         Wersja angielska:{' '}
         <a href="/en/privacy-policy/" class="text-g2-accent hover:underline">Privacy policy</a>.

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import PageCtaPanel from '../components/PageCtaPanel.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import type { Locale } from '../lib/i18n/routes';
@@ -10,17 +11,37 @@ type Props = {
   title: string;
   description: string;
   pathname: string;
+  /** Patrz `BaseLayout` — dla sekcji wyłącznie PL (artykuły) ustaw `pl-only`. */
+  hreflangMode?: 'bilingual' | 'pl-only';
   hreflangPl: string;
   hreflangEn: string;
-  alternateHref: string;
-  active?: 'home' | 'about' | 'products' | 'integrations' | 'support' | 'news' | 'careers' | 'contact';
+  /**
+   * Docelowy URL przełącznika języka (ta sama strona w EN). Dla `hreflangMode=pl-only` pomijamy —
+   * użytkownik nie powinien widzieć linku „English”, skoro treści nie ma w EN.
+   */
+  alternateHref?: string;
+  /** Wymuszenie ukrycia przełącznika (np. strony PL-only). Domyślnie ukrywamy przy `hreflangMode=pl-only`. */
+  showLanguageSwitch?: boolean;
+  active?:
+    | 'home'
+    | 'about'
+    | 'team'
+    | 'products'
+    | 'integrations'
+    | 'support'
+    | 'careers'
+    | 'contact'
+    | 'articles';
   ogType?: 'website' | 'article';
   ogImagePath?: string;
   structuredData?: Record<string, unknown>[];
 };
 
 const props = Astro.props as Props;
-const { structuredData: pageStructuredData, ...baseProps } = props;
+/** `showLanguageSwitch` nie jest atrybutem `BaseLayout` — wyłączamy z spreadu. */
+const { structuredData: pageStructuredData, showLanguageSwitch: showLanguageSwitchProp, ...baseProps } = props;
+const hreflangMode = props.hreflangMode ?? 'bilingual';
+const showLanguageSwitch = showLanguageSwitchProp ?? hreflangMode !== 'pl-only';
 
 /** Domyślny JSON-LD WebPage - spełnia bramę verify-seo na każdej podstronie. */
 const webPageLd: Record<string, unknown> = {
@@ -35,10 +56,30 @@ const webPageLd: Record<string, unknown> = {
 const mergedStructuredData = [...(pageStructuredData ?? []), webPageLd];
 ---
 
-<BaseLayout {...baseProps} structuredData={mergedStructuredData}>
-  <SiteHeader locale={props.locale} active={props.active} alternateHref={props.alternateHref} />
+<BaseLayout
+  {...baseProps}
+  hreflangMode={hreflangMode}
+  structuredData={mergedStructuredData}
+>
+  <SiteHeader
+    locale={props.locale}
+    active={props.active}
+    alternateHref={showLanguageSwitch ? props.alternateHref : undefined}
+    showLanguageSwitch={showLanguageSwitch}
+  />
   <main id="main" class="flex-1">
     <slot />
+    <!--
+      Globalny panel CTA:
+      - zapewnia, że każda strona marketingowa kończy się jasnym kolejnym krokiem,
+      - centralizuje linkowanie wewnętrzne między powiązanymi podstronami,
+      - dzięki temu nie trzeba ręcznie pilnować CTA w każdym osobnym pliku strony.
+    -->
+    <PageCtaPanel locale={props.locale} pathname={props.pathname} active={props.active} />
   </main>
-  <SiteFooter locale={props.locale} alternateHref={props.alternateHref} />
+  <SiteFooter
+    locale={props.locale}
+    alternateHref={showLanguageSwitch ? props.alternateHref : undefined}
+    showLanguageSwitch={showLanguageSwitch}
+  />
 </BaseLayout>

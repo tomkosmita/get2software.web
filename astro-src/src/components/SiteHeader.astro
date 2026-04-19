@@ -5,25 +5,42 @@ import { routeMap } from '../lib/i18n/routes';
 type Props = {
   locale: Locale;
   /** Aktywny klucz trasy dla podświetlenia (opcjonalnie). */
-  active?: 'home' | 'about' | 'products' | 'integrations' | 'support' | 'news' | 'careers' | 'contact';
-  /** Pełny URL (ścieżka) do tej samej strony w drugim języku - hreflang UX w menu. */
-  alternateHref: string;
+  active?:
+    | 'home'
+    | 'about'
+    | 'team'
+    | 'products'
+    | 'integrations'
+    | 'support'
+    | 'careers'
+    | 'contact'
+    | 'articles';
+  /**
+   * Pełny URL do odpowiednika w drugim języku — gdy brak (np. treść PL-only), ukrywamy przełącznik języka,
+   * żeby nie kierować użytkownika na „pustą” stronę EN.
+   */
+  alternateHref?: string;
+  /** Domyślnie true — wyłącz dla sekcji bez wersji językowej. */
+  showLanguageSwitch?: boolean;
 };
 
-const { locale, active, alternateHref } = Astro.props;
+const { locale, active, alternateHref, showLanguageSwitch = true } = Astro.props;
 
 const t =
   locale === 'pl'
     ? {
         home: 'Start',
         about: 'O nas',
+        /** Podstrona kompetencji zespołu i modelu współpracy z klientem. */
+        team: 'Zespół',
         products: 'Produkty',
         integrations: 'Integracje',
         /** Pozycja menu: utrzymanie systemów po wdrożeniu (spójna etykieta z podstroną /pl/wsparcie-systemow/). */
         support: 'Wsparcie',
-        news: 'Aktualności',
         careers: 'Kariera',
         contact: 'Kontakt',
+        /** Sekcja wiedzy — link do polskich artykułów (treść na start wyłącznie PL). */
+        articles: 'Artykuły',
         langSwitch: 'English',
         productBhp: 'get2_BHPRent',
         productFsm: 'get2_FSM',
@@ -39,12 +56,14 @@ const t =
     : {
         home: 'Home',
         about: 'About',
+        team: 'Team',
         products: 'Products',
         integrations: 'Integrations',
         support: 'Support',
-        news: 'News',
         careers: 'Careers',
         contact: 'Contact',
+        /** Ten sam URL co PL — czytelnik widzi, że materiały są po polsku. */
+        articles: 'Articles (PL)',
         langSwitch: 'Polski',
         productBhp: 'get2_BHPRent',
         productFsm: 'get2_FSM',
@@ -58,12 +77,13 @@ const t =
 
 const home = routeMap.home[locale];
 const about = routeMap.about[locale];
+const team = routeMap.team[locale];
 const products = routeMap.products[locale];
 const integrations = routeMap.integrations[locale];
 const support = routeMap.support[locale];
-const news = routeMap.news[locale];
 const careers = routeMap.careers[locale];
 const contact = routeMap.contact[locale];
+const articles = routeMap.articles[locale];
 const pBhp = routeMap.productBhp[locale];
 const pFsm = routeMap.productFsm[locale];
 const pComm = routeMap.productComm[locale];
@@ -120,6 +140,15 @@ const mobileProductLink =
         ]}
       >
         {t.about}
+      </a>
+      <a
+        href={team}
+        class:list={[
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
+          active === 'team' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
+        ]}
+      >
+        {t.team}
       </a>
 
       <div class="relative group">
@@ -187,13 +216,13 @@ const mobileProductLink =
         {t.support}
       </a>
       <a
-        href={news}
+        href={articles}
         class:list={[
           'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
-          active === 'news' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
+          active === 'articles' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
         ]}
       >
-        {t.news}
+        {t.articles}
       </a>
       <a
         href={careers}
@@ -213,14 +242,16 @@ const mobileProductLink =
       >
         {t.contact}
       </a>
-      <a
-        href={alternateHref}
-        class="ml-2 rounded-lg border border-g2-glass-border px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text"
-        hreflang={otherLocale}
-        lang={otherLocale}
-      >
-        {t.langSwitch}
-      </a>
+      {showLanguageSwitch && alternateHref ? (
+        <a
+          href={alternateHref}
+          class="ml-2 rounded-lg border border-g2-glass-border px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text"
+          hreflang={otherLocale}
+          lang={otherLocale}
+        >
+          {t.langSwitch}
+        </a>
+      ) : null}
     </nav>
 
     <!-- Mobile: tylko toggle hamburger - język i pełna nawigacja w panelu pod headerem. -->
@@ -274,6 +305,12 @@ const mobileProductLink =
           class:list={[mobileNavLink, active === 'about' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text']}
         >
           {t.about}
+        </a>
+        <a
+          href={team}
+          class:list={[mobileNavLink, active === 'team' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text']}
+        >
+          {t.team}
         </a>
 
         <!-- Akordeon Produkty: ta sama IA co desktop (bez zmian slugów). -->
@@ -330,10 +367,13 @@ const mobileProductLink =
           {t.support}
         </a>
         <a
-          href={news}
-          class:list={[mobileNavLink, active === 'news' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text']}
+          href={articles}
+          class:list={[
+            mobileNavLink,
+            active === 'articles' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
+          ]}
         >
-          {t.news}
+          {t.articles}
         </a>
         <a
           href={careers}
@@ -351,14 +391,16 @@ const mobileProductLink =
         >
           {t.contact}
         </a>
-        <a
-          href={alternateHref}
-          class="mt-2 w-full rounded-lg border border-g2-glass-border px-3 py-3 text-center text-sm text-g2-muted transition hover:bg-g2-hover hover:text-g2-text"
-          hreflang={otherLocale}
-          lang={otherLocale}
-        >
-          {t.langSwitch}
-        </a>
+        {showLanguageSwitch && alternateHref ? (
+          <a
+            href={alternateHref}
+            class="mt-2 w-full rounded-lg border border-g2-glass-border px-3 py-3 text-center text-sm text-g2-muted transition hover:bg-g2-hover hover:text-g2-text"
+            hreflang={otherLocale}
+            lang={otherLocale}
+          >
+            {t.langSwitch}
+          </a>
+        ) : null}
       </nav>
     </div>
   </div>

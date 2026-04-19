@@ -1,0 +1,388 @@
+---
+/**
+ * Globalny panel CTA dla wszystkich stron marketingowych.
+ *
+ * Cel biznesowy:
+ * - każda podstrona ma kończyć się jasnym "co dalej",
+ * - użytkownik dostaje nie tylko kontakt, ale też 2 sensowne przejścia do powiązanych podstron,
+ * - linkowanie wewnętrzne jest kontrolowane centralnie, więc łatwiej utrzymać spójność między PL i EN.
+ *
+ * Layout:
+ * - lewa kolumna: komunikat i główny CTA (najmocniejsza intencja biznesowa danej strony),
+ * - prawa kolumna: 2 guziki do innych podstron, żeby użytkownik miał naturalny kolejny krok bez wracania do menu,
+ * - cały panel jest osadzony na tle glass / surface, żeby wyglądał jak świadome domknięcie sekcji contentowej,
+ *   a nie przypadkowy blok linków.
+ */
+import type { Locale } from '../lib/i18n/routes';
+import { routeMap } from '../lib/i18n/routes';
+
+type ActivePage =
+  | 'home'
+  | 'about'
+  | 'team'
+  | 'products'
+  | 'integrations'
+  | 'support'
+  | 'careers'
+  | 'contact'
+  | 'articles';
+
+type CtaAction = {
+  href: string;
+  label: string;
+  tone: 'primary' | 'secondary';
+};
+
+type CtaConfig = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  actions: [CtaAction, CtaAction, CtaAction];
+};
+
+type NavigationKey = 'about' | 'team' | 'products' | 'integrations' | 'support' | 'careers' | 'contact' | 'articles';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+  active?: ActivePage;
+}
+
+const { locale, pathname, active } = Astro.props as Props;
+
+/**
+ * Etykiety pomocniczych CTA mają być 1:1 zgodne z nazwami pozycji w menu.
+ * Dzięki temu użytkownik nie musi tłumaczyć sobie, że „Wróć do o firmie” = „O nas”.
+ */
+const navLabelsByLocale: Record<Locale, Record<NavigationKey, string>> = {
+  pl: {
+    about: 'O nas',
+    team: 'Zespół',
+    products: 'Produkty',
+    integrations: 'Integracje',
+    support: 'Wsparcie',
+    careers: 'Kariera',
+    contact: 'Kontakt',
+    articles: 'Artykuły'
+  },
+  en: {
+    about: 'About',
+    team: 'Team',
+    products: 'Products',
+    integrations: 'Integrations',
+    support: 'Support',
+    careers: 'Careers',
+    contact: 'Contact',
+    articles: 'Articles (PL)'
+  }
+};
+
+/**
+ * Guziki pomocnicze korzystają z jednej fabryki:
+ * - biorą dokładny URL z routeMap,
+ * - zachowują nazewnictwo spójne z headerem i footerem,
+ * - łatwo zmienić ich zestaw per strona bez przepisywania etykiet „idź do / wróć do”.
+ */
+function navAction(locale: Locale, key: NavigationKey): CtaAction {
+  return {
+    href: routeMap[key][locale],
+    label: navLabelsByLocale[locale][key],
+    tone: 'secondary'
+  };
+}
+
+/**
+ * Prywatność nie ma `active` w layoutcie, ale nadal ma dostać CTA i linki.
+ * Wykrywamy ją po ścieżce, żeby nie rozbudowywać wszystkich istniejących stron o nowy prop.
+ */
+/**
+ * Artykuły żyją pod `/pl/artykuly/...` — nawet jeśli `active` nie został przekazany, wykrywamy ścieżkę,
+ * żeby CTA nie pokazywało domyślnego „home”.
+ */
+const pageKey: ActivePage | 'privacy' =
+  pathname === routeMap.privacy[locale]
+    ? 'privacy'
+    : pathname.startsWith('/pl/artykuly/')
+      ? 'articles'
+      : (active ?? 'home');
+
+/**
+ * Centralna mapa CTA:
+ * - pierwszy guzik zawsze pełni rolę głównej konwersji,
+ * - dwa kolejne guziki prowadzą do logicznie powiązanych podstron,
+ * - przykład wymagany przez użytkownika jest tu jawnie spełniony: `about` prowadzi m.in. do `team`.
+ */
+const ctaConfigByLocale: Record<Locale, Record<ActivePage | 'privacy', CtaConfig>> = {
+  pl: {
+    home: {
+      eyebrow: 'Kolejny krok',
+      title: 'Chcesz sprawdzić, który obszar najlepiej pasuje do Twojej firmy?',
+      description:
+        'Zacznij od krótkiej rozmowy albo przejdź od razu do produktów i zespołu, żeby zobaczyć model współpracy.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Porozmawiajmy o wdrożeniu', tone: 'primary' },
+        navAction('pl', 'products'),
+        navAction('pl', 'team')
+      ]
+    },
+    about: {
+      eyebrow: 'Co dalej',
+      title: 'Poznaj model współpracy i obszary, za które bierzemy odpowiedzialność',
+      description:
+        'Po stronie o firmie warto od razu przejść do zespołu i produktów, żeby zobaczyć, jak przekładamy kompetencje na realne wdrożenia.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Umów rozmowę', tone: 'primary' },
+        navAction('pl', 'team'),
+        navAction('pl', 'products')
+      ]
+    },
+    team: {
+      eyebrow: 'Następny krok',
+      title: 'Sprawdź, jak ten zespół pracuje w praktyce',
+      description:
+        'Jeśli model współpracy jest zbieżny z Twoją organizacją, kolejnym krokiem jest zwykle sprawdzenie produktów albo obszaru integracji.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Porozmawiajmy o zakresie', tone: 'primary' },
+        navAction('pl', 'products'),
+        navAction('pl', 'integrations')
+      ]
+    },
+    products: {
+      eyebrow: 'Dobór rozwiązania',
+      title: 'Chcesz dobrać właściwy produkt i zakres wdrożenia?',
+      description:
+        'Po stronie produktowej naturalnym kolejnym krokiem jest rozmowa o procesie, a pomocniczo także przegląd integracji i wsparcia po starcie.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Umów demo / rozmowę', tone: 'primary' },
+        navAction('pl', 'integrations'),
+        navAction('pl', 'support')
+      ]
+    },
+    integrations: {
+      eyebrow: 'Architektura i wdrożenie',
+      title: 'Sprawdź też produkt i model wsparcia po starcie',
+      description:
+        'Integracje zwykle nie są osobnym bytem: warto od razu połączyć je z produktem i z zespołem, który bierze odpowiedzialność za wdrożenie.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Porozmawiajmy o integracji', tone: 'primary' },
+        navAction('pl', 'products'),
+        navAction('pl', 'team')
+      ]
+    },
+    support: {
+      eyebrow: 'Utrzymanie po wdrożeniu',
+      title: 'Zobacz, co wdrażamy i jak spinamy to z ERP',
+      description:
+        'Strona wsparcia domyka historię po starcie, ale przed rozmową warto też zobaczyć same produkty oraz zespół odpowiedzialny za delivery.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Porozmawiajmy o wsparciu', tone: 'primary' },
+        navAction('pl', 'products'),
+        navAction('pl', 'team')
+      ]
+    },
+    careers: {
+      eyebrow: 'Dołącz do nas',
+      title: 'Sprawdź, jak pracujemy i kim jesteśmy jako firma',
+      description:
+        'Dla kandydatów najważniejszy kontekst to sposób pracy zespołu oraz szerszy obraz firmy, nie tylko formularz kontaktowy.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Aplikuj / napisz do nas', tone: 'primary' },
+        navAction('pl', 'team'),
+        navAction('pl', 'about')
+      ]
+    },
+    contact: {
+      eyebrow: 'Przed kontaktem',
+      title: 'Chcesz jeszcze lepiej przygotować rozmowę?',
+      description:
+        'Jeśli potrzebujesz więcej kontekstu przed wysłaniem wiadomości, zobacz produkty albo sposób, w jaki podchodzimy do integracji.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Wyślij zapytanie', tone: 'primary' },
+        navAction('pl', 'products'),
+        navAction('pl', 'integrations')
+      ]
+    },
+    privacy: {
+      eyebrow: 'Przejścia pomocnicze',
+      title: 'Po sprawach formalnych możesz wrócić do oferty albo do kontaktu',
+      description:
+        'Na stronie prawnej zachowujemy spokojny ton, ale nadal dajemy czytelne przejścia do oferty i do głównych stron firmowych.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Skontaktuj się z nami', tone: 'primary' },
+        navAction('pl', 'about'),
+        navAction('pl', 'products')
+      ]
+    },
+    articles: {
+      eyebrow: 'Wdrożenie i kontekst',
+      title: 'Chcesz omówić integrację ERP albo odbiór techniczny w praktyce?',
+      description:
+        'Artykuły są punktem wyjścia — kolejnym krokiem jest rozmowa o konkretnym procesie, zakresie integracji lub wdrożeniu narzędzia do listy usterek i raportów odbiorowych.',
+      actions: [
+        { href: routeMap.contact.pl, label: 'Porozmawiajmy', tone: 'primary' },
+        navAction('pl', 'integrations'),
+        { href: routeMap.productComm.pl, label: 'get2_Commissioning', tone: 'secondary' }
+      ]
+    }
+  },
+  en: {
+    home: {
+      eyebrow: 'Next step',
+      title: 'Want to see which part of the offer best fits your operation?',
+      description:
+        'Start with a short conversation or jump straight to products and the team page to understand the delivery model.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Talk to us', tone: 'primary' },
+        navAction('en', 'products'),
+        navAction('en', 'team')
+      ]
+    },
+    about: {
+      eyebrow: 'What next',
+      title: 'See how the company story translates into delivery and product work',
+      description:
+        'From the about page, the most useful next steps are the team page and the product overview.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Start a conversation', tone: 'primary' },
+        navAction('en', 'team'),
+        navAction('en', 'products')
+      ]
+    },
+    team: {
+      eyebrow: 'Next step',
+      title: 'See how this team turns into delivery',
+      description:
+        'If this engagement model matches your organisation, the next useful pages are products and integrations.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Discuss the scope', tone: 'primary' },
+        navAction('en', 'products'),
+        navAction('en', 'integrations')
+      ]
+    },
+    products: {
+      eyebrow: 'Solution fit',
+      title: 'Need help choosing the right product and rollout scope?',
+      description:
+        'Product pages should naturally connect to contact, ERP integration planning, and post-go-live support.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Book a demo / talk to us', tone: 'primary' },
+        navAction('en', 'integrations'),
+        navAction('en', 'support')
+      ]
+    },
+    integrations: {
+      eyebrow: 'Architecture and rollout',
+      title: 'Pair integrations with the product and the support model',
+      description:
+        'Integration planning makes the most sense when linked to the product itself and to the team that will carry the rollout.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Talk about integrations', tone: 'primary' },
+        navAction('en', 'products'),
+        navAction('en', 'team')
+      ]
+    },
+    support: {
+      eyebrow: 'After go-live',
+      title: 'See what we implement and how it connects to ERP',
+      description:
+        'Support closes the story after launch, but products and the team page give the fuller picture before the first call.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Talk about support', tone: 'primary' },
+        navAction('en', 'products'),
+        navAction('en', 'team')
+      ]
+    },
+    careers: {
+      eyebrow: 'Join the team',
+      title: 'Understand how we work and who we are as a company',
+      description:
+        'For candidates, the team page and the company page provide the context behind the hiring message.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Apply / contact us', tone: 'primary' },
+        navAction('en', 'team'),
+        navAction('en', 'about')
+      ]
+    },
+    contact: {
+      eyebrow: 'Before you send',
+      title: 'Need a bit more context before reaching out?',
+      description:
+        'If you want to prepare the conversation better, continue to the product overview or the integrations page.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Send your inquiry', tone: 'primary' },
+        navAction('en', 'products'),
+        navAction('en', 'integrations')
+      ]
+    },
+    privacy: {
+      eyebrow: 'Helpful paths',
+      title: 'After the legal details, you can return to the offer or contact',
+      description:
+        'The privacy page stays calm and formal, but it still offers clear button-based routes back into the main offer.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Contact us', tone: 'primary' },
+        navAction('en', 'about'),
+        navAction('en', 'products')
+      ]
+    },
+    articles: {
+      eyebrow: 'Next step',
+      title: 'Want to discuss ERP integration or commissioning in practice?',
+      description:
+        'These articles are Polish-only for now — if the topic fits your rollout, continue to ERP integrations or the commissioning product, or contact us for a scoped conversation.',
+      actions: [
+        { href: routeMap.contact.en, label: 'Contact us', tone: 'primary' },
+        navAction('en', 'integrations'),
+        { href: routeMap.productComm.en, label: 'get2_Commissioning', tone: 'secondary' }
+      ]
+    }
+  }
+};
+
+const config = ctaConfigByLocale[locale][pageKey];
+---
+
+<section class="g2-container pb-16 md:pb-20" aria-labelledby="global-page-cta-heading">
+  <!--
+    Domknięcie każdej podstrony: szeroki panel z wyraźnym CTA.
+    Na mobile układa się w jedną kolumnę, na desktopie rozdziela komunikat i nawigację pomocniczą.
+  -->
+  <div class="g2-glass rounded-3xl p-6 md:p-8">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:items-start">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-g2-accent">{config.eyebrow}</p>
+        <h2 id="global-page-cta-heading" class="mt-3 font-display text-2xl font-semibold text-g2-text md:text-3xl">
+          {config.title}
+        </h2>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-g2-muted md:text-base">{config.description}</p>
+
+        <!-- Główny CTA zawsze jest pierwszy i wizualnie najsilniejszy - to docelowa akcja biznesowa strony. -->
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={config.actions[0].href} class="g2-btn-primary inline-flex">
+            {config.actions[0].label}
+          </a>
+        </div>
+      </div>
+
+      <!--
+        Prawa kolumna to dwa guziki do innych podstron.
+        Dzięki temu użytkownik dostaje alternatywną ścieżkę: nie tylko "kontakt", ale też dalszą eksplorację oferty.
+      -->
+      <div class="grid gap-3">
+        {config.actions.slice(1).map((action) => (
+          <a
+            href={action.href}
+            class:list={[
+              'inline-flex min-h-12 items-center justify-center rounded-xl border px-5 py-3 text-center text-sm font-medium transition',
+              action.tone === 'primary'
+                ? 'g2-btn-primary'
+                : 'g2-btn-secondary'
+            ]}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

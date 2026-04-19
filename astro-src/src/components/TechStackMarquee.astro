@@ -1,0 +1,118 @@
+---
+/**
+ * Pas technologii (efekt „karuzeli”) – powtarzalna lista badge'y bez biblioteki slidera.
+ *
+ * Cel layoutu: wizualny rytm na dole strony (zespół + stack), bez przeładowania UI.
+ * Cel biznesowy: sygnał, że pracujemy w ekosystemie ch/cloud/ERP typowym dla wdrożeń B2B.
+ *
+ * Dostępność:
+ * - prefers-reduced-motion: animacja wyłączona, badge zawijają się w wielu linijkach;
+ * - hover: pauza animacji, żeby dało się przeczytać etykiety;
+ * - druga kopia listy ma aria-hidden (dekoracja, nie osobna treść).
+ */
+export type Props = {
+  locale: 'pl' | 'en';
+};
+
+const { locale } = Astro.props;
+
+const title = locale === 'pl' ? 'Technologie i ekosystem' : 'Technologies and ecosystem';
+
+const intro =
+  locale === 'pl'
+    ? 'W projektach łączymy narzędzia chmurowe, backend, integracje i dane operacyjne — dopasowujemy stack do procesu i infrastruktury klienta.'
+    : 'We combine cloud tooling, backend, integrations, and operational data — we pick a stack that fits the client process and infrastructure.';
+
+/** Kolejność: od ogólnego ekosystemu po integracje — czytelna „ściana” kompetencji technicznych. */
+const items = [
+  'AWS',
+  'Azure',
+  'Google Cloud',
+  'Next.js',
+  'React',
+  'Node.js',
+  'Python',
+  'SQL',
+  'PostgreSQL',
+  'Firebase',
+  'Docker',
+  'Kubernetes',
+  'REST API',
+  'GraphQL',
+  'ERP integrations'
+] as const;
+---
+
+<section class="g2-section-band py-14 md:py-16" aria-labelledby="g2-tech-marquee-heading">
+  <div class="g2-container">
+    <div class="max-w-3xl">
+      <h2 id="g2-tech-marquee-heading" class="font-display text-2xl font-semibold tracking-tight text-g2-text md:text-3xl">
+        {title}
+      </h2>
+      <p class="g2-prose mt-3 text-g2-muted">{intro}</p>
+    </div>
+
+    <!--
+      Marquee: wewnętrzny tor z dwiema identycznymi listami — animacja translateX(-50%) daje pętlę bez „skoku”.
+      overflow-x: ukrywa drugą połowę toru poza viewportem pasa.
+    -->
+    <div class="g2-tech-marquee not-prose mt-8 overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface/80 py-5 shadow-sm">
+      <div class="g2-tech-marquee__track">
+        <div class="flex shrink-0 items-center gap-3 px-1">
+          {
+            items.map((name) => (
+              <span class="inline-flex items-center rounded-full border border-g2-border bg-g2-bg px-4 py-2 text-sm font-semibold text-g2-text shadow-sm">
+                {name}
+              </span>
+            ))
+          }
+        </div>
+        <div class="flex shrink-0 items-center gap-3 px-1" aria-hidden="true">
+          {
+            items.map((name) => (
+              <span class="inline-flex items-center rounded-full border border-g2-border bg-g2-bg px-4 py-2 text-sm font-semibold text-g2-text shadow-sm">
+                {name}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes g2-tech-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .g2-tech-marquee__track {
+    display: flex;
+    width: max-content;
+    gap: 0.75rem;
+    animation: g2-tech-marquee 55s linear infinite;
+  }
+
+  .g2-tech-marquee:hover .g2-tech-marquee__track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .g2-tech-marquee {
+      overflow: visible;
+    }
+
+    .g2-tech-marquee__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      row-gap: 0.75rem;
+      justify-content: center;
+    }
+  }
+</style>

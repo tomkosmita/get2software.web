@@ -5,7 +5,8 @@ import { routeMap } from '../../../lib/i18n/routes';
 
 const pathname = '/en/privacy-policy/';
 const title = 'Privacy policy - get2software.com';
-const description = 'How get2software.com processes personal data under GDPR.';
+const description =
+  'Privacy information for get2software.com: how to reach the controller, what data may arise, why it is processed, retention, subprocessors, cookies, and your rights.';
 ---
 
 <MarketingLayout
@@ -17,44 +18,178 @@ const description = 'How get2software.com processes personal data under GDPR.';
   hreflangEn={canonicalUrl(pathname)}
   alternateHref={routeMap.privacy.pl}
 >
+  <!--
+    Section order differs from a typical “definitions-first” template: contact and scope up front, glossary last.
+    Wording is written for this site only (marketing pages + optional contact form).
+  -->
   <div class="g2-container max-w-3xl py-14 md:py-20">
     <h1 class="g2-heading-xl">Privacy policy</h1>
-    <div class="g2-prose mt-8 space-y-4">
+    <div class="g2-prose mt-8 space-y-6">
       <p>
-        This policy explains how personal data is processed for visitors of get2software.com. The data controller is the
-        entity operating get2software.com, as identified in the controller’s registration and contact details. For
-        privacy-related matters, contact{' '}
-        <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>.
+        This page explains how personal data may be processed when you use the website <strong>get2software.com</strong>{' '}
+        (the <strong>“Site”</strong>). It covers browsing the published pages and contacting us (via the contact form
+        when enabled, or by email). The text is written specifically for this Site and only describes the processing
+        activities mentioned here.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Purposes and legal bases</h2>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Who is responsible and how to reach us</h2>
       <p>
-        Contact form data is processed to respond to your inquiry, continue communication related to rollout or commercial
-        discussion, and protect the service against abuse. The legal basis is the controller’s legitimate interest and,
-        where required, consent expressed in the form.
+        The controller of personal data under the GDPR (Regulation (EU) 2016/679) is the organisation responsible for
+        operating the <strong>get2software.com</strong> Site, identifiable from its public registration and contact
+        details.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Scope of data</h2>
       <p>
-        We process the data submitted in the contact form, including company name, email address, phone number, subject,
-        and message content. We may also process basic technical data required for security and operation of the site,
-        such as system logs and essential cookies.
+        For privacy questions, email{' '}
+        <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>. A
+        short subject line (for example “data correction request” or “question about logs”) helps us route the message
+        without unnecessary back-and-forth.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Retention</h2>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Who this notice is for</h2>
+      <p>In practice, this notice matters if you are:</p>
+      <ul>
+        <li>
+          a visitor loading Site pages — which may generate limited technical data as part of normal web delivery and
+          security controls;
+        </li>
+        <li>
+          someone contacting us about cooperation or products — through the contact form (when available), email, or
+          phone in a business context.
+        </li>
+      </ul>
       <p>
-        Data is retained for as long as needed to handle the inquiry, prepare an offer, continue relevant correspondence,
-        and establish, defend, or pursue claims where necessary. After that period, data is deleted or anonymised unless
-        further retention is required by law.
+        We do not operate a newsletter or webinar registration through this Site as a separate product line. If we add
+        data-heavy features later, we will publish an updated description (or a dedicated notice) before relying on new
+        processing.
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Data recipients</h2>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">What kinds of data may exist</h2>
+      <p>The categories depend on what you do:</p>
+      <ul>
+        <li>
+          <strong>Contact-related content</strong> — such as company name, email address, phone number, subject, message
+          body, and anything else you choose to include;
+        </li>
+        <li>
+          <strong>Technical metadata</strong> — such as IP address, timestamps, browser hints, server diagnostic lines, and
+          security-related identifiers tied to bot protection for the form (exact fields depend on production
+          configuration).
+        </li>
+      </ul>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Why we process data and the legal bases</h2>
       <p>
-        Data may be entrusted to service providers supporting website operation and communication, including hosting,
-        contact-form delivery, email, and anti-spam tools. Data is shared only to the extent necessary for those
-        services.
+        <strong>Running the Site safely.</strong> Delivering pages, diagnosing faults, and reducing abuse — Article 6(1)(f)
+        GDPR (legitimate interests in operating a dependable website).
       </p>
-      <h2 class="font-display text-xl font-semibold text-g2-text">Your rights</h2>
       <p>
-        You may request access, rectification, erasure, restriction, objection, and data portability where applicable.
-        You may lodge a complaint with your local supervisory authority.
+        <strong>Answering your message.</strong> Handling correspondence and preparing follow-up materials — Article
+        6(1)(f) GDPR; where a consent checkbox is required for a specific step, Article 6(1)(a) GDPR also applies to that
+        step.
       </p>
+      <p>
+        <strong>Protecting the contact form.</strong> Short checks with a third-party vendor to reduce automated spam —
+        Article 6(1)(f) GDPR.
+      </p>
+      <p>
+        <strong>Claims and legal duties.</strong> Retention where needed to establish, exercise, or defend legal claims, or
+        to meet statutory obligations — Article 6(1)(f) and/or Article 6(1)(c) GDPR, depending on the situation.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Where the data comes from</h2>
+      <p>
+        Most information comes directly from you (typed into the form or written in an email). A smaller portion is
+        created automatically by the infrastructure that hosts the Site, because a public website cannot function without
+        basic request handling and logging.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">How long we keep information</h2>
+      <p>
+        We keep contact content for as long as needed to finish the conversation, then for any additional period required
+        for limitation periods or statutory record-keeping, if applicable. When the purpose ends, we delete or anonymise
+        data unless law requires longer storage.
+      </p>
+      <p>
+        Technical log retention is governed by our hosting and security vendors’ policies and is often shorter than the
+        retention window for commercial correspondence.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Who may process data on our behalf</h2>
+      <p>
+        We use external services that are necessary to publish the Site and deliver messages. Sharing is limited to what
+        those services need to perform their task. Typical examples include:
+      </p>
+      <ul>
+        <li>hosting or cloud infrastructure serving Site files;</li>
+        <li>
+          an endpoint that accepts form submissions (for example an edge function) plus a transactional email provider
+          that delivers the message;
+        </li>
+        <li>a vendor providing bot/human verification for the form;</li>
+        <li>legal or IT advisers, only when a matter requires it.</li>
+      </ul>
+      <p>We use data processing agreements with processors where the GDPR requires them.</p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Transfers outside the EEA</h2>
+      <p>
+        Some providers may process data outside the European Economic Area (for example in the United States). Where that
+        happens, we rely on GDPR transfer tools such as Standard Contractual Clauses or other approved mechanisms, as
+        applicable to the relationship.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Cookies and similar technologies</h2>
+      <p>
+        We use technical measures required for the Site to work, to keep it secure, and to operate the contact form. We
+        do not run behavioural ad profiling on this Site in a way that would call for a broad, standalone marketing-cookie
+        banner today. If we add analytics or marketing cookies later, we will expand this section and provide an
+        appropriate consent mechanism under applicable law.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">No solely automated decisions with legal effect</h2>
+      <p>
+        We do not make decisions about you based solely on automated processing, including profiling, which produce legal or
+        similarly significant effects within the meaning of Article 22 GDPR. Anti-spam checks are there to separate bulk
+        abuse from genuine human contact, not to build a consumer marketing profile.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Your rights and complaints</h2>
+      <p>Where the GDPR applies, you may have rights including:</p>
+      <ul>
+        <li>access to your personal data and a copy;</li>
+        <li>rectification of inaccurate data;</li>
+        <li>erasure or restriction of processing, where grounds exist;</li>
+        <li>data portability, where Article 20 GDPR applies;</li>
+        <li>objection to processing based on Article 6(1)(f) GDPR, where the legal tests are met;</li>
+        <li>withdrawal of consent, where processing relied on consent;</li>
+        <li>the right to lodge a complaint with a supervisory authority.</li>
+      </ul>
+      <p>
+        We may ask for reasonable information to confirm your identity before disclosing or changing records, to reduce the
+        risk of unauthorised access.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Updates to this page</h2>
+      <p>
+        We may revise this notice when the Site’s features, vendors, or legal requirements change. The current version is
+        published at{' '}
+        <a href="/en/privacy-policy/" class="text-g2-accent hover:underline">/en/privacy-policy/</a>. For material changes,
+        we may add a short notice elsewhere on the Site when that feels appropriate.
+      </p>
+
+      <h2 class="font-display text-xl font-semibold text-g2-text">Terms used on this page</h2>
+      <ul>
+        <li>
+          <strong>GDPR</strong> — Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016.
+        </li>
+        <li>
+          <strong>Controller</strong> — the organisation responsible for the get2software.com Site, as described above.
+        </li>
+        <li>
+          <strong>Site</strong> — the website served under the get2software.com domain, including informational and product
+          pages and the contact page with a form when it is enabled.
+        </li>
+      </ul>
+
       <p>
         Polish version:{' '}
         <a href="/pl/polityka-prywatnosci/" class="text-g2-accent hover:underline">Polityka prywatności</a>.
