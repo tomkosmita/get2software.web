@@ -1,0 +1,49 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/about/';
+const title = 'About - get2software.com';
+const description =
+  'We design and implement operational software for processes that need control, traceability, and ERP-ready data.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.about.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.about.pl}
+  active="about"
+  structuredData={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: title,
+      url: canonicalUrl(pathname)
+    }
+  ]}
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">About us</h1>
+    <div class="g2-prose mt-8 max-w-3xl space-y-4">
+      <p>
+        get2software.com builds software for operational processes that need accountability, auditability, and reliable
+        ERP integration. We structure documents, statuses, costs, and ownership where standard systems usually stop too
+        early.
+      </p>
+      <p>
+        Our products address specific realities of industry and B2B services: PPE and workwear records, field work
+        orders, commissioning defect lists, and maintenance workflows. Every implementation starts with the process and
+        ends with data that supports execution, reporting, and settlement.
+      </p>
+      <p>
+        We work as a product and implementation partner, not as a licence-only vendor. We take responsibility for process
+        architecture, configuration, integration, operational launch, and the next stage of system development.
+      </p>
+    </div>
+  </div>
+</MarketingLayout>

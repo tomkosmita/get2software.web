@@ -1,0 +1,135 @@
+{
+  "slug": "get2-fsm",
+  "pl": {
+    "seoTitle": "get2_FSM - zarządzanie serwisem, zleceniami, kosztami i rozliczeniem",
+    "seoDescription": "System do zarządzania serwisem dla zespołów serwisowych i wdrożeniowych: planowanie zleceń, realizacja offline, czas pracy, koszty, podpis klienta i dane gotowe do ERP.",
+    "listingTeaser": "System dla zespołów serwisowych i wdrożeniowych: planowanie zleceń, praca offline, dokumentacja wykonania, podpis klienta i rozliczenia gotowe do ERP.",
+    "heroTitle": "get2_FSM - serwis i wdrożenia w jednej platformie operacyjnej",
+    "heroLead": "Marża na serwisie znika wtedy, gdy zlecenia żyją w mailach, a rozliczenie kończy się w arkuszach. get2_FSM spina planowanie, realizację i zamknięcie pracy w jednym procesie: zespół widzi zadania od razu, dokumentuje wykonanie na miejscu, a biuro dostaje komplet czasu, kosztów i potwierdzeń gotowych do rozliczenia.",
+    "personas": [
+      "Kierownik serwisu lub kierownik realizacji - odpowiada za obciążenie zespołu, terminowość i rentowność zleceń; KPI: SLA, wykorzystanie godzin i marża na zleceniu.",
+      "Technik serwisowy lub inżynier wdrożeniowy - realizuje pracę w terenie, dokumentuje wykonanie i zamyka zadanie przy kliencie; KPI: kompletność dokumentacji i skuteczne zamknięcie przy pierwszej wizycie.",
+      "Finanse lub kontroling usług - rozliczają czas, koszty i materiały; KPI: szybkie zamknięcie miesiąca, zgodność danych i gotowość do fakturowania."
+    ],
+    "modules": [
+      {
+        "title": "Planowanie zleceń i kontrola backlogu",
+        "body": "Zespół biurowy planuje zlecenia na liście, w kalendarzu i w ujęciu zespołów, dlatego od razu widać priorytety, obciążenie i opóźnienia. Statusy pokazują realny postęp pracy bez dzwonienia po aktualizacje i bez równoległych arkuszy."
+      },
+      {
+        "title": "Klienci, obiekty i historia wykonania",
+        "body": "Każde zlecenie jest osadzone w kliencie, lokalizacji i historii wcześniejszych interwencji. Technik jedzie na miejsce z pełnym kontekstem, a biuro zachowuje ciągłość wiedzy o obiekcie, urządzeniu i zakresie prac."
+      },
+      {
+        "title": "Realizacja w terenie i checklisty",
+        "body": "Praca w terenie jest prowadzona krok po kroku przez checklisty, pola kosztowe i dokumentację zdjęciową. Zespół zapisuje wykonanie w trakcie wizyty, dzięki czemu zlecenie zamyka się na aktualnych danych, a nie z pamięci po powrocie do biura."
+      },
+      {
+        "title": "Czas pracy, koszty i materiały",
+        "body": "Czas, dojazdy, części i pozostałe koszty są przypisane bezpośrednio do zlecenia. System tworzy czytelną podstawę do rozliczeń wewnętrznych, faktury godzinowej lub analizy rentowności według klienta, zespołu i typu usługi."
+      },
+      {
+        "title": "Raport wykonania i podpis klienta",
+        "body": "Przed zamknięciem zlecenia technik widzi pełne podsumowanie wykonanych prac, kosztów i załączników. Podpis klienta oraz raport wykonania domykają wizytę formalnie jeszcze na miejscu, co skraca drogę do akceptacji i faktury."
+      },
+      {
+        "title": "Praca bez sieci i ciągłość dokumentacji",
+        "body": "System wspiera realizację w miejscach o słabym zasięgu, dlatego praca nie zatrzymuje się w halach, piwnicach ani na odległych obiektach. Po odzyskaniu łączności dane wracają do obiegu bez utraty opisów, zdjęć i potwierdzeń."
+      },
+      {
+        "title": "Rozliczenie miesiąca i zamknięcie danych w ERP",
+        "body": "Biuro dostaje gotowe zestawienia czasu, kosztów i materiałów za cały okres rozliczeniowy. Dane trafiają do fakturowania, kontrolingu i ERP bez ręcznego łączenia informacji z telefonu, maila i arkusza."
+      }
+    ],
+    "integrationsText": "get2_FSM przekazuje do ERP i systemów finansowych czas pracy, koszty, materiały oraz dane potrzebne do rozliczenia usług. Serwis pracuje na żywych danych operacyjnych, a finanse dostają spójną podstawę do faktur i analiz rentowności.",
+    "faqs": [
+      {
+        "question": "Czy system działa bez dostępu do sieci?",
+        "answer": "Tak. Zespół realizuje zlecenie i zapisuje wykonanie także przy słabym zasięgu, a dane synchronizują się po odzyskaniu łączności."
+      },
+      {
+        "question": "Czy można rozliczać różne modele usług?",
+        "answer": "Tak. Czas, koszty i materiały są zbierane na poziomie zlecenia, dlatego system wspiera zarówno rozliczenia godzinowe, jak i modele mieszane oraz analizy marży."
+      },
+      {
+        "question": "Czy klient musi instalować aplikację ze sklepu?",
+        "answer": "Nie. Klient nie musi instalować aplikacji ze sklepu. Zespół uruchamia pracę szybciej, a utrzymanie narzędzia po stronie firmy jest prostsze."
+      },
+      {
+        "question": "Jak wygląda dowód wykonania przy sporze o zakres?",
+        "answer": "Zlecenie gromadzi checklisty, zdjęcia, czas pracy, koszty i podpis klienta, więc cały pakiet dowodowy pozostaje w jednym miejscu."
+      },
+      {
+        "question": "Czy można rozdzielać zespoły i zakres odpowiedzialności?",
+        "answer": "Tak. System wspiera podział pracy według ról, zespołów i dostępu do danych, dzięki czemu każdy widzi dokładnie ten obszar procesu, za który odpowiada."
+      }
+    ],
+    "heroIllustration": "fsm"
+  },
+  "en": {
+    "seoTitle": "get2_FSM - field service management, jobs, costing, and settlement",
+    "seoDescription": "Field service management software for service and rollout teams: job planning, offline execution, time capture, costs, customer sign-off, and ERP-ready settlement data.",
+    "listingTeaser": "Software for service and rollout teams: job planning, offline work, execution records, customer sign-off, and settlement data ready for ERP.",
+    "heroTitle": "get2_FSM - service and rollout in one operational platform",
+    "heroLead": "Margin disappears when service work lives in email threads and settlement ends in spreadsheets. get2_FSM connects planning, execution, and close-out in one flow: teams receive work immediately, record execution on site, and the back office gets time, cost, and sign-off data ready for settlement.",
+    "personas": [
+      "Service manager or delivery manager - owns team load, deadlines, and job profitability; KPIs: SLA adherence, utilisation, and margin per job.",
+      "Field technician or rollout engineer - executes work on site, records delivery evidence, and closes the task with the customer; KPIs: documentation completeness and first-visit closure.",
+      "Finance or service controlling - settles time, costs, and materials; KPIs: fast month-end close, data consistency, and invoice readiness."
+    ],
+    "modules": [
+      {
+        "title": "Job planning and backlog control",
+        "body": "The office team plans work from list, calendar, and team views, so priorities, load, and delays remain visible at all times. Statuses show real progress without status calls and without parallel spreadsheets."
+      },
+      {
+        "title": "Customers, sites, and service history",
+        "body": "Every job is anchored to the customer, location, and previous interventions. Technicians arrive with context, while the back office keeps a continuous record of the site, asset, and delivery scope."
+      },
+      {
+        "title": "Field execution and guided checklists",
+        "body": "On-site work is structured through checklists, cost fields, and photo evidence. Teams record execution during the visit, so the job closes on current data instead of memory and after-hours admin."
+      },
+      {
+        "title": "Time, costs, and materials",
+        "body": "Time, travel, parts, and other costs are tied directly to the job. The product builds a clean basis for internal settlement, hourly billing, and profitability analysis by customer, team, and service type."
+      },
+      {
+        "title": "Execution report and customer sign-off",
+        "body": "Before closure, the technician sees the full summary of work, costs, and attachments. Customer sign-off and the execution report formalise the visit on site, which shortens the path to acceptance and invoicing."
+      },
+      {
+        "title": "Offline work and documentation continuity",
+        "body": "The product supports work in low-connectivity environments, so execution does not stop in plants, basements, or remote sites. When the network returns, records flow back without losing notes, photos, or confirmations."
+      },
+      {
+        "title": "Month-end close and ERP hand-off",
+        "body": "The back office receives complete time, cost, and materials summaries for the billing period. Data moves into invoicing, controlling, and ERP without manual stitching across phones, email, and spreadsheets."
+      }
+    ],
+    "integrationsText": "get2_FSM passes time, costs, materials, and service-settlement data into ERP and finance systems. Service teams work on live operational data, while finance receives one consistent basis for invoicing and profitability analysis.",
+    "faqs": [
+      {
+        "question": "Does the system work without network coverage?",
+        "answer": "Yes. Teams can execute work and record delivery even in low-connectivity conditions, with data syncing once the connection returns."
+      },
+      {
+        "question": "Can it support different service billing models?",
+        "answer": "Yes. Time, costs, and materials are captured at job level, which supports hourly billing, mixed commercial models, and margin analysis."
+      },
+      {
+        "question": "Does the customer need an app-store installation?",
+        "answer": "No. The team works in a lightweight mobile model that reduces rollout friction and simplifies tool maintenance."
+      },
+      {
+        "question": "How do you prove execution in scope disputes?",
+        "answer": "The job collects checklists, photos, time, costs, and customer sign-off, so the entire evidence pack stays in one place."
+      },
+      {
+        "question": "Can teams and responsibility areas be separated?",
+        "answer": "Yes. The system supports role-based work and data visibility, so each group sees the part of the process it owns."
+      }
+    ],
+    "heroIllustration": "fsm"
+  }
+}

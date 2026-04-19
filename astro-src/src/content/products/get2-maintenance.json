@@ -1,0 +1,135 @@
+{
+  "slug": "get2-maintenance",
+  "pl": {
+    "seoTitle": "get2_Maintenance - CMMS, UR, zgłoszenia QR i historia maszyny",
+    "seoDescription": "CMMS dla utrzymania ruchu: zgłoszenia z kodu QR, kolejka prac, historia zasobu, części, MTTR i raporty przestojów gotowe do ERP i kontrolingu.",
+    "listingTeaser": "CMMS dla utrzymania ruchu: zgłoszenia z kodu QR, kolejka prac, historia maszyny, części zamienne i raporty przestojów dla UR oraz zarządu.",
+    "heroTitle": "get2_Maintenance - utrzymanie ruchu z pełną historią maszyny",
+    "heroLead": "W utrzymaniu ruchu liczy się nie tylko naprawa, ale tempo reakcji, jakość decyzji i wiedza, która zostaje po interwencji. get2_Maintenance porządkuje zgłoszenia, kolejkę prac, historię zasobu i raporty przestojów, dzięki czemu UR działa na faktach, a nie na pamięci kolejnej zmiany.",
+    "personas": [
+      "Kierownik utrzymania ruchu - odpowiada za priorytety, zasoby i skuteczność zespołu; KPI: MTTR, dostępność linii i liczba awarii powtarzalnych.",
+      "Mechanik, elektryk lub automatyk - realizuje zgłoszenia, dokumentuje naprawę i aktualizuje wiedzę o maszynie; KPI: czas zamknięcia, kompletność dokumentacji i skuteczność naprawy.",
+      "Operator linii lub brygadzista produkcji - zgłasza problem i przekazuje kontekst awarii; KPI: szybkie poprawne zgłoszenie i krótka ścieżka od zatrzymania do reakcji UR."
+    ],
+    "modules": [
+      {
+        "title": "Rejestr zasobów i zgłoszenie z kodu QR",
+        "body": "Maszyny, linie i lokalizacje są uporządkowane w jednej strukturze zasobów. Kod QR przy urządzeniu skraca drogę do poprawnego zgłoszenia i eliminuje błędy wynikające z ręcznego wyszukiwania maszyny pod presją czasu."
+      },
+      {
+        "title": "Zgłoszenia awarii, usterek i przeglądów",
+        "body": "Każde zgłoszenie zawiera typ problemu, opis, zdjęcia i kontekst potrzebny do szybkiej diagnozy. Produkcja zgłasza problem bezpośrednio na właściwym zasobie, a UR od razu widzi, z czym ma do czynienia i jak ustawić priorytet."
+      },
+      {
+        "title": "Kolejka prac i priorytety zespołu UR",
+        "body": "Tablica pracy pokazuje, co jest nowe, co jest w toku, co czeka na części i co wymaga weryfikacji. Zespół utrzymania ruchu widzi rzeczywiste obciążenie, a kierownik może prowadzić kolejkę jak proces operacyjny, a nie zbiór pojedynczych telefonów i kartek."
+      },
+      {
+        "title": "Historia maszyny i baza wiedzy",
+        "body": "Każda interwencja zostaje na karcie zasobu razem z opisem rozwiązania, załącznikami i wnioskami. Kiedy problem wraca po tygodniu lub po kilku miesiącach, kolejna zmiana startuje z wiedzą, a nie od zera."
+      },
+      {
+        "title": "Części, koszty i potwierdzenie wykonania",
+        "body": "Naprawa może być rozliczona przez wykorzystane części, czas i dokumentację po wykonaniu. Dzięki temu UR, magazyn i finanse pracują na jednym obrazie kosztu interwencji, a produkcja widzi, kiedy zasób wrócił do pracy."
+      },
+      {
+        "title": "MTTR, przestoje i raporty dla decyzji",
+        "body": "System mierzy czas od zgłoszenia do usunięcia awarii oraz porządkuje historię przestojów. Kierownictwo dostaje dane do decyzji o modernizacji, wymianie komponentów i ocenie skuteczności zespołu albo podwykonawców."
+      },
+      {
+        "title": "Dane gotowe do współpracy z ERP i kontrolingiem",
+        "body": "Koszty napraw, zużycie części i historia prac mogą być przekazywane dalej do ERP i systemów kontrolingowych. Utrzymanie ruchu pracuje na danych operacyjnych, a reszta organizacji widzi ten sam obraz kosztów i zdarzeń."
+      }
+    ],
+    "integrationsText": "get2_Maintenance zamyka zgłoszenia, koszty, części i przestoje w danych gotowych dla ERP, kontrolingu i raportowania zarządczego. UR nie przepisuje informacji do kolejnych systemów, a decyzje inwestycyjne opierają się na spójnej historii zasobów.",
+    "faqs": [
+      {
+        "question": "Dlaczego zgłoszenie z kodu QR jest ważne?",
+        "answer": "Bo skraca drogę od zatrzymania maszyny do poprawnie przypisanego zgłoszenia. UR od razu pracuje na właściwym zasobie i pełnym kontekście problemu."
+      },
+      {
+        "question": "Czy system zastępuje papierowe zgłoszenia i zeszyty zmianowe?",
+        "answer": "Tak. Zgłoszenie, komunikacja, dokumentacja i historia napraw pozostają w jednym systemie, więc wiedza nie znika między zmianami."
+      },
+      {
+        "question": "Czy można prowadzić podwykonawców zewnętrznych?",
+        "answer": "Tak. System pozwala rozdzielać odpowiedzialność i zakres prac przy zachowaniu pełnej kontroli po stronie wewnętrznego UR."
+      },
+      {
+        "question": "Jak wygląda raportowanie przestojów?",
+        "answer": "Przestoje, MTTR i historia interwencji są widoczne na poziomie zasobu i w ujęciach okresowych, więc łatwo wskazać miejsca wymagające działania lub inwestycji."
+      },
+      {
+        "question": "Czy system obsługuje części zamienne?",
+        "answer": "Tak. Zużycie części może być przypisane do konkretnej interwencji i dalej przekazane do rozliczeń oraz analiz kosztowych."
+      }
+    ],
+    "heroIllustration": "maintenance"
+  },
+  "en": {
+    "seoTitle": "get2_Maintenance - CMMS, QR reporting, and asset history",
+    "seoDescription": "CMMS for maintenance teams: QR-based reporting, work queue, asset history, spare parts, MTTR, and downtime analytics ready for ERP and controlling.",
+    "listingTeaser": "CMMS for maintenance teams: QR-based reporting, work queue, asset history, spare parts, and downtime reporting for maintenance and management.",
+    "heroTitle": "get2_Maintenance - maintenance with full asset history",
+    "heroLead": "In maintenance, success depends on more than fixing the fault. It depends on response speed, quality of decisions, and the knowledge that remains after the intervention. get2_Maintenance structures reporting, work queues, asset history, and downtime analysis, so maintenance runs on facts instead of shift memory.",
+    "personas": [
+      "Maintenance manager - owns priorities, team capacity, and maintenance effectiveness; KPIs: MTTR, line availability, and repeat-failure rate.",
+      "Mechanic, electrician, or automation technician - executes work, records the repair, and updates asset knowledge; KPIs: closure time, documentation quality, and repair effectiveness.",
+      "Line operator or production supervisor - reports the issue and provides the first operational context; KPIs: fast, correct reporting and a short path from line stop to maintenance response."
+    ],
+    "modules": [
+      {
+        "title": "Asset registry and QR-based reporting",
+        "body": "Machines, lines, and locations are organised in one asset structure. A QR code on the machine shortens the path to the correct report and removes errors caused by manual asset lookup under pressure."
+      },
+      {
+        "title": "Breakdowns, defects, and inspection requests",
+        "body": "Each report contains the issue type, description, photos, and the context needed for fast diagnosis. Production reports the problem directly on the right asset, and maintenance sees immediately what happened and how to prioritise it."
+      },
+      {
+        "title": "Work queue and maintenance priorities",
+        "body": "The work board shows what is new, in progress, waiting for parts, and pending verification. Maintenance sees real workload, while leadership can run the queue as an operational process instead of a stream of calls and notes."
+      },
+      {
+        "title": "Asset history and knowledge base",
+        "body": "Every intervention stays on the asset card with the fix description, attachments, and conclusions. When the same issue returns weeks or months later, the next shift starts with knowledge instead of from zero."
+      },
+      {
+        "title": "Parts, costs, and completion evidence",
+        "body": "The repair can be settled through consumed parts, labour time, and after-work evidence. Maintenance, warehouse, and finance operate on one cost picture, while production sees when the asset returned to service."
+      },
+      {
+        "title": "MTTR, downtime, and decision-grade reporting",
+        "body": "The product measures time from report to repair and structures downtime history over time. Leadership gets data for modernisation decisions, component replacement, and evaluation of internal teams or vendors."
+      },
+      {
+        "title": "Data ready for ERP and controlling",
+        "body": "Repair costs, spare-part usage, and work history can move into ERP and controlling systems. Maintenance works on live operational data, while the rest of the organisation sees the same picture of costs and events."
+      }
+    ],
+    "integrationsText": "get2_Maintenance closes reports, costs, parts, and downtime in data ready for ERP, controlling, and management reporting. Maintenance teams stop rekeying information into parallel systems, while investment decisions rely on one consistent asset history.",
+    "faqs": [
+      {
+        "question": "Why does QR-based reporting matter?",
+        "answer": "Because it shortens the path from line stop to the correctly assigned report. Maintenance starts immediately on the right asset and with the right context."
+      },
+      {
+        "question": "Does the system replace paper requests and shift notebooks?",
+        "answer": "Yes. Reporting, communication, repair evidence, and asset history stay in one system, so knowledge does not disappear between shifts."
+      },
+      {
+        "question": "Can external contractors be included?",
+        "answer": "Yes. Responsibility and work scope can be separated while internal maintenance keeps full control over the process."
+      },
+      {
+        "question": "How is downtime reported?",
+        "answer": "Downtime, MTTR, and intervention history are visible per asset and in period views, which makes it easier to spot where action or investment is needed."
+      },
+      {
+        "question": "Does it support spare parts usage?",
+        "answer": "Yes. Spare-part consumption can be linked to a specific intervention and then passed into settlement and cost analysis."
+      }
+    ],
+    "heroIllustration": "maintenance"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "slug": "get2-bhp-rent",
+  "pl": {
+    "seoTitle": "get2_BHPRent - odzież robocza, ŚOI, najem i rozliczenia B2B",
+    "seoDescription": "System dla operatorów odzieży roboczej i ŚOI: dokumentowy obieg wydań i zwrotów, normatywy, magazyny własne i wirtualne, portal klienta oraz dane gotowe do ERP.",
+    "listingTeaser": "System dla operatorów odzieży roboczej i ŚOI: magazyny, normatywy, kartoteki pracowników, portal klienta i rozliczenia miesięczne gotowe do ERP.",
+    "heroTitle": "get2_BHPRent - odzież robocza, ŚOI i najem pod pełną kontrolą",
+    "heroLead": "Operator odzieży roboczej musi jednocześnie panować nad magazynem, odpowiedzialnością za wydany asortyment i miesięcznym rozliczeniem klienta. get2_BHPRent łączy te obszary w jednym systemie: każdy ruch idzie przez dokument, każdy pracownik ma historię i saldo, a klient widzi stany, zgłoszenia i podstawę do rozliczeń bez ręcznego składania danych z kilku źródeł.",
+    "personas": [
+      "Kierownik operacji najmu lub serwisu odzieży - odpowiada za terminowość obiegu, kompletność dokumentów i jakość obsługi klientów; KPI: czas realizacji, zgodność stanów i brak braków w dokumentacji.",
+      "Kierownik magazynu lub logistyki - zarządza przyjęciami, przesunięciami, wydaniami i zwrotami w wielu lokalizacjach; KPI: dokładność stanów, szybkość kompletacji i sprawna inwentaryzacja.",
+      "Specjalista BHP lub koordynator po stronie klienta B2B - nadzoruje normatywy, przydziały i zgodność z wymaganiami audytowymi; KPI: gotowość do kontroli, kompletność kartotek i przejrzystość rozliczeń."
+    ],
+    "modules": [
+      {
+        "title": "Magazyny własne, wirtualne i pracownicze",
+        "body": "System odwzorowuje realną strukturę obiegu: magazyny centralne, buforowe, reklamacyjne oraz lokalizacje klienta. Każdy pracownik może być końcowym punktem odpowiedzialności za wydany asortyment, dlatego stan i historia są widoczne dokładnie tam, gdzie powstaje zobowiązanie."
+      },
+      {
+        "title": "Dokumentowy obieg wydań i zwrotów",
+        "body": "Każdy ruch towaru ma dokument i jednoznaczną podstawę operacyjną. Przyjęcia, przesunięcia, wydania, zwroty i reklamacje tworzą spójny ślad audytowy, na którym opierają się zarówno magazyn, jak i rozliczenia z klientem."
+      },
+      {
+        "title": "Kartoteka pracownika i normatywy",
+        "body": "Kartoteka pracownika łączy firmę, dział, stanowisko, historię wydań i aktualne saldo. Normatywy pilnują, jaki asortyment przysługuje na danym stanowisku, a zamienniki pozwalają utrzymać ciągłość wydań bez rozbijania kontroli nad przydziałem."
+      },
+      {
+        "title": "Rozmiary, nieobecności i harmonogram wymian",
+        "body": "Dane rozmiarowe ograniczają błędy przy wydaniu, a harmonogram wymian porządkuje cykliczne przydziały. Nieobecności i przesunięcia terminów są ujęte w logice systemu, dlatego planowanie nie rozpada się przy rotacji pracowników i zmianach w zespołach."
+      },
+      {
+        "title": "Portal klienta i zgłoszenia operacyjne",
+        "body": "Klient B2B widzi stany w swoich lokalizacjach, historię wydań i zgłoszenia dotyczące nowych pracowników, wymian lub korekt. Portal pracuje na tych samych danych co operacje, więc front klienta i działania magazynu pozostają spójne."
+      },
+      {
+        "title": "MPK, alokacja kosztów i miesięczne rozliczenia",
+        "body": "Wydania są przypisywane do właściwych miejsc powstawania kosztów, a rozliczenia miesięczne zbierają wartości w układzie wymaganym przez klienta. Dzięki temu operator zamyka okres szybciej, a finanse dostają gotową podstawę do faktury i dalszej alokacji."
+      },
+      {
+        "title": "Inwentaryzacja i ślad audytowy",
+        "body": "Stan systemowy można zestawić ze stanem fizycznym w magazynie i u pracownika. Każda zmiana ma właściciela, moment wykonania i dokument źródłowy, co wzmacnia kontrolę operacyjną i upraszcza wyjaśnianie rozbieżności."
+      },
+      {
+        "title": "Model danych gotowy na dalszy rozwój",
+        "body": "Rdzeń systemu porządkuje dziś dokumenty, przydziały i rozliczenia, a jednocześnie przygotowuje proces pod identyfikację sztuk, kody QR lub RFID. Rozwój nie wymaga zmiany logiki operacyjnej, bo dane są od początku zapisane na poziomie pojedynczych wydań i zwrotów."
+      }
+    ],
+    "integrationsText": "Rozliczenia, MPK, wydania i stany eksportujemy do ERP w modelu dopasowanym do procesu klienta. Finanse, logistyka i operacje pracują na tej samej definicji danych, dlatego miesiąc zamyka się bez ręcznego przepisywania i dodatkowych arkuszy.",
+    "faqs": [
+      {
+        "question": "Czy system obsługuje wiele lokalizacji klienta?",
+        "answer": "Tak. W jednym modelu łączysz magazyny własne, lokalizacje klienta i punkty wirtualne, a stany są rozdzielone dokładnie według miejsca odpowiedzialności za asortyment."
+      },
+      {
+        "question": "Czy nadaje się do miesięcznych rozliczeń najmu lub serwisu?",
+        "answer": "Tak. System zbiera podstawę rozliczenia z dokumentów operacyjnych, MPK i historii wydań, dzięki czemu fakturowanie opiera się na jednej, kontrolowanej bazie danych."
+      },
+      {
+        "question": "Jak wygląda rozliczenie pracownika przy odejściu?",
+        "answer": "Kartoteka i saldo pokazują dokładnie, jaki asortyment został wydany, co wróciło i co wymaga dalszego rozliczenia zgodnie z polityką klienta."
+      },
+      {
+        "question": "Czy można rozdzielać koszty na działy i projekty?",
+        "answer": "Tak. Wydania i rozliczenia pracują na MPK oraz innych polach kosztowych, dlatego dane można przekazać do księgowości i zespołów kontrolingu bez dodatkowego mapowania poza systemem."
+      },
+      {
+        "question": "Czy system jest gotowy na identyfikację sztuk?",
+        "answer": "Tak. Struktura danych przygotowuje proces pod dalsze rozszerzenie o identyfikatory, kody QR i RFID bez przebudowy podstawowego obiegu dokumentów."
+      }
+    ],
+    "heroIllustration": "bhp"
+  },
+  "en": {
+    "seoTitle": "get2_BHPRent - workwear, PPE, rental, and B2B settlement",
+    "seoDescription": "Software for workwear and PPE operators: document-led issue and return flows, entitlement rules, owned and virtual warehouses, customer portal, and ERP-ready settlement data.",
+    "listingTeaser": "Software for workwear and PPE operators: warehouses, entitlement rules, employee records, customer portal, and monthly settlement data ready for ERP.",
+    "heroTitle": "get2_BHPRent - workwear, PPE, and rental under full control",
+    "heroLead": "A workwear operator has to control warehouse circulation, custody of issued items, and the customer’s monthly settlement at the same time. get2_BHPRent brings those threads into one system: every movement is documented, every employee has a history and balance, and the customer sees stock, requests, and billing data without piecing information together across multiple tools.",
+    "personas": [
+      "Rental or service operations manager - owns flow efficiency, document completeness, and customer service quality; KPIs: fulfilment speed, stock accuracy, and clean operational records.",
+      "Warehouse or logistics manager - controls inbound, transfers, issues, and returns across multiple locations; KPIs: inventory accuracy, picking speed, and efficient stock-take.",
+      "HSE specialist or customer-side B2B coordinator - supervises entitlements, allocations, and audit readiness; KPIs: compliance visibility, complete employee records, and transparent settlement."
+    ],
+    "modules": [
+      {
+        "title": "Owned, virtual, and employee-level warehouses",
+        "body": "The system mirrors the real circulation model: central stock, buffer points, claim locations, and customer-side storage. Each employee can act as the final custody point, so stock and history remain visible exactly where accountability begins."
+      },
+      {
+        "title": "Document-led issue and return flow",
+        "body": "Every stock movement has a document and a clear operational basis. Inbound, transfers, issues, returns, and claims build one audit trail that supports both warehouse execution and customer settlement."
+      },
+      {
+        "title": "Employee record and entitlement rules",
+        "body": "The employee file connects company, department, role, issue history, and current balance. Entitlement rules enforce what each role should receive, while substitutes keep operations moving without losing control over allocation logic."
+      },
+      {
+        "title": "Sizing, absences, and replacement cycles",
+        "body": "Size data reduces issue errors, while replacement schedules keep recurring allocations under control. Absences and timing shifts are built into the process, so planning stays reliable even when staffing changes."
+      },
+      {
+        "title": "Customer portal and operational requests",
+        "body": "The B2B customer sees stock by location, issue history, and requests for new employees, replacements, or corrections. The portal works on the same data as the operations team, so customer visibility and warehouse execution stay aligned."
+      },
+      {
+        "title": "Cost centres, allocation, and monthly settlement",
+        "body": "Issues are assigned to the right cost centres, and monthly settlement rolls up values in the structure required by the customer. Operators close the period faster, while finance receives a ready basis for invoicing and internal allocation."
+      },
+      {
+        "title": "Stock-take and audit trail",
+        "body": "System stock can be compared with physical stock in the warehouse and at employee level. Every change has an owner, a timestamp, and a source document, which strengthens operational control and simplifies discrepancy handling."
+      },
+      {
+        "title": "Data model ready for further expansion",
+        "body": "The product structures documents, allocations, and settlement today while keeping the process ready for serialised identification, QR, or RFID. Growth does not require a process rewrite because issues and returns are stored at the right level from the start."
+      }
+    ],
+    "integrationsText": "Settlement data, cost centres, stock movements, and balances feed ERP in the format that fits the customer process. Finance, logistics, and operations work on the same data contract, so the month closes without manual rekeying and spreadsheet side work.",
+    "faqs": [
+      {
+        "question": "Can the system cover multiple customer locations?",
+        "answer": "Yes. It connects owned warehouses, customer-side locations, and virtual points in one model, while keeping balances separated exactly where accountability sits."
+      },
+      {
+        "question": "Is it suitable for monthly rental or service settlement?",
+        "answer": "Yes. Settlement is built from operational documents, cost centres, and issue history, so invoicing is based on one controlled dataset."
+      },
+      {
+        "question": "How is employee offboarding handled?",
+        "answer": "The employee record and balance show what was issued, what returned, and what still requires settlement under the customer policy."
+      },
+      {
+        "question": "Can costs be split by department or project?",
+        "answer": "Yes. Issues and settlement work with cost-centre and allocation fields, so data can move to finance and controlling without external rework."
+      },
+      {
+        "question": "Is the system ready for item-level identification?",
+        "answer": "Yes. The data structure keeps the process ready for identifiers, QR, and RFID without rebuilding the core document flow."
+      }
+    ],
+    "heroIllustration": "bhp"
+  }
+}

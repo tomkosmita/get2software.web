@@ -1,0 +1,35 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/integrations/';
+const title = 'ERP integrations - get2software.com';
+const description =
+  'ERP integrations for operational processes: consistent data, faster period close, and no manual rekeying between teams.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.integrations.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.integrations.pl}
+  active="integrations"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">ERP integrations</h1>
+    <div class="g2-prose mt-8 max-w-3xl space-y-4">
+      <p>
+        Our products close operational work in data that ERP can use immediately. Billing bases, inventory positions,
+        material consumption, execution reports, and cost records move to finance and logistics in one agreed data model.
+      </p>
+      <p>
+        Depending on the process, we run file exports, API integrations, or dedicated project connectors. The outcome is
+        the same: operations move faster, while ERP receives structured data without manual reconciliation across tools.
+      </p>
+    </div>
+  </div>
+</MarketingLayout>

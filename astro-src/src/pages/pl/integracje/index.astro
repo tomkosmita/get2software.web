@@ -1,0 +1,35 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/pl/integracje/';
+const title = 'Integracje ERP - get2software.com';
+const description =
+  'Integracje ERP dla procesów operacyjnych: spójne dane, rozliczenia bez przepisywania i jeden model pracy dla biznesu i finansów.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(pathname)}
+  hreflangEn={canonicalUrl(routeMap.integrations.en)}
+  alternateHref={routeMap.integrations.en}
+  active="integrations"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Integracje z ERP</h1>
+    <div class="g2-prose mt-8 max-w-3xl space-y-4">
+      <p>
+        Nasze systemy zamykają proces operacyjny w danych gotowych dla ERP. Rozliczenia, stany magazynowe, zużycie
+        materiałów, raporty wykonania i kosztów trafiają do finansów oraz logistyki w jednym uzgodnionym modelu danych.
+      </p>
+      <p>
+        W zależności od procesu uruchamiamy eksporty plikowe, integracje API albo konektory projektowe. Efekt jest jeden:
+        operacje pracują szybciej, a ERP dostaje uporządkowane dane bez ręcznego składania informacji z kilku narzędzi.
+      </p>
+    </div>
+  </div>
+</MarketingLayout>

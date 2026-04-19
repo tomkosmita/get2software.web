@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../lib/seo/site';
+import { routeMap } from '../../lib/i18n/routes';
+
+const productSlugOrder = ['get2-bhp-rent', 'get2-fsm', 'get2-commissioning', 'get2-maintenance', 'get2-fcm', 'get2-fcm-rent'] as const;
+const productBundles = await getCollection('productBundles');
+const productsEn = productSlugOrder
+  .map((slug) => productBundles.find((e) => e.data.slug === slug))
+  .filter((e): e is NonNullable<typeof e> => Boolean(e));
+
+const pathname = '/en/';
+const hreflangPl = canonicalUrl(routeMap.home.pl);
+const hreflangEn = canonicalUrl(pathname);
+const alternateHref = routeMap.home.pl;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'get2software.com',
+    url: canonicalUrl('/en/'),
+    description:
+      'Operational software for industrial and service businesses: structured processes, accountable data, and ERP-ready settlement.',
+    sameAs: [] as string[]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'get2software.com',
+    url: canonicalUrl('/en/'),
+    inLanguage: 'en-US'
+  }
+];
+
+const title = 'get2software.com - operational software for industry and service teams';
+const description =
+  'We design operational software for processes that need control, accountability, and clean ERP integration.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={hreflangPl}
+  hreflangEn={hreflangEn}
+  alternateHref={alternateHref}
+  active="home"
+  structuredData={structuredData}
+>
+  <section class="g2-container py-16 md:py-24">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-g2-accent">get2software.com</p>
+      <h1 class="g2-heading-xl mt-3">
+        Operational software that brings industrial and service processes under control
+      </h1>
+      <p class="g2-prose mt-6 text-lg">
+        We build systems that organise operational work and deliver the data needed for settlement and decision-making.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/en/contact/" class="g2-btn-primary">Talk to us</a>
+        <a href="/en/products/" class="g2-btn-secondary">Explore products</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-white/[0.03] py-16">
+    <div class="g2-container">
+      <h2 class="g2-heading-lg">What we do</h2>
+      <p class="g2-prose mt-4 max-w-3xl">
+        We deliver focused systems for operational processes that sit beyond standard ERP capabilities and need their own
+        working logic. Each product structures day-to-day execution and closes it in data that finance, logistics, and
+        controlling can use without manual reconciliation.
+      </p>
+    </div>
+  </section>
+
+  <section class="g2-container py-16">
+    <h2 class="g2-heading-lg">Products</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      {productsEn.map((entry) => {
+        const titleShort = entry.data.en.heroTitle.split(' - ')[0];
+        return (
+          <a
+            href={`/en/products/${entry.data.slug}/`}
+            class="g2-glass block p-6 transition hover:border-g2-accent/40"
+          >
+            <h3 class="font-display text-xl font-semibold text-g2-text">{titleShort}</h3>
+            <p class="mt-2 text-sm text-g2-muted">{entry.data.en.listingTeaser}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</MarketingLayout>

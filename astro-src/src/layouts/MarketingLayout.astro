@@ -1,0 +1,44 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import type { Locale } from '../lib/i18n/routes';
+import { canonicalUrl } from '../lib/seo/site';
+
+type Props = {
+  locale: Locale;
+  title: string;
+  description: string;
+  pathname: string;
+  hreflangPl: string;
+  hreflangEn: string;
+  alternateHref: string;
+  active?: 'home' | 'about' | 'products' | 'integrations' | 'news' | 'careers' | 'contact';
+  ogType?: 'website' | 'article';
+  ogImagePath?: string;
+  structuredData?: Record<string, unknown>[];
+};
+
+const props = Astro.props as Props;
+const { structuredData: pageStructuredData, ...baseProps } = props;
+
+/** Domyślny JSON-LD WebPage - spełnia bramę verify-seo na każdej podstronie. */
+const webPageLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: props.title,
+  description: props.description,
+  url: canonicalUrl(props.pathname),
+  inLanguage: props.locale === 'pl' ? 'pl-PL' : 'en-US'
+};
+
+const mergedStructuredData = [...(pageStructuredData ?? []), webPageLd];
+---
+
+<BaseLayout {...baseProps} structuredData={mergedStructuredData}>
+  <SiteHeader locale={props.locale} active={props.active} alternateHref={props.alternateHref} />
+  <main id="main" class="flex-1">
+    <slot />
+  </main>
+  <SiteFooter locale={props.locale} alternateHref={props.alternateHref} />
+</BaseLayout>

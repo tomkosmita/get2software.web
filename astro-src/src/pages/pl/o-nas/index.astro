@@ -1,0 +1,49 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/pl/o-nas/';
+const title = 'O nas - get2software.com';
+const description =
+  'Projektujemy i wdrażamy oprogramowanie operacyjne dla procesów, które wymagają porządku danych, rozliczalności i integracji z ERP.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(pathname)}
+  hreflangEn={canonicalUrl(routeMap.about.en)}
+  alternateHref={routeMap.about.en}
+  active="about"
+  structuredData={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: title,
+      url: canonicalUrl(pathname)
+    }
+  ]}
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">O firmie</h1>
+    <div class="g2-prose mt-8 max-w-3xl space-y-4">
+      <p>
+        get2software.com buduje oprogramowanie dla procesów operacyjnych, które muszą być rozliczalne, audytowalne i
+        gotowe do współpracy z ERP. Porządkujemy obieg dokumentów, statusów, kosztów i odpowiedzialności tam, gdzie
+        standardowe systemy kończą się zbyt wcześnie.
+      </p>
+      <p>
+        Nasze produkty odpowiadają na konkretne potrzeby przemysłu i usług B2B: ewidencję ŚOI i odzieży roboczej,
+        zlecenia serwisowe w terenie, odbiory techniczne i utrzymanie ruchu. Każde wdrożenie zaczyna się od procesu,
+        a kończy na danych, które zamykają pracę operacyjną, raportowanie i rozliczenia.
+      </p>
+      <p>
+        Pracujemy jak zespół produktowo-wdrożeniowy, a nie dostawca samej licencji. Bierzemy odpowiedzialność za
+        architekturę procesu, konfigurację, integrację, start operacyjny i dalszy rozwój systemu.
+      </p>
+    </div>
+  </div>
+</MarketingLayout>

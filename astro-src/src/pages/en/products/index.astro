@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const productSlugOrder = ['get2-bhp-rent', 'get2-fsm', 'get2-commissioning', 'get2-maintenance', 'get2-fcm', 'get2-fcm-rent'] as const;
+const productBundles = await getCollection('productBundles');
+const productsEn = productSlugOrder
+  .map((slug) => productBundles.find((e) => e.data.slug === slug))
+  .filter((e): e is NonNullable<typeof e> => Boolean(e));
+
+const pathname = '/en/products/';
+const title = 'Products - get2software.com';
+const description =
+  'get2software products for operational processes: property and maintenance management, field work, commissioning, and workwear circulation with data ready for settlement and ERP.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.products.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.products.pl}
+  active="products"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Products</h1>
+    <p class="g2-prose mt-4 max-w-3xl">
+      Choose a product to see the process it structures, the business roles it serves, and how operational work turns
+      into data for settlement and decisions.
+    </p>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {productsEn.map((entry) => {
+        const titleShort = entry.data.en.heroTitle.split(' - ')[0];
+        return (
+          <a class="g2-glass block p-6" href={`/en/products/${entry.data.slug}/`}>
+            <h2 class="font-display text-xl font-semibold text-g2-accent">{titleShort}</h2>
+            <p class="mt-2 text-sm text-g2-muted">{entry.data.en.listingTeaser}</p>
+            <span class="mt-4 inline-block text-sm font-medium text-g2-text">Explore modules →</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</MarketingLayout>

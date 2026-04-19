@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens: Enterprise Deep Slate + cyan/indigo (get2software.com).
+   Kolory w oklch dla spójnego kontrastu; komentarze PL - cel wizualny i UX.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Tło główne - głęboki grafit (nie czysta czerń - mniej „gaming”, lepszy kontrast). */
+  --color-g2-bg: oklch(22% 0.02 250);
+  /* Powierzchnie kart / paneli - nieco jaśniejszy odcień niż bg. */
+  --color-g2-surface: oklch(28% 0.025 250);
+  /* Akcent brand - cyan‑teal (automatyka, dane). */
+  --color-g2-accent: oklch(72% 0.14 195);
+  /* Akcent drugi - indygo (CTA, linki sekcji produktów). */
+  --color-g2-accent-2: oklch(62% 0.18 275);
+  /* Tekst podstawowy - biel z lekkim przygaszeniem. */
+  --color-g2-text: oklch(98% 0.01 250);
+  --color-g2-muted: oklch(78% 0.02 250);
+  /* Obramowania szkła (glass). */
+  --color-g2-border: oklch(100% 0 0 / 0.12);
+  /* Font: Inter - czytelność UI + polskie znaki. */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-dvh bg-g2-bg text-g2-text font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, oklch(40% 0.12 280 / 0.35), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, oklch(35% 0.1 195 / 0.2), transparent);
+    background-attachment: fixed;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-g2-accent;
+  }
+}
+
+@layer components {
+  /* Karta „glass” - spójna z baseline 7omnicom (szkło + obramowanie). */
+  .g2-glass {
+    @apply rounded-2xl border border-white/10 bg-white/5 shadow-lg shadow-black/20 backdrop-blur-md;
+  }
+
+  .g2-container {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .g2-btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-g2-accent px-5 py-3 text-sm font-semibold text-g2-bg transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-g2-accent;
+  }
+
+  .g2-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-g2-border bg-white/5 px-5 py-3 text-sm font-semibold text-g2-text backdrop-blur-sm transition hover:bg-white/10;
+  }
+
+  .g2-heading-xl {
+    @apply font-display text-3xl font-semibold tracking-tight text-g2-text sm:text-4xl md:text-5xl;
+  }
+
+  .g2-heading-lg {
+    @apply font-display text-2xl font-semibold tracking-tight text-g2-text sm:text-3xl;
+  }
+
+  .g2-prose {
+    @apply max-w-3xl text-base leading-relaxed text-g2-muted;
+  }
+
+  .g2-prose strong {
+    @apply font-semibold text-g2-text;
+  }
+}

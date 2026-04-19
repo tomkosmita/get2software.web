@@ -1,0 +1,29 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/careers/';
+const title = 'Careers - get2software.com';
+const description = 'We are growing the team behind operational software for industry and service businesses.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.careers.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.careers.pl}
+  active="careers"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Careers</h1>
+    <p class="g2-prose mt-4 max-w-2xl">
+      We are growing the product and implementation team behind operational software for industrial and B2B service
+      environments. If you work across product, rollout, integration, or operations, get in touch.
+    </p>
+    <a href="/en/contact/" class="g2-btn-primary mt-8 inline-flex">Start a conversation</a>
+  </div>
+</MarketingLayout>

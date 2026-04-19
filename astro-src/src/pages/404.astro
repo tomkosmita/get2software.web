@@ -1,0 +1,32 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../lib/seo/site';
+import { routeMap } from '../lib/i18n/routes';
+
+const pathname = '/404.html';
+const title = '404 - get2software.com';
+const description = 'Strona nie została znaleziona.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname="/404.html"
+  hreflangPl={canonicalUrl(routeMap.home.pl)}
+  hreflangEn={canonicalUrl(routeMap.home.en)}
+  alternateHref={routeMap.home.en}
+  robots="noindex,nofollow"
+>
+  <div class="g2-container py-24 text-center">
+    <p class="text-sm font-medium text-g2-accent">404</p>
+    <h1 class="g2-heading-xl mt-2">Nie znaleziono strony</h1>
+    <p class="g2-prose mx-auto mt-4 max-w-md">
+      Wróć na stronę główną lub skorzystaj z menu. / Page not found - return to home.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="/pl/" class="g2-btn-primary">Strona główna (PL)</a>
+      <a href="/en/" class="g2-btn-secondary">Home (EN)</a>
+    </div>
+  </div>
+</MarketingLayout>

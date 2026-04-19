@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import MarketingLayout from '../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../lib/seo/site';
+import { routeMap } from '../../lib/i18n/routes';
+
+/** Ta sama kolejność co w nawigacji / na liście produktów - spójność UX i łatwe porównanie z routeMap. */
+const productSlugOrder = ['get2-bhp-rent', 'get2-fsm', 'get2-commissioning', 'get2-maintenance', 'get2-fcm', 'get2-fcm-rent'] as const;
+const productBundles = await getCollection('productBundles');
+const productsPl = productSlugOrder
+  .map((slug) => productBundles.find((e) => e.data.slug === slug))
+  .filter((e): e is NonNullable<typeof e> => Boolean(e));
+
+const pathname = '/pl/';
+const hreflangPl = canonicalUrl(pathname);
+const hreflangEn = canonicalUrl(routeMap.home.en);
+const alternateHref = routeMap.home.en;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'get2software.com',
+    url: canonicalUrl('/pl/'),
+    description:
+      'Dostawca oprogramowania operacyjnego dla przemysłu i usług: porządkowanie procesów, danych i rozliczeń gotowych do integracji z ERP.',
+    sameAs: [] as string[]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'get2software.com',
+    url: canonicalUrl('/pl/'),
+    inLanguage: 'pl-PL'
+  }
+];
+
+const title = 'get2software.com - oprogramowanie operacyjne dla przemysłu i usług';
+const description =
+  'Projektujemy oprogramowanie operacyjne dla procesów, które wymagają kontroli, rozliczalności i integracji z ERP.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={hreflangPl}
+  hreflangEn={hreflangEn}
+  alternateHref={alternateHref}
+  active="home"
+  structuredData={structuredData}
+>
+  <section class="g2-container py-16 md:py-24">
+    <!-- Hero: wartość + CTA - pierwszy ekran dla decydenta B2B. -->
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-g2-accent">get2software.com</p>
+      <h1 class="g2-heading-xl mt-3">
+        Oprogramowanie operacyjne, które porządkuje procesy w przemyśle i usługach
+      </h1>
+      <p class="g2-prose mt-6 text-lg">
+        Budujemy systemy, które porządkują pracę operacyjną i dostarczają dane do rozliczeń i decyzji.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/pl/kontakt/" class="g2-btn-primary">Porozmawiajmy o wdrożeniu</a>
+        <a href="/pl/produkty/" class="g2-btn-secondary">Zobacz produkty</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-white/[0.03] py-16">
+    <div class="g2-container">
+      <h2 class="g2-heading-lg">Co dostarczamy</h2>
+      <p class="g2-prose mt-4 max-w-3xl">
+        Dostarczamy wyspecjalizowane systemy dla procesów operacyjnych, które wykraczają poza standardowe funkcje ERP i
+        wymagają własnej logiki pracy. Każde rozwiązanie porządkuje codzienną operację i zamyka ją w danych gotowych dla
+        finansów, logistyki i kontrolingu.
+      </p>
+    </div>
+  </section>
+
+  <section class="g2-container py-16">
+    <h2 class="g2-heading-lg">Produkty</h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      {productsPl.map((entry) => {
+        const titleShort = entry.data.pl.heroTitle.split(' - ')[0];
+        return (
+          <a
+            href={`/pl/produkty/${entry.data.slug}/`}
+            class="g2-glass block p-6 transition hover:border-g2-accent/40"
+          >
+            <h3 class="font-display text-xl font-semibold text-g2-text">{titleShort}</h3>
+            <p class="mt-2 text-sm text-g2-muted">{entry.data.pl.listingTeaser}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</MarketingLayout>

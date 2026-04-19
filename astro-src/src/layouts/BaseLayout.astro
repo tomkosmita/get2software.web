@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+
+type Locale = 'pl' | 'en';
+
+type Props = {
+  /** Język dokumentu i og:locale. */
+  locale: Locale;
+  title: string;
+  description: string;
+  /** Ścieżka kanoniczna bez origin, np. /pl/kontakt/ */
+  pathname: string;
+  /** Pełne URL alternatywne dla hreflang (PL i EN tej samej treści). */
+  hreflangPl: string;
+  hreflangEn: string;
+  ogType?: 'website' | 'article';
+  /** Opcjonalny obraz OG - domyślnie grafika marki. */
+  ogImagePath?: string;
+  /** JSON-LD - tablica obiektów schema.org (Organization, WebSite, SoftwareApplication…). */
+  structuredData?: Record<string, unknown>[];
+};
+
+const {
+  locale,
+  title,
+  description,
+  pathname,
+  hreflangPl,
+  hreflangEn,
+  ogType = 'website',
+  ogImagePath = '/og-cover.svg',
+  structuredData = []
+} = Astro.props as Props;
+
+const siteOrigin = Astro.site?.href?.replace(/\/$/, '') || 'https://get2software.com';
+const canonical = `${siteOrigin}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
+const ogImage = ogImagePath.startsWith('http') ? ogImagePath : `${siteOrigin}${ogImagePath}`;
+const ogLocale = locale === 'pl' ? 'pl_PL' : 'en_US';
+const htmlLang = locale === 'pl' ? 'pl' : 'en';
+const buildSha = (import.meta.env.PUBLIC_BUILD_SHA || 'dev').toString().slice(0, 12);
+---
+
+<!DOCTYPE html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#1a1f2e" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="pl" href={hreflangPl} />
+    <link rel="alternate" hreflang="en" href={hreflangEn} />
+    <link rel="alternate" hreflang="x-default" href={hreflangPl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta property="og:site_name" content="get2software.com" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    {structuredData.map((obj) => (
+      <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+    ))}
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <!-- Layout: slot = treść strony między header a footer; flex-col utrzymuje stopkę na dole przy krótkiej treści. -->
+    <slot />
+    <!-- Wersja builda - debug cache / Pages; nie wpływa na UI. -->
+    <span class="sr-only" aria-hidden="true" data-build={buildSha} />
+  </body>
+</html>

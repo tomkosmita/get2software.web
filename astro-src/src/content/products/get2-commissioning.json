@@ -1,0 +1,135 @@
+{
+  "slug": "get2-commissioning",
+  "pl": {
+    "seoTitle": "get2_Commissioning - odbiory techniczne, usterki i dokumentacja powykonawcza",
+    "seoDescription": "System do odbiorów technicznych i list usterek: zgłoszenia ze zdjęciami, przydział wykonawców, obieg akceptacji, raport PDF i dane do zamknięcia projektu.",
+    "listingTeaser": "System do odbiorów technicznych: zgłoszenia ze zdjęciami, odpowiedzialność wykonawców, weryfikacja jakości i pakiet raportowy pod zamknięcie projektu.",
+    "heroTitle": "get2_Commissioning - odbiory techniczne z pełną kontrolą listy usterek",
+    "heroLead": "Odbiór kończy się wtedy, gdy każda usterka ma właściciela, status i dowód wykonania. get2_Commissioning prowadzi proces od zgłoszenia w hali lub na obiekcie, przez pracę wykonawcy i weryfikację jakości, aż do raportu, który zamyka odbiór i porządkuje dokumentację projektu.",
+    "personas": [
+      "Kierownik projektu lub kierownik odbiorów - odpowiada za tempo zamykania listy usterek i jakość przekazania obiektu; KPI: liczba otwartych pozycji, czas reakcji i termin odbioru.",
+      "Koordynator jakości lub inwestor po stronie odbioru - weryfikuje standard wykonania i kompletność dowodów; KPI: odsetek poprawek wracających do wykonawcy i komplet dokumentacji powykonawczej.",
+      "Wykonawca lub podwykonawca - realizuje przypisane poprawki i potwierdza wykonanie w systemie; KPI: czas zamknięcia zgłoszenia i skuteczność napraw bez ponownych zwrotów."
+    ],
+    "modules": [
+      {
+        "title": "Projekt, lokalizacja i dokumentacja odniesienia",
+        "body": "Każde zgłoszenie jest osadzone w konkretnym projekcie, strefie i dokumentacji odniesienia. Zespół pracuje na tym samym kontekście, dlatego usterka nie ginie w ogólnych opisach i nie wymaga dodatkowych wyjaśnień poza systemem."
+      },
+      {
+        "title": "Zgłoszenia ze zdjęciem i adnotacją",
+        "body": "Usterka powstaje na miejscu wraz ze zdjęciem, opisem i oznaczeniem problemu na obrazie. Taka forma zgłoszenia od razu porządkuje komunikację między odbiorem, wykonawcą i jakością, a lista usterek pozostaje czytelna nawet przy dużej skali projektu."
+      },
+      {
+        "title": "Przydział odpowiedzialności i komunikacja w zgłoszeniu",
+        "body": "Każda pozycja trafia do właściwej osoby lub firmy z terminem i pełnym kontekstem. Komentarze, załączniki i historia zdarzeń pozostają w jednym wątku, więc zespół nie rozrzuca ustaleń po mailach i komunikatorach."
+      },
+      {
+        "title": "Workflow jakości i weryfikacja wykonania",
+        "body": "Proces odróżnia wykonanie poprawki od jej formalnej akceptacji. Dzięki temu odbiór zachowuje kontrolę nad jakością, a wykonawca pracuje na jasnym statusie i precyzyjnym powodzie ewentualnego zwrotu."
+      },
+      {
+        "title": "Raporty pod odbiór i archiwum projektu",
+        "body": "System buduje raporty z historią zgłoszeń, zdjęciami przed i po, statusem oraz odpowiedzialnością stron. Dokumentacja jest gotowa do przekazania inwestorowi, do archiwum projektu i do dalszej analizy po zakończeniu prac."
+      },
+      {
+        "title": "Praca terenowa bez utraty danych",
+        "body": "Zgłoszenia można tworzyć i uzupełniać także w warunkach niestabilnej łączności. Dzięki temu lista usterek powstaje tam, gdzie pojawia się problem, a nie z opóźnieniem po powrocie do biura."
+      },
+      {
+        "title": "Filtry, widoki i kontrola sprintu odbiorowego",
+        "body": "Przy dużej liczbie zgłoszeń zespół zarządza listą według wykonawcy, strefy, priorytetu i czasu reakcji. To pozwala prowadzić odbiór jak kontrolowany proces zamykania ryzyk, a nie ręczne porządkowanie pojedynczych ticketów."
+      }
+    ],
+    "integrationsText": "Raporty odbiorowe i dane o statusach mogą być przekazywane do systemów obiegu dokumentów, DMS i ERP. Projekt kończy się uporządkowaną dokumentacją, a nie rozproszonym zestawem zdjęć, maili i lokalnych notatek.",
+    "faqs": [
+      {
+        "question": "Czy system działa w halach i na obiektach o słabej łączności?",
+        "answer": "Tak. Zgłoszenia i dokumentacja wykonania mogą powstawać w terenie, a dane wracają do pełnego obiegu po odzyskaniu połączenia."
+      },
+      {
+        "question": "Kto akceptuje zamknięcie usterki?",
+        "answer": "Proces rozdziela wykonanie poprawki od jej formalnej akceptacji, dlatego ostateczne zamknięcie pozostaje po stronie odbioru lub jakości."
+      },
+      {
+        "question": "Czy można prowadzić wiele firm wykonawczych w jednym projekcie?",
+        "answer": "Tak. Każda firma pracuje na swoim zakresie odpowiedzialności, a kierownictwo projektu zachowuje pełną widoczność nad całą listą usterek."
+      },
+      {
+        "question": "Jak wygląda dokumentacja pod odbiór końcowy?",
+        "answer": "Raport zbiera zgłoszenia, historię zmian, zdjęcia i statusy w jednym pakiecie gotowym do przekazania inwestorowi i do archiwum projektu."
+      },
+      {
+        "question": "Czy dane nadają się do analizy po projekcie?",
+        "answer": "Tak. Lista usterek, czasy reakcji i skuteczność wykonawców pozostają w uporządkowanej strukturze, którą można wykorzystać przy kolejnych realizacjach."
+      }
+    ],
+    "heroIllustration": "commissioning"
+  },
+  "en": {
+    "seoTitle": "get2_Commissioning - technical handover, defects, and as-built documentation",
+    "seoDescription": "Software for technical handover and defect management: photo-based reporting, contractor assignments, quality workflow, PDF reports, and structured project close-out data.",
+    "listingTeaser": "Software for technical handovers: photo-based defects, contractor accountability, quality verification, and reporting packs for project close-out.",
+    "heroTitle": "get2_Commissioning - technical handovers with full control of the defect list",
+    "heroLead": "A handover closes only when every defect has an owner, a status, and evidence of completion. get2_Commissioning runs that process from on-site capture through contractor execution and quality review to the report that closes the handover and structures project documentation.",
+    "personas": [
+      "Project manager or handover lead - owns list clearance speed and the quality of final delivery; KPIs: open items, response time, and handover date.",
+      "Quality coordinator or owner-side reviewer - verifies workmanship and evidence completeness; KPIs: return rate and complete as-built documentation.",
+      "Contractor or subcontractor - executes assigned fixes and confirms completion in the system; KPIs: closure time and first-time-right correction."
+    ],
+    "modules": [
+      {
+        "title": "Project, location, and reference documentation",
+        "body": "Each issue is tied to a defined project, zone, and reference set. Teams work on shared context, so defects do not disappear into vague descriptions or require side-channel clarification."
+      },
+      {
+        "title": "Photo-based reporting with markup",
+        "body": "A defect starts on site with a photo, clear description, and visual annotation. That format structures communication immediately between handover, contractor, and quality teams, even when the project runs at scale."
+      },
+      {
+        "title": "Assignment and communication inside the issue",
+        "body": "Each item goes to the right person or firm with a deadline and the full context required to act. Comments, attachments, and event history stay in one thread instead of spreading across email and chat tools."
+      },
+      {
+        "title": "Quality workflow and execution review",
+        "body": "The process separates doing the fix from formally accepting it. Handover keeps control over quality, while contractors work against a clear status and a precise reason whenever an item returns for correction."
+      },
+      {
+        "title": "Reports for handover and project archive",
+        "body": "The system builds reports with defect history, before-and-after photos, current status, and responsibility records. Documentation is ready for the owner, the archive, and post-project analysis."
+      },
+      {
+        "title": "Field work without data loss",
+        "body": "Issues can be created and updated even in unstable connectivity conditions. That keeps the defect list close to the place where problems appear instead of delaying reporting until teams return to the office."
+      },
+      {
+        "title": "Filters, views, and close-out sprint control",
+        "body": "At high volume, teams manage the list by contractor, zone, priority, and response time. The handover works like a controlled risk-closing process rather than a manual ticket clean-up exercise."
+      }
+    ],
+    "integrationsText": "Handover reports and status data can be passed to document workflows, DMS, and ERP environments. The project closes with structured documentation instead of a scattered mix of photos, email threads, and local notes.",
+    "faqs": [
+      {
+        "question": "Does the system work in plants and sites with weak connectivity?",
+        "answer": "Yes. Issues and completion evidence can be captured on site, with records flowing back into the full process once the connection returns."
+      },
+      {
+        "question": "Who approves closure of a defect?",
+        "answer": "The workflow separates correction from formal acceptance, so final closure stays under the control of handover or quality ownership."
+      },
+      {
+        "question": "Can multiple contractors work in one project?",
+        "answer": "Yes. Each company operates within its responsibility area, while project leadership keeps full visibility over the complete defect list."
+      },
+      {
+        "question": "What does the final handover documentation look like?",
+        "answer": "The report combines issues, change history, photos, and statuses in one package ready for the owner and the project archive."
+      },
+      {
+        "question": "Can the data be analysed after the project ends?",
+        "answer": "Yes. Defect patterns, response times, and contractor performance remain in a clean structure that supports future projects."
+      }
+    ],
+    "heroIllustration": "commissioning"
+  }
+}

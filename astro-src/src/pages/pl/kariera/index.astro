@@ -1,0 +1,29 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/pl/kariera/';
+const title = 'Kariera - get2software.com';
+const description = 'Rozwijamy zespół budujący i wdrażający oprogramowanie operacyjne dla przemysłu i usług.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(pathname)}
+  hreflangEn={canonicalUrl(routeMap.careers.en)}
+  alternateHref={routeMap.careers.en}
+  active="careers"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Kariera</h1>
+    <p class="g2-prose mt-4 max-w-2xl">
+      Rozwijamy zespół produktowy i wdrożeniowy wokół systemów operacyjnych dla przemysłu i usług B2B. Jeśli masz
+      doświadczenie w produktach, wdrożeniach, integracjach albo procesach operacyjnych, napisz do nas.
+    </p>
+    <a href="/pl/kontakt/" class="g2-btn-primary mt-8 inline-flex">Porozmawiajmy</a>
+  </div>
+</MarketingLayout>

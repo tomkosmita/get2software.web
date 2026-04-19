@@ -1,0 +1,65 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/pl/polityka-prywatnosci/';
+const title = 'Polityka prywatności - get2software.com';
+const description =
+  'Zasady przetwarzania danych osobowych w serwisie get2software.com zgodnie z RODO.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(pathname)}
+  hreflangEn={canonicalUrl(routeMap.privacy.en)}
+  alternateHref={routeMap.privacy.en}
+>
+  <div class="g2-container max-w-3xl py-14 md:py-20">
+    <h1 class="g2-heading-xl">Polityka prywatności</h1>
+    <div class="g2-prose mt-8 space-y-4">
+      <p>
+        Niniejsza polityka opisuje sposób przetwarzania danych osobowych użytkowników serwisu get2software.com.
+        Administratorem danych jest podmiot prowadzący serwis get2software.com, wskazywany w danych rejestrowych i
+        kontaktowych publikowanych przez administratora. W sprawach dotyczących danych osobowych można kontaktować się
+        przez adres <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Cele i podstawy</h2>
+      <p>
+        Dane z formularza kontaktowego przetwarzamy w celu odpowiedzi na zapytanie, prowadzenia dalszej korespondencji
+        związanej z wdrożeniem lub ofertą oraz ochrony przed nadużyciami. Podstawą przetwarzania jest uzasadniony interes
+        administratora albo zgoda wyrażona w formularzu, jeśli jest wymagana dla danej czynności.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Zakres danych</h2>
+      <p>
+        Przetwarzamy dane przekazane w formularzu kontaktowym, w szczególności nazwę firmy, adres e-mail, numer telefonu,
+        temat i treść wiadomości. Dodatkowo możemy przetwarzać podstawowe dane techniczne związane z bezpieczeństwem i
+        działaniem serwisu, takie jak logi systemowe oraz niezbędne pliki cookies.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Okres przechowywania</h2>
+      <p>
+        Dane przechowujemy przez czas potrzebny do obsługi zapytania, przygotowania oferty, prowadzenia dalszej
+        korespondencji oraz dochodzenia lub obrony roszczeń, jeżeli jest to konieczne. Po tym czasie dane są usuwane albo
+        anonimizowane, o ile dalsze przechowywanie nie wynika z obowiązku prawnego.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Odbiorcy danych</h2>
+      <p>
+        Dane mogą być powierzane podmiotom wspierającym obsługę serwisu i komunikacji, w szczególności dostawcom hostingu,
+        narzędzi do obsługi formularza kontaktowego, poczty elektronicznej oraz zabezpieczeń antyspamowych. Dane są
+        przekazywane wyłącznie w zakresie niezbędnym do realizacji tych usług.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Prawa osób</h2>
+      <p>
+        Przysługuje Państwu prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu oraz przenoszenia
+        danych - w zakresie przewidzianym przez RODO. Skargę można złożyć do Prezesa UODO.
+      </p>
+      <p>
+        Wersja angielska:{' '}
+        <a href="/en/privacy-policy/" class="text-g2-accent hover:underline">Privacy policy</a>.
+      </p>
+    </div>
+  </div>
+</MarketingLayout>

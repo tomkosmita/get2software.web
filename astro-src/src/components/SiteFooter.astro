@@ -1,0 +1,96 @@
+---
+import type { Locale } from '../lib/i18n/routes';
+import { routeMap } from '../lib/i18n/routes';
+
+type Props = {
+  locale: Locale;
+  alternateHref: string;
+};
+
+const { locale, alternateHref } = Astro.props;
+
+const t =
+  locale === 'pl'
+    ? {
+        tagline: 'Oprogramowanie operacyjne dla przemysłu i usług.',
+        rights: 'Wszelkie prawa zastrzeżone.',
+        privacy: 'Polityka prywatności',
+        products: 'Produkty',
+        company: 'Firma'
+      }
+    : {
+        tagline: 'Operational software for industry and service teams.',
+        rights: 'All rights reserved.',
+        privacy: 'Privacy policy',
+        products: 'Products',
+        company: 'Company'
+      };
+
+const otherLocale: Locale = locale === 'pl' ? 'en' : 'pl';
+const home = routeMap.home[locale];
+const about = routeMap.about[locale];
+const products = routeMap.products[locale];
+const integrations = routeMap.integrations[locale];
+const contact = routeMap.contact[locale];
+const privacy = routeMap.privacy[locale];
+---
+
+<footer class="mt-auto border-t border-white/10 bg-g2-bg/90 py-12" data-component="site-footer">
+  <!-- Stopka: siatka linków + przełącznik języka; cel - szybka nawigacja i zaufanie B2B. -->
+  <div class="g2-container grid gap-10 md:grid-cols-3">
+    <div>
+      <p class="font-display text-lg font-semibold text-g2-text">
+        get2<span class="text-g2-accent">software</span>
+      </p>
+      <p class="mt-3 max-w-sm text-sm text-g2-muted">{t.tagline}</p>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-g2-muted">{t.company}</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href={about} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'O nas' : 'About'}</a></li>
+        <li><a href={contact} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Kontakt' : 'Contact'}</a></li>
+        <li><a href={integrations} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Integracje' : 'Integrations'}</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-g2-muted">{t.products}</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li>
+          <a href={routeMap.productBhp[locale]} class="text-g2-muted hover:text-g2-accent">get2_BHPRent</a>
+        </li>
+        <li>
+          <a href={routeMap.productFsm[locale]} class="text-g2-muted hover:text-g2-accent">get2_FSM</a>
+        </li>
+        <li>
+          <a href={routeMap.productComm[locale]} class="text-g2-muted hover:text-g2-accent">get2_Commissioning</a>
+        </li>
+        <li>
+          <a href={routeMap.productMaint[locale]} class="text-g2-muted hover:text-g2-accent">get2_Maintenance</a>
+        </li>
+        <li>
+          <a href={routeMap.productFcm[locale]} class="text-g2-muted hover:text-g2-accent">get2_FCM</a>
+        </li>
+        <li>
+          <a href={routeMap.productFcmRent[locale]} class="text-g2-muted hover:text-g2-accent">get2_FCMRent</a>
+        </li>
+        <li>
+          <a href={products} class="text-g2-accent hover:underline">{locale === 'pl' ? 'Wszystkie →' : 'View all →'}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="g2-container mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-sm text-g2-muted md:flex-row md:items-center">
+    <p>© {new Date().getFullYear()} get2software.com - {t.rights}</p>
+    <div class="flex flex-wrap gap-4">
+      <a href={privacy} class="hover:text-g2-accent">{t.privacy}</a>
+      <a
+        href={alternateHref}
+        class="rounded-lg border border-white/15 px-3 py-1 text-xs hover:bg-white/5"
+        hreflang={otherLocale}
+        lang={otherLocale}
+      >
+        {locale === 'pl' ? 'English version' : 'Wersja polska'}
+      </a>
+    </div>
+  </div>
+</footer>

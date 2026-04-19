@@ -1,0 +1,184 @@
+---
+/**
+ * Formularz kontaktowy - POST JSON do Cloudflare Workera (Resend) + token Turnstile.
+ * Zmienne: PUBLIC_CONTACT_FORM_WORKER_URL, PUBLIC_TURNSTILE_SITE_KEY (jak w projekcie wroclaw-psychoterapia).
+ * Komentarze PL: layout pól, kolejność walidacji, integracja antyspamowa.
+ */
+type Props = {
+  locale: 'pl' | 'en';
+};
+
+const { locale } = Astro.props;
+
+const copy =
+  locale === 'pl'
+    ? {
+        title: 'Wyślij wiadomość',
+        company: 'Firma',
+        email: 'E-mail',
+        phone: 'Telefon',
+        subject: 'Temat',
+        message: 'Treść',
+        consent:
+          'Wyrażam zgodę na przetwarzanie danych osobowych w celu odpowiedzi na zapytanie (RODO).',
+        submit: 'Wyślij',
+        statusIdle: '',
+        statusSending: 'Wysyłanie…',
+        statusOk: 'Wiadomość wysłana. Dziękujemy.',
+        statusErr: 'Nie udało się wysłać. Spróbuj ponownie lub napisz bezpośrednio na kontakt@get2software.com.',
+        configErr:
+          'Formularz kontaktowy jest chwilowo niedostępny. Napisz bezpośrednio na adres poniżej.',
+        mailtoLabel: 'Napisz e-mail (klient pocztowy)',
+        mailtoHint: 'Kontakt alternatywny:',
+        honeypot: 'WWW'
+      }
+    : {
+        title: 'Send a message',
+        company: 'Company',
+        email: 'Email',
+        phone: 'Phone',
+        subject: 'Subject',
+        message: 'Message',
+        consent: 'I agree to the processing of personal data to respond to this inquiry (GDPR).',
+        submit: 'Send',
+        statusIdle: '',
+        statusSending: 'Sending…',
+        statusOk: 'Message sent. Thank you.',
+        statusErr: 'Could not send. Please retry or email contact@get2software.com.',
+        configErr:
+          'The contact form is temporarily unavailable. Please use the email address below.',
+        mailtoLabel: 'Compose email',
+        mailtoHint: 'Alternative contact:',
+        honeypot: 'Website'
+      };
+
+const workerUrl = import.meta.env.PUBLIC_CONTACT_FORM_WORKER_URL as string | undefined;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+const formReady = Boolean(workerUrl && turnstileSiteKey);
+---
+
+<div class="g2-glass p-6 md:p-8">
+  <h2 class="font-display text-xl font-semibold text-g2-text">{copy.title}</h2>
+  {!formReady && (
+    <div class="mt-3 space-y-3 rounded-lg border border-white/15 bg-white/5 p-4 text-sm text-g2-muted">
+      <p>{copy.configErr}</p>
+      <p class="text-xs text-g2-muted/90">{copy.mailtoHint}</p>
+      <a
+        href="mailto:kontakt@get2software.com"
+        class="g2-btn-secondary inline-flex"
+      >
+        {copy.mailtoLabel}
+      </a>
+    </div>
+  )}
+  <form id="g2-contact-form" class="mt-6 space-y-4" novalidate data-worker-url={workerUrl ?? ''} data-locale={locale}>
+    <input
+      type="text"
+      name="company"
+      required
+      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      placeholder={copy.company}
+      autocomplete="organization"
+    />
+    <input
+      type="email"
+      name="email"
+      required
+      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      placeholder={copy.email}
+      autocomplete="email"
+    />
+    <input
+      type="tel"
+      name="phone"
+      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      placeholder={copy.phone}
+      autocomplete="tel"
+    />
+    <input
+      type="text"
+      name="subject"
+      required
+      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      placeholder={copy.subject}
+    />
+    <textarea
+      name="message"
+      required
+      rows={5}
+      class="min-h-32 w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      placeholder={copy.message}
+    />
+    <!-- Honeypot: ukryte pole antybot - wypełnienie przez spamery blokuje wysyłkę po stronie workera. -->
+    <label class="sr-only">
+      {copy.honeypot}
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" />
+    </label>
+    <label class="flex items-start gap-3 text-sm text-g2-muted">
+      <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded border-white/20 bg-white/5" />
+      <span>{copy.consent}</span>
+    </label>
+    {formReady && (
+      <div
+        class="cf-turnstile"
+        data-sitekey={turnstileSiteKey}
+        data-theme="dark"
+      />
+    )}
+    <button type="submit" class="g2-btn-primary w-full sm:w-auto" disabled={!formReady}>
+      {copy.submit}
+    </button>
+    <p id="g2-contact-status" class="text-sm text-g2-muted" role="status" aria-live="polite" />
+  </form>
+</div>
+
+{formReady && (
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+)}
+
+<script is:inline define:vars={{ copy, formReady }}>
+  (function () {
+    if (!formReady) return;
+    const form = document.getElementById('g2-contact-form');
+    if (!form || !(form instanceof HTMLFormElement)) return;
+    const statusEl = document.getElementById('g2-contact-status');
+    const workerUrl = form.getAttribute('data-worker-url');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!workerUrl || !statusEl) return;
+      statusEl.textContent = copy.statusSending;
+      const fd = new FormData(form);
+      const honeypot = fd.get('website');
+      if (honeypot) {
+        statusEl.textContent = copy.statusErr;
+        return;
+      }
+      const tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
+      const token = tokenInput && 'value' in tokenInput ? tokenInput.value : '';
+      if (!token) {
+        statusEl.textContent = copy.statusErr;
+        return;
+      }
+      const payload = {
+        company: String(fd.get('company') || ''),
+        email: String(fd.get('email') || ''),
+        phone: String(fd.get('phone') || ''),
+        subject: String(fd.get('subject') || ''),
+        message: String(fd.get('message') || ''),
+        locale: form.getAttribute('data-locale') || 'pl',
+        turnstileToken: token
+      };
+      try {
+        const res = await fetch(workerUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) statusEl.textContent = copy.statusOk;
+        else statusEl.textContent = copy.statusErr;
+      } catch {
+        statusEl.textContent = copy.statusErr;
+      }
+    });
+  })();
+</script>

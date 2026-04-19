@@ -1,0 +1,29 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/news/';
+const title = 'News - get2software.com';
+const description = 'We publish updates on products, rollouts, integrations, and operational practice.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.news.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.news.pl}
+  active="news"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">News</h1>
+    <p class="g2-prose mt-4 max-w-2xl">
+      This section covers products, rollouts, integrations, and operational practice. If you want to discuss a specific
+      process in your business, head to the contact page.
+    </p>
+    <a href="/en/contact/" class="g2-btn-primary mt-8 inline-flex">Talk to us</a>
+  </div>
+</MarketingLayout>

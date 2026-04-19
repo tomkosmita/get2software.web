@@ -1,0 +1,324 @@
+---
+/**
+ * Grafiki wektorowe (SVG) per produkt - styl monoline + akcent brand.
+ * Prop `part`: hero (duży) lub sekcje diagramów 1–5 zgodnie z planem dokumentacji.
+ */
+type ProductKey = 'bhp' | 'fsm' | 'commissioning' | 'maintenance' | 'fcm' | 'fcmrent';
+type Part =
+  | 'hero'
+  | 's1'
+  | 's2'
+  | 's3'
+  | 's4'
+  | 's5';
+
+interface Props {
+  product: ProductKey;
+  part: Part;
+  class?: string;
+}
+
+const { product, part, class: className = '' } = Astro.props;
+
+const stroke = 'currentColor';
+const acc = '#2dd4bf';
+const acc2 = '#a78bfa';
+---
+
+{product === 'bhp' && part === 'hero' && (
+  <svg class={className} viewBox="0 0 480 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="24" y="40" width="160" height="200" rx="12" stroke={stroke} stroke-width="2" class="text-white/40" />
+    <text x="104" y="32" text-anchor="middle" class="fill-g2-muted text-[11px]">Centralny</text>
+    <rect x="200" y="60" width="120" height="72" rx="10" stroke={acc} stroke-width="2" />
+    <text x="260" y="52" text-anchor="middle" class="fill-g2-muted text-[11px]">Wirtualny</text>
+    <rect x="200" y="160" width="120" height="72" rx="10" stroke={acc2} stroke-width="2" />
+    <text x="260" y="152" text-anchor="middle" class="fill-g2-muted text-[11px]">Pracownik</text>
+    <path d="M184 120h16M184 196h16" stroke={stroke} stroke-width="2" class="text-white/50" marker-end="url(#a)" />
+    <defs>
+      <marker id="a" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0 0L6 3L0 6z" fill="white" opacity="0.5" /></marker>
+    </defs>
+    <circle cx="360" cy="140" r="56" stroke={acc} stroke-width="2" opacity="0.6" />
+    <text x="360" y="144" text-anchor="middle" class="fill-g2-text text-[12px]">B2B</text>
+  </svg>
+)}
+
+{product === 'bhp' && part === 's1' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M40 160V60h80v100M140 160V40h80v120M240 160V90h60v70" stroke="currentColor" stroke-width="2" class="text-white/40" fill="none" />
+    <circle cx="80" cy="60" r="6" fill={acc} /><circle cx="180" cy="40" r="6" fill={acc2} /><circle cx="270" cy="90" r="6" fill={acc} />
+  </svg>
+)}
+{product === 'bhp' && part === 's2' && (
+  <svg class={className} viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="20" y="40" width="48" height="40" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <text x="44" y="30" text-anchor="middle" class="fill-g2-muted text-[10px]">PZ</text>
+    <path d="M72 60h40" stroke="white" stroke-width="2" opacity="0.4" />
+    <rect x="116" y="40" width="48" height="40" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <text x="140" y="30" text-anchor="middle" class="fill-g2-muted text-[10px]">MM</text>
+    <path d="M168 60h40" stroke="white" stroke-width="2" opacity="0.4" />
+    <rect x="212" y="40" width="48" height="40" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <text x="236" y="30" text-anchor="middle" class="fill-g2-muted text-[10px]">WZ</text>
+  </svg>
+)}
+{product === 'bhp' && part === 's3' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="40" width="240" height="120" rx="12" stroke="white" stroke-opacity="0.2" stroke-width="2" />
+    <rect x="56" y="56" width="72" height="32" rx="6" fill={acc} opacity="0.3" />
+    <rect x="56" y="104" width="200" height="12" rx="4" fill="white" opacity="0.1" />
+    <rect x="56" y="124" width="160" height="12" rx="4" fill="white" opacity="0.08" />
+  </svg>
+)}
+{product === 'bhp' && part === 's4' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="48" y="48" width="96" height="120" rx="8" stroke={acc} stroke-width="2" fill="none" />
+    <path d="M168 80h96M168 110h80M168 140h72" stroke="white" stroke-width="2" opacity="0.25" />
+    <circle cx="72" cy="72" r="8" fill={acc2} />
+  </svg>
+)}
+{product === 'bhp' && part === 's5' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="120" width="60" height="56" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="120" y="100" width="60" height="76" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <rect x="200" y="130" width="60" height="46" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <path d="M70 120V80h200v40" stroke="white" stroke-opacity="0.2" fill="none" />
+    <text x="160" y="40" text-anchor="middle" class="fill-g2-muted text-[11px]">MPK</text>
+  </svg>
+)}
+
+{product === 'fsm' && part === 'hero' && (
+  <svg class={className} viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M60 200 L120 80 L200 140 L280 60 L360 120 L420 90" stroke={acc} stroke-width="3" fill="none" />
+    <circle cx="120" cy="80" r="10" fill={acc2} /><circle cx="280" cy="60" r="10" fill={acc} />
+    <rect x="320" y="160" width="120" height="96" rx="16" stroke="white" stroke-opacity="0.3" stroke-width="2" />
+    <text x="380" y="200" text-anchor="middle" class="fill-g2-muted text-[11px]">PWA</text>
+  </svg>
+)}
+{product === 'fsm' && part === 's1' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="160" cy="100" r="70" stroke="white" stroke-opacity="0.2" fill="none" />
+    <path d="M160 100 L210 60" stroke={acc} stroke-width="2" />
+    <circle cx="210" cy="60" r="8" fill={acc2} />
+  </svg>
+)}
+{product === 'fsm' && part === 's2' && (
+  <svg class={className} viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="40" width="56" height="40" rx="6" fill={acc} opacity="0.25" />
+    <rect x="104" y="40" width="56" height="40" rx="6" fill="white" opacity="0.08" />
+    <rect x="168" y="40" width="56" height="40" rx="6" fill="white" opacity="0.08" />
+    <rect x="232" y="40" width="56" height="40" rx="6" fill="white" opacity="0.08" />
+  </svg>
+)}
+{product === 'fsm' && part === 's3' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="100" y="40" width="120" height="200" rx="20" stroke="white" stroke-opacity="0.25" stroke-width="2" />
+    <circle cx="160" cy="180" r="6" fill={acc} />
+  </svg>
+)}
+{product === 'fsm' && part === 's4' && (
+  <svg class={className} viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M40 120h240M40 80h180M40 40h220" stroke="white" stroke-width="2" opacity="0.2" />
+    <rect x="220" y="68" width="48" height="28" rx="4" stroke={acc} stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'fsm' && part === 's5' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="60" y="60" width="200" height="100" rx="8" stroke={acc2} stroke-width="2" fill="none" stroke-dasharray="6 4" />
+    <path d="M100 120c20-30 40-30 60 0s40 30 60 0" stroke={acc} stroke-width="2" fill="none" />
+    <text x="160" y="40" text-anchor="middle" class="fill-g2-muted text-[11px]">Sign</text>
+  </svg>
+)}
+
+{product === 'commissioning' && part === 'hero' && (
+  <svg class={className} viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="60" width="400" height="160" rx="12" stroke="white" stroke-opacity="0.2" stroke-width="2" />
+    <circle cx="120" cy="140" r="40" stroke={acc} stroke-width="2" fill="none" />
+    <circle cx="260" cy="120" r="50" stroke={acc2} stroke-width="2" fill="none" opacity="0.6" />
+    <rect x="340" y="100" width="80" height="80" rx="8" stroke={acc} stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'commissioning' && part === 's1' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="40" width="240" height="120" stroke="white" stroke-opacity="0.2" />
+    <path d="M80 160 L100 80 L140 100 L180 60 L220 90" stroke={acc} stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'commissioning' && part === 's2' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="60" y="50" width="200" height="120" rx="8" stroke="white" stroke-opacity="0.3" stroke-width="2" />
+    <circle cx="140" cy="110" r="40" stroke={acc2} stroke-width="3" fill="none" />
+  </svg>
+)}
+{product === 'commissioning' && part === 's3' && (
+  <svg class={className} viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="20" y="40" width="64" height="48" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <path d="M84 64h40" stroke="white" opacity="0.3" />
+    <rect x="124" y="40" width="64" height="48" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <path d="M188 64h40" stroke="white" opacity="0.3" />
+    <rect x="228" y="40" width="64" height="48" rx="6" stroke={acc} stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'commissioning' && part === 's4' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="80" y="40" width="160" height="200" rx="8" stroke="white" stroke-opacity="0.25" stroke-width="2" />
+    <text x="160" y="120" text-anchor="middle" class="fill-g2-muted text-[12px]">PDF</text>
+  </svg>
+)}
+{product === 'commissioning' && part === 's5' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="40" width="100" height="140" rx="8" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="180" y="40" width="100" height="140" rx="8" stroke={acc2} stroke-width="2" fill="none" />
+    <path d="M140 90h40" stroke="white" opacity="0.4" />
+  </svg>
+)}
+
+{product === 'maintenance' && part === 'hero' && (
+  <svg class={className} viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="200" y="60" width="200" height="160" rx="12" stroke="white" stroke-opacity="0.25" stroke-width="2" />
+    <rect x="80" y="100" width="80" height="80" rx="8" stroke={acc} stroke-width="2" fill="none" />
+    <text x="120" y="92" text-anchor="middle" class="fill-g2-muted text-[10px]">QR</text>
+    <path d="M160 140h40" stroke={acc2} stroke-width="2" />
+  </svg>
+)}
+{product === 'maintenance' && part === 's1' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="100" y="60" width="120" height="120" rx="12" stroke={acc} stroke-width="2" fill="none" />
+    <path d="M120 80h80v80h-80z" stroke="white" stroke-opacity="0.3" fill="none" />
+    <path d="M130 130h60M130 145h40" stroke={acc2} stroke-width="2" />
+  </svg>
+)}
+{product === 'maintenance' && part === 's2' && (
+  <svg class={className} viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="30" y="60" width="56" height="72" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="100" y="50" width="56" height="82" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <rect x="170" y="65" width="56" height="67" rx="6" stroke="white" stroke-opacity="0.3" stroke-width="2" fill="none" />
+    <rect x="240" y="75" width="56" height="57" rx="6" stroke="white" stroke-opacity="0.2" stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'maintenance' && part === 's3' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="160" cy="100" r="60" stroke={acc} stroke-width="3" fill="none" />
+    <path d="M160 100V60" stroke={acc2} stroke-width="2" />
+    <text x="160" y="40" text-anchor="middle" class="fill-g2-muted text-[11px]">MTTR</text>
+  </svg>
+)}
+{product === 'maintenance' && part === 's4' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="60" y="50" width="200" height="120" rx="8" stroke="white" stroke-opacity="0.25" stroke-width="2" />
+    <path d="M80 90h160M80 110h140M80 130h120" stroke="white" stroke-opacity="0.15" stroke-width="2" />
+    <circle cx="90" cy="90" r="4" fill={acc} />
+  </svg>
+)}
+{product === 'maintenance' && part === 's5' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="50" y="120" width="48" height="48" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="120" y="110" width="48" height="58" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <path d="M98 120v-40h120v30" stroke="white" opacity="0.25" fill="none" />
+  </svg>
+)}
+
+{product === 'fcm' && part === 'hero' && (
+  <svg class={className} viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="40" y="52" width="400" height="184" rx="14" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <path d="M100 100h280M100 148h280M100 196h280M160 76v160M240 76v160M320 76v160" stroke="white" stroke-opacity="0.15" stroke-width="2" />
+    <circle cx="138" cy="122" r="10" fill={acc} />
+    <circle cx="286" cy="168" r="10" fill={acc2} />
+    <path d="M138 122l148 46" stroke={acc} stroke-width="2" stroke-dasharray="5 5" />
+    <text x="240" y="34" text-anchor="middle" class="fill-g2-muted text-[11px]">Mapa obiektu</text>
+  </svg>
+)}
+{product === 'fcm' && part === 's1' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="44" y="34" width="232" height="132" rx="10" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <path d="M92 34v132M160 34v132M228 34v132M44 78h232M44 122h232" stroke="white" stroke-opacity="0.14" stroke-width="2" />
+    <circle cx="126" cy="100" r="9" fill={acc} />
+  </svg>
+)}
+{product === 'fcm' && part === 's2' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="56" y="44" width="72" height="108" rx="8" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="152" y="44" width="112" height="28" rx="6" fill="white" opacity="0.08" />
+    <rect x="152" y="84" width="96" height="20" rx="6" fill={acc2} opacity="0.25" />
+    <rect x="152" y="116" width="84" height="20" rx="6" fill={acc} opacity="0.22" />
+  </svg>
+)}
+{product === 'fcm' && part === 's3' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="42" y="52" width="236" height="96" rx="8" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <path d="M74 100h172" stroke="white" stroke-opacity="0.18" stroke-width="2" />
+    <circle cx="94" cy="100" r="8" fill={acc} />
+    <circle cx="162" cy="100" r="8" fill={acc2} />
+    <circle cx="230" cy="100" r="8" fill={acc} />
+    <text x="160" y="34" text-anchor="middle" class="fill-g2-muted text-[11px]">Klasyfikacja</text>
+  </svg>
+)}
+{product === 'fcm' && part === 's4' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="60" y="38" width="200" height="124" rx="10" stroke="white" stroke-opacity="0.2" stroke-width="2" fill="none" />
+    <path d="M92 78h136M92 106h112M92 134h84" stroke="white" stroke-opacity="0.16" stroke-width="2" />
+    <rect x="204" y="64" width="36" height="28" rx="4" stroke={acc} stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'fcm' && part === 's5' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="48" y="116" width="52" height="44" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="126" y="98" width="52" height="62" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <rect x="204" y="128" width="52" height="32" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <path d="M74 116V84h156v44" stroke="white" stroke-opacity="0.2" fill="none" />
+    <text x="160" y="38" text-anchor="middle" class="fill-g2-muted text-[11px]">Zespół</text>
+  </svg>
+)}
+
+{product === 'fcmrent' && part === 'hero' && (
+  <svg class={className} viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="48" y="56" width="156" height="156" rx="12" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <path d="M126 88l42 34v54H84v-54l42-34z" stroke={acc} stroke-width="2" fill="none" />
+    <circle cx="128" cy="140" r="9" fill={acc2} />
+    <path d="M220 134h56" stroke="white" stroke-opacity="0.22" stroke-width="2" />
+    <rect x="292" y="76" width="140" height="128" rx="12" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <circle cx="332" cy="112" r="9" fill={acc} />
+    <circle cx="372" cy="144" r="9" fill={acc2} />
+    <circle cx="332" cy="176" r="9" fill={acc} />
+    <text x="126" y="36" text-anchor="middle" class="fill-g2-muted text-[11px]">Nieruchomość</text>
+    <text x="362" y="36" text-anchor="middle" class="fill-g2-muted text-[11px]">Konserwatorzy</text>
+  </svg>
+)}
+{product === 'fcmrent' && part === 's1' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="54" y="42" width="212" height="120" rx="10" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <path d="M160 72l58 44v16H102v-16l58-44z" stroke={acc} stroke-width="2" fill="none" />
+    <circle cx="160" cy="116" r="10" fill={acc2} />
+  </svg>
+)}
+{product === 'fcmrent' && part === 's2' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="54" y="46" width="90" height="110" rx="8" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="166" y="46" width="100" height="24" rx="6" fill={acc2} opacity="0.25" />
+    <rect x="166" y="84" width="84" height="18" rx="6" fill="white" opacity="0.1" />
+    <rect x="166" y="116" width="68" height="18" rx="6" fill={acc} opacity="0.24" />
+  </svg>
+)}
+{product === 'fcmrent' && part === 's3' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="42" y="64" width="236" height="84" rx="8" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <circle cx="92" cy="106" r="10" fill={acc} />
+    <circle cx="160" cy="106" r="10" fill={acc2} />
+    <circle cx="228" cy="106" r="10" fill={acc} />
+    <path d="M102 106h48M170 106h48" stroke="white" stroke-opacity="0.18" stroke-width="2" />
+  </svg>
+)}
+{product === 'fcmrent' && part === 's4' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="68" y="40" width="184" height="126" rx="10" stroke="white" stroke-opacity="0.22" stroke-width="2" fill="none" />
+    <path d="M96 78h128M96 106h96M96 134h78" stroke="white" stroke-opacity="0.16" stroke-width="2" />
+    <rect x="196" y="62" width="34" height="24" rx="4" stroke={acc} stroke-width="2" fill="none" />
+  </svg>
+)}
+{product === 'fcmrent' && part === 's5' && (
+  <svg class={className} viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="46" y="120" width="50" height="40" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <rect x="122" y="104" width="50" height="56" rx="6" stroke={acc2} stroke-width="2" fill="none" />
+    <rect x="198" y="128" width="50" height="32" rx="6" stroke={acc} stroke-width="2" fill="none" />
+    <path d="M72 120V86h152v38" stroke="white" stroke-opacity="0.2" fill="none" />
+    <text x="160" y="40" text-anchor="middle" class="fill-g2-muted text-[11px]">Zlecenia</text>
+  </svg>
+)}

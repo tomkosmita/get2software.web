@@ -1,0 +1,43 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import ContactForm from '../../../components/ContactForm.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/contact/';
+const title = 'Contact - get2software.com';
+const description = 'Talk to us about rollout, ERP integration, or bringing an operational process under control.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.contact.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.contact.pl}
+  active="contact"
+>
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Contact</h1>
+    <p class="g2-prose mt-4 max-w-2xl">
+      Tell us which process you want to improve. We reply with a practical approach, the right product scope, and the
+      next step toward implementation.
+    </p>
+    <div class="mt-10 grid gap-10 lg:grid-cols-2">
+      <ContactForm locale="en" />
+      <aside class="g2-glass p-6 text-sm text-g2-muted">
+        <p class="font-display text-lg font-semibold text-g2-text">get2software.com</p>
+        <p class="mt-3">
+          Email:{' '}
+          <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>
+        </p>
+        <p class="mt-4">
+          We respond to questions about rollout, integration, and operational process design. It helps if you include
+          your industry, company scale, and the ERP your team already uses.
+        </p>
+      </aside>
+    </div>
+  </div>
+</MarketingLayout>

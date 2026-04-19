@@ -1,0 +1,135 @@
+{
+  "slug": "get2-fcm-rent",
+  "pl": {
+    "seoTitle": "get2_FCMRent - obsługa najmu mieszkań, domów i zgłoszeń lokatorskich",
+    "seoDescription": "System dla firm zarządzających najmem: zgłoszenia usterek ze zdjęciem, opisem i pilnością, przypisanie do konkretnej nieruchomości oraz zlecanie prac rozproszonej sieci konserwatorów i specjalistów.",
+    "listingTeaser": "System dla najmu: zgłoszenia lokatorskie z pilnością i zdjęciami, przypięte do konkretnej nieruchomości i przekazywane do właściwych wykonawców.",
+    "heroTitle": "get2_FCMRent - obsługa najmu od zgłoszenia lokatora do wykonania pracy",
+    "heroLead": "Firmy zarządzające najmem nie potrzebują kolejnej skrzynki mailowej z usterkami. Potrzebują jednego miejsca, w którym zgłoszenie trafia do konkretnego mieszkania, domu lub lokalu, dostaje opis, zdjęcia i pilność, a potem przechodzi do właściwego konserwatora albo specjalisty. get2_FCMRent porządkuje cały ten obieg i pozwala prowadzić go na własnej sieci wykonawców albo w modelu zbliżonym do wyspecjalizowanej giełdy usług dla rynku najmu.",
+    "personas": [
+      "Menedżer najmu lub koordynator portfela nieruchomości - odpowiada za czas reakcji, jakość obsługi zgłoszeń i sprawne przekazanie pracy do właściwego wykonawcy; KPI: czas podjęcia zgłoszenia, terminowość zamknięcia i liczba spraw wracających.",
+      "Koordynator sieci wykonawców - dobiera konserwatorów i specjalistów według branży, lokalizacji i dostępności; KPI: skuteczność przydziału, czas akceptacji zlecenia i obłożenie wykonawców.",
+      "Lokator lub opiekun nieruchomości zgłaszający problem - przekazuje usterkę z opisem, zdjęciem i wskazaniem pilności; KPI: poprawność zgłoszenia i szybkość przekazania sprawy do realizacji."
+    ],
+    "modules": [
+      {
+        "title": "Zgłoszenie lokatorskie z opisem, zdjęciem i pilnością",
+        "body": "Lokator lub opiekun nieruchomości zgłasza problem wraz ze zdjęciem, opisem i oznaczeniem pilności. Od początku wiadomo, czy chodzi o drobną usterkę, sprawę wymagającą szybkiej reakcji czy awarię, która wpływa na bezpieczeństwo albo możliwość korzystania z lokalu."
+      },
+      {
+        "title": "Przypięcie zgłoszenia do konkretnej nieruchomości",
+        "body": "Każda sprawa jest od razu przypisana do mieszkania, domu, lokalu lub części wspólnej z listy zarządzanych adresów. Zespół nie szuka ręcznie, którego obiektu dotyczy problem, a historia zgłoszeń buduje się dla konkretnej nieruchomości."
+      },
+      {
+        "title": "Klasyfikacja i routing do właściwej specjalizacji",
+        "body": "Zgłoszenie otrzymuje kategorię pracy, poziom pilności i wymagany typ wykonawcy. Dzięki temu elektryk trafia do spraw elektrycznych, hydraulik do instalacji wodnych, a konserwator ogólny do prostych napraw bez ręcznego przeklejania zgłoszeń między ludźmi."
+      },
+      {
+        "title": "Rozproszona sieć konserwatorów i wykonawców",
+        "body": "System wspiera model pracy z własną bazą konserwatorów, firmami partnerskimi albo szeroką siecią specjalistów działających na różnych obszarach. Koordynator widzi, kto pracuje w danej specjalizacji i lokalizacji, kto przyjął zlecenie i które sprawy czekają na reakcję."
+      },
+      {
+        "title": "Model zbliżony do giełdy usług dla rynku najmu",
+        "body": "Zlecenia można kierować do rozproszonego rynku wykonawców, a nie tylko do jednej stałej ekipy. To pozwala szybciej znajdować dostępnych fachowców, porównywać tempo reakcji i budować operacyjny model pracy dla dużego portfela najmu."
+      },
+      {
+        "title": "Dokumentacja wykonania i historia nieruchomości",
+        "body": "Każda interwencja zostawia po sobie opis, zdjęcia, komentarze i status wykonania. Menedżer najmu widzi pełną historię usterek, napraw i kosztotwórczych zdarzeń dla konkretnego adresu, co porządkuje obsługę najemców i decyzje operacyjne."
+      },
+      {
+        "title": "Dane do rozliczeń, raportów i kontroli jakości",
+        "body": "Czasy reakcji, wykonane prace i zamknięte zgłoszenia tworzą uporządkowaną podstawę do rozliczeń z wykonawcami, raportów dla właścicieli portfela i kontroli jakości obsługi najmu. Dane mogą zasilać kolejne systemy finansowe i ERP bez przepisywania historii z maili i komunikatorów."
+      }
+    ],
+    "integrationsText": "get2_FCMRent łączy zgłoszenia lokatorskie, historię nieruchomości i pracę rozproszonej sieci wykonawców w jednym porządku operacyjnym. Zarządzający najmem rozlicza usługi i ocenia jakość pracy na podstawie realnych danych, a nie rozproszonych ustaleń z telefonu i wiadomości.",
+    "faqs": [
+      {
+        "question": "Czy zgłoszenie można przypisać do konkretnego mieszkania lub domu?",
+        "answer": "Tak. Każda sprawa od początku jest powiązana z konkretną nieruchomością z listy zarządzanych adresów, więc historia problemów i napraw buduje się we właściwym miejscu."
+      },
+      {
+        "question": "Czy lokator może dodać zdjęcie i oznaczyć pilność?",
+        "answer": "Tak. Zgłoszenie może zawierać opis, zdjęcia i poziom pilności, co porządkuje reakcję i ułatwia właściwy przydział pracy."
+      },
+      {
+        "question": "Czy system nadaje się do rozproszonej sieci specjalistów?",
+        "answer": "Tak. Zlecenia można kierować do konserwatorów i wykonawców według specjalizacji, lokalizacji i dostępności, z pełną widocznością po stronie koordynatora."
+      },
+      {
+        "question": "Czy to może działać jak wyspecjalizowana giełda usług dla najmu?",
+        "answer": "Tak. Model pracy może opierać się na stałej bazie wykonawców albo na szerszym rynku specjalistów, do których trafiają zlecenia zgodnie z branżą i obszarem działania."
+      },
+      {
+        "question": "Czy dane nadają się do rozliczeń i raportowania właścicielom?",
+        "answer": "Tak. Historia zgłoszeń, czas reakcji i wykonane prace tworzą czytelną podstawę do rozliczeń usług, raportów operacyjnych i dalszej integracji z ERP."
+      }
+    ],
+    "heroIllustration": "fcmrent"
+  },
+  "en": {
+    "seoTitle": "get2_FCMRent - rental operations for homes, apartments, and tenant issues",
+    "seoDescription": "Software for rental-management companies: tenant issue reporting with photos, descriptions, and urgency, tied to a specific property and routed to distributed maintenance specialists and contractors.",
+    "listingTeaser": "Rental operations software: tenant issues with urgency and photos, attached to a specific property and routed to the right specialist.",
+    "heroTitle": "get2_FCMRent - rental operations from tenant report to completed work",
+    "heroLead": "Rental operators do not need another inbox full of repair requests. They need one place where a report is tied to a specific apartment, house, or unit, enriched with description, photos, and urgency, and then passed to the right maintenance worker or specialist. get2_FCMRent structures that full workflow and supports either an owned contractor network or a market-style operating model for the rental sector.",
+    "personas": [
+      "Property manager or rental coordinator - owns response time, service quality, and hand-off to the right contractor; KPIs: time to accept, completion lead time, and return rate.",
+      "Contractor-network coordinator - matches maintenance workers and specialists by trade, area, and availability; KPIs: assignment quality, acceptance speed, and contractor utilisation.",
+      "Tenant or local property contact reporting the issue - submits the problem with description, photos, and urgency; KPIs: report accuracy and speed of hand-off into execution."
+    ],
+    "modules": [
+      {
+        "title": "Tenant issue report with description, photos, and urgency",
+        "body": "The tenant or property contact reports the issue together with photos, description, and urgency. From the start, the team knows whether it is a minor defect, a fast-response case, or an incident that affects safety or the usability of the property."
+      },
+      {
+        "title": "Attach every issue to a specific property",
+        "body": "Each case is immediately tied to an apartment, house, unit, or common area from the managed property list. The team does not waste time figuring out which address the problem belongs to, and the issue history grows against the right property."
+      },
+      {
+        "title": "Classification and routing by trade",
+        "body": "Each issue gets a work category, urgency level, and required contractor type. Electricians receive electrical jobs, plumbers receive water-system cases, and general maintenance workers take on simple repairs without manual relaying between people."
+      },
+      {
+        "title": "Distributed network of maintenance workers and contractors",
+        "body": "The product supports an owned contractor base, partner firms, or a wider network of specialists working across different areas. Coordinators see who covers a given trade and region, who accepted the task, and which cases still wait for action."
+      },
+      {
+        "title": "A market-style model for rental services",
+        "body": "Tasks can be routed across a distributed contractor market rather than one fixed team. That makes it easier to find available specialists faster, compare response quality, and run a scalable operating model for a larger rental portfolio."
+      },
+      {
+        "title": "Execution records and property history",
+        "body": "Every intervention leaves a description, photos, comments, and completion status. Property managers see the full history of issues, repairs, and cost-driving events for each address, which strengthens tenant service and operational decisions."
+      },
+      {
+        "title": "Data for settlement, reporting, and service control",
+        "body": "Response time, completed work, and closed cases form a structured basis for contractor settlement, owner reporting, and service-quality control. The data can feed finance and ERP environments without rewriting the history from email threads and chats."
+      }
+    ],
+    "integrationsText": "get2_FCMRent brings tenant issues, property history, and the work of a distributed contractor network into one operating model. Rental operators settle services and assess quality on real execution data instead of fragmented calls and messages.",
+    "faqs": [
+      {
+        "question": "Can an issue be tied to a specific apartment or house?",
+        "answer": "Yes. Every case is linked from the start to a specific property from the managed address list, so issue and repair history stays in the right place."
+      },
+      {
+        "question": "Can the tenant add photos and mark urgency?",
+        "answer": "Yes. A report can include description, photos, and urgency, which makes response handling and assignment much clearer from the start."
+      },
+      {
+        "question": "Does it support a distributed network of specialists?",
+        "answer": "Yes. Tasks can be routed to maintenance workers and contractors by trade, area, and availability while the coordinator keeps full visibility."
+      },
+      {
+        "question": "Can it work like a specialised rental-service marketplace?",
+        "answer": "Yes. The model can run on a fixed contractor base or on a broader specialist network that receives jobs by trade and operating area."
+      },
+      {
+        "question": "Can the data support settlement and owner reporting?",
+        "answer": "Yes. Issue history, response time, and completed work create a clear basis for service settlement, operational reporting, and further ERP integration."
+      }
+    ],
+    "heroIllustration": "fcmrent"
+  }
+}

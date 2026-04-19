@@ -1,0 +1,64 @@
+---
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/privacy-policy/';
+const title = 'Privacy policy - get2software.com';
+const description = 'How get2software.com processes personal data under GDPR.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.privacy.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.privacy.pl}
+>
+  <div class="g2-container max-w-3xl py-14 md:py-20">
+    <h1 class="g2-heading-xl">Privacy policy</h1>
+    <div class="g2-prose mt-8 space-y-4">
+      <p>
+        This policy explains how personal data is processed for visitors of get2software.com. The data controller is the
+        entity operating get2software.com, as identified in the controller’s registration and contact details. For
+        privacy-related matters, contact{' '}
+        <a href="mailto:kontakt@get2software.com" class="text-g2-accent hover:underline">kontakt@get2software.com</a>.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Purposes and legal bases</h2>
+      <p>
+        Contact form data is processed to respond to your inquiry, continue communication related to rollout or commercial
+        discussion, and protect the service against abuse. The legal basis is the controller’s legitimate interest and,
+        where required, consent expressed in the form.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Scope of data</h2>
+      <p>
+        We process the data submitted in the contact form, including company name, email address, phone number, subject,
+        and message content. We may also process basic technical data required for security and operation of the site,
+        such as system logs and essential cookies.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Retention</h2>
+      <p>
+        Data is retained for as long as needed to handle the inquiry, prepare an offer, continue relevant correspondence,
+        and establish, defend, or pursue claims where necessary. After that period, data is deleted or anonymised unless
+        further retention is required by law.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Data recipients</h2>
+      <p>
+        Data may be entrusted to service providers supporting website operation and communication, including hosting,
+        contact-form delivery, email, and anti-spam tools. Data is shared only to the extent necessary for those
+        services.
+      </p>
+      <h2 class="font-display text-xl font-semibold text-g2-text">Your rights</h2>
+      <p>
+        You may request access, rectification, erasure, restriction, objection, and data portability where applicable.
+        You may lodge a complaint with your local supervisory authority.
+      </p>
+      <p>
+        Polish version:{' '}
+        <a href="/pl/polityka-prywatnosci/" class="text-g2-accent hover:underline">Polityka prywatności</a>.
+      </p>
+    </div>
+  </div>
+</MarketingLayout>

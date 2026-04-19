@@ -1,0 +1,135 @@
+{
+  "slug": "get2-fcm",
+  "pl": {
+    "seoTitle": "get2_FCM - facility management dla obiektów i ekip technicznych",
+    "seoDescription": "System facility management dla hal sportowych, sklepów wielkopowierzchniowych i innych obiektów: zgłoszenia usterek na mapie obiektu, klasyfikacja zgłoszeń, priorytety i koordynacja ekip naprawczych.",
+    "listingTeaser": "Facility management dla obiektów: zgłoszenia usterek na planie budynku, klasyfikacja, priorytety i sprawne przekazywanie prac do zespołów technicznych.",
+    "heroTitle": "get2_FCM - facility management dla obiektów, nie dla parku maszynowego",
+    "heroLead": "W zarządzaniu obiektami problem nie zaczyna się od maszyny, tylko od miejsca, zgłoszenia i czasu reakcji. get2_FCM porządkuje utrzymanie hal sportowych, sklepów wielkopowierzchniowych i podobnych obiektów: usterka trafia na mapę budynku, dostaje klasę, priorytet i właściwy zespół, a kierownictwo widzi pełną historię działań w jednej kolejce pracy.",
+    "personas": [
+      "Kierownik obiektu lub facility manager - odpowiada za ciągłość działania obiektu, priorytety i jakość obsługi zgłoszeń; KPI: czas reakcji, liczba otwartych usterek i terminowość usunięcia problemów.",
+      "Koordynator techniczny lub brygadzista - rozdziela zgłoszenia do ekip, pilnuje klasyfikacji i dostępności zasobów; KPI: skuteczność przydziału, liczba zgłoszeń wracających i obciążenie zespołów.",
+      "Pracownik obiektu lub najemca zgłaszający usterkę - przekazuje problem z dokładnym wskazaniem miejsca i kontekstu; KPI: poprawność zgłoszenia i szybkie przekazanie sprawy do realizacji."
+    ],
+    "modules": [
+      {
+        "title": "Mapa obiektu i precyzyjne wskazanie miejsca",
+        "body": "Zgłoszenie jest osadzane bezpośrednio na planie obiektu, kondygnacji lub strefy. Dzięki temu zespół techniczny nie traci czasu na ustalanie, gdzie dokładnie znajduje się problem, a historia usterek buduje się w odniesieniu do realnych miejsc, nie ogólnych opisów."
+      },
+      {
+        "title": "Klasyfikacja usterek i priorytety",
+        "body": "Każda sprawa otrzymuje kategorię, priorytet i typ pracy, co od razu porządkuje kolejkę. Obiekt może rozróżniać awarie krytyczne, usterki eksploatacyjne, sprawy porządkowe i zgłoszenia planowe bez mieszania ich w jednym worku."
+      },
+      {
+        "title": "Przekazywanie prac do ekip naprawczych",
+        "body": "Zgłoszenia trafiają do właściwego zespołu technicznego lub zewnętrznego wykonawcy wraz z lokalizacją, opisem i wymaganym terminem reakcji. Facility manager widzi, kto przejął sprawę, co jest w toku i które zadania wymagają eskalacji."
+      },
+      {
+        "title": "Dokumentacja wykonania i historia miejsca",
+        "body": "Każda interwencja zostawia po sobie opis, zdjęcia, komentarze i status zamknięcia. Dzięki temu obiekt buduje wiedzę o powtarzających się problemach w konkretnych strefach, a kolejne zgłoszenie startuje z pełnym kontekstem."
+      },
+      {
+        "title": "Praca na dużych obiektach i wielu strefach",
+        "body": "System wspiera obiekty, w których pracuje wiele zespołów i jednocześnie pojawia się dużo zgłoszeń. Hala sportowa, galeria handlowa czy sklep wielkopowierzchniowy mogą prowadzić jedną kolejkę pracy z podziałem na poziomy, sektory i zakres odpowiedzialności."
+      },
+      {
+        "title": "Raporty dla operacji i zarządzania obiektem",
+        "body": "Kierownictwo widzi czas reakcji, typy najczęstszych usterek, obciążenie ekip i historię problemów według lokalizacji. To daje podstawę do decyzji operacyjnych, planowania budżetu i rozmów z najemcami lub wykonawcami."
+      },
+      {
+        "title": "Dane gotowe do współpracy z ERP i rozliczeniem usług",
+        "body": "Zgłoszenia, statusy i wykonane prace można przekazać do systemów finansowych, ERP lub rozliczeń usług utrzymaniowych. Obiekt pracuje na jednej historii zdarzeń, a rozliczenie nie wymaga osobnego przepisywania danych z maili i notatek."
+      }
+    ],
+    "integrationsText": "get2_FCM zamyka zgłoszenia obiektowe, pracę ekip i historię usterek w danych gotowych do raportowania, rozliczeń usług i integracji z ERP. Facility management działa na jednej kolejce pracy, a nie na rozproszonych zgłoszeniach z telefonu, maila i papieru.",
+    "faqs": [
+      {
+        "question": "Czym get2_FCM różni się od systemu utrzymania ruchu?",
+        "answer": "get2_FCM porządkuje utrzymanie obiektów, w których kluczowe są miejsca, strefy i infrastruktura budynku, a nie park maszynowy i historia urządzeń."
+      },
+      {
+        "question": "Czy zgłoszenie można oznaczyć bezpośrednio na mapie obiektu?",
+        "answer": "Tak. To podstawowy element procesu, dzięki któremu ekipa techniczna od razu wie, gdzie znajduje się problem i jak do niego dotrzeć."
+      },
+      {
+        "question": "Czy system nadaje się do wielu ekip i wykonawców zewnętrznych?",
+        "answer": "Tak. Zgłoszenia można rozdzielać według stref, typów prac i odpowiedzialności, przy zachowaniu pełnej widoczności po stronie zarządzającego obiektem."
+      },
+      {
+        "question": "Jak wygląda historia usterek w obiekcie?",
+        "answer": "Każde miejsce może gromadzić własną historię zgłoszeń, napraw i komentarzy, więc łatwo wykryć obszary problematyczne i planować działania zapobiegawcze."
+      },
+      {
+        "question": "Czy dane można wykorzystać do rozliczeń i raportowania?",
+        "answer": "Tak. Statusy, czas reakcji i wykonane prace tworzą uporządkowaną podstawę do raportów operacyjnych, rozliczeń usług i dalszej integracji z ERP."
+      }
+    ],
+    "heroIllustration": "fcm"
+  },
+  "en": {
+    "seoTitle": "get2_FCM - facility management for buildings and technical teams",
+    "seoDescription": "Facility management software for sports halls, big-box retail, and similar properties: defect reporting on building maps, issue classification, priorities, and structured hand-off to repair teams.",
+    "listingTeaser": "Facility management for properties: issue reporting on building plans, classification, priorities, and efficient hand-off to technical teams.",
+    "heroTitle": "get2_FCM - facility management for properties, not machine fleets",
+    "heroLead": "In facility management, the problem starts with a place, a report, and response time, not with a machine record. get2_FCM structures upkeep for sports halls, big-box retail, and similar properties: an issue is pinned to the building map, classified, prioritised, and routed to the right team, while management sees the full work history in one queue.",
+    "personas": [
+      "Property manager or facility manager - owns operational continuity, priorities, and service quality across the building; KPIs: response time, open issues, and completion lead time.",
+      "Technical coordinator or maintenance supervisor - assigns issues to teams, enforces classification, and manages resource availability; KPIs: assignment quality, return rate, and team workload.",
+      "Property staff member or tenant reporting the issue - submits the problem with an exact location and context; KPIs: report accuracy and fast hand-off into execution."
+    ],
+    "modules": [
+      {
+        "title": "Building map and precise location marking",
+        "body": "An issue is pinned directly to the building plan, floor, or zone. Technical teams no longer waste time figuring out where the problem sits, and issue history grows against real places instead of vague descriptions."
+      },
+      {
+        "title": "Issue classification and priorities",
+        "body": "Every case receives a category, priority, and work type, which keeps the queue under control from the start. The property can separate critical incidents, operational defects, housekeeping issues, and planned work without mixing them together."
+      },
+      {
+        "title": "Routing work to repair teams",
+        "body": "Issues are passed to the right internal team or external contractor together with location, description, and required response time. Facility leadership sees who picked up the work, what is in progress, and which tasks require escalation."
+      },
+      {
+        "title": "Execution records and location history",
+        "body": "Every intervention leaves a description, photos, comments, and closure status. The building builds knowledge around recurring issues in specific zones, and the next report starts with full context."
+      },
+      {
+        "title": "Large properties and multiple zones",
+        "body": "The product supports sites where many teams operate and high report volumes appear at the same time. Sports halls, retail complexes, and big-box stores can run one structured queue split by floors, sectors, and responsibility areas."
+      },
+      {
+        "title": "Reporting for operations and property leadership",
+        "body": "Management sees response time, the most frequent issue types, team load, and history by location. That supports operational decisions, budget planning, and conversations with tenants or service providers."
+      },
+      {
+        "title": "Data ready for ERP and service settlement",
+        "body": "Issues, statuses, and completed work can be passed into ERP, finance, or service-settlement environments. The property works from one event history, while settlement no longer depends on rewriting information from calls, email, and paper notes."
+      }
+    ],
+    "integrationsText": "get2_FCM closes property issues, team execution, and location history in data ready for reporting, service settlement, and ERP integration. Facility management runs on one work queue instead of scattered requests from calls, email, and paper.",
+    "faqs": [
+      {
+        "question": "How is get2_FCM different from a maintenance-management system?",
+        "answer": "get2_FCM structures property upkeep where places, zones, and building infrastructure matter more than machine records and equipment history."
+      },
+      {
+        "question": "Can an issue be marked directly on the building map?",
+        "answer": "Yes. That is a core part of the process, so the technical team immediately knows where the problem is and how to reach it."
+      },
+      {
+        "question": "Does it support multiple teams and external contractors?",
+        "answer": "Yes. Issues can be routed by zone, work type, and responsibility, while property leadership keeps full visibility across the whole queue."
+      },
+      {
+        "question": "What does issue history look like across the property?",
+        "answer": "Each place can build its own history of reports, repairs, and comments, which makes it easier to spot problematic areas and plan preventive work."
+      },
+      {
+        "question": "Can the data support settlement and reporting?",
+        "answer": "Yes. Statuses, response time, and completed work form a structured basis for operational reports, service settlement, and further ERP integration."
+      }
+    ],
+    "heroIllustration": "fcm"
+  }
+}
