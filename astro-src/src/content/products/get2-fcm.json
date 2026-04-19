@@ -64,7 +64,11 @@
         "answer": "Tak. Statusy, czas reakcji i wykonane prace tworzą uporządkowaną podstawę do raportów operacyjnych, rozliczeń usług i dalszej integracji z ERP."
       }
     ],
-    "heroIllustration": "fcm"
+    "heroIllustration": "fcm",
+    "focusDiagram": {
+      "title": "Klasyfikacja zgłoszenia → zlecenie → wykonawca",
+      "caption": "Zgłoszenie jest klasyfikowane w kontekście obiektu i przestrzeni, przechodzi w zlecenie z jasnym zakresem, a zespół lub konserwator realizuje pracę - jeden spójny przepływ FM zamiast równoległych kanałów."
+    }
   },
   "en": {
     "seoTitle": "get2_FCM - facility management for buildings and technical teams",
@@ -130,6 +134,10 @@
         "answer": "Yes. Statuses, response time, and completed work form a structured basis for operational reports, service settlement, and further ERP integration."
       }
     ],
-    "heroIllustration": "fcm"
+    "heroIllustration": "fcm",
+    "focusDiagram": {
+      "title": "Ticket classification → work order → assignee",
+      "caption": "Requests are classified in building and space context, become a scoped work order, and are executed by the team or contractor-one FM flow instead of parallel channels."
+    }
   }
 }

@@ -15,6 +15,8 @@ export const routeMap: Record<
   about: { pl: '/pl/o-nas/', en: '/en/about/' },
   products: { pl: '/pl/produkty/', en: '/en/products/' },
   integrations: { pl: '/pl/integracje/', en: '/en/integrations/' },
+  /** Wsparcie utrzymaniowe systemów po wdrożeniu (PL/EN) - hreflang i przełącznik języka. */
+  support: { pl: '/pl/wsparcie-systemow/', en: '/en/system-support/' },
   news: { pl: '/pl/aktualnosci/', en: '/en/news/' },
   careers: { pl: '/pl/kariera/', en: '/en/careers/' },
   contact: { pl: '/pl/kontakt/', en: '/en/contact/' },

@@ -64,7 +64,11 @@
         "answer": "Tak. Lista usterek, czasy reakcji i skuteczność wykonawców pozostają w uporządkowanej strukturze, którą można wykorzystać przy kolejnych realizacjach."
       }
     ],
-    "heroIllustration": "commissioning"
+    "heroIllustration": "commissioning",
+    "focusDiagram": {
+      "title": "Od zgłoszenia w strefie do raportu PDF pod odbiór",
+      "caption": "Zgłoszenie ze zdjęciem i kontekstem projektu, przydział wykonawcy i komunikacja w jednym wątku, rozróżnienie wykonania i akceptacji jakości, na końcu raport do archiwum i przekazania inwestorowi."
+    }
   },
   "en": {
     "seoTitle": "get2_Commissioning - technical handover, defects, and as-built documentation",
@@ -130,6 +134,10 @@
         "answer": "Yes. Defect patterns, response times, and contractor performance remain in a clean structure that supports future projects."
       }
     ],
-    "heroIllustration": "commissioning"
+    "heroIllustration": "commissioning",
+    "focusDiagram": {
+      "title": "From on-site issue to handover PDF report",
+      "caption": "Photo-backed issue in project context, contractor assignment and threaded discussion, quality workflow separating execution from acceptance, ending in a report for archive and investor handover."
+    }
   }
 }

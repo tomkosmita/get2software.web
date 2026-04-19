@@ -64,7 +64,11 @@
         "answer": "Tak. System wspiera podział pracy według ról, zespołów i dostępu do danych, dzięki czemu każdy widzi dokładnie ten obszar procesu, za który odpowiada."
       }
     ],
-    "heroIllustration": "fsm"
+    "heroIllustration": "fsm",
+    "focusDiagram": {
+      "title": "Jedno zlecenie: realizacja, koszty, podpis, zamknięcie pod ERP",
+      "caption": "Checklisty i dokumentacja z terenu, czas oraz koszty i materiały przypięte do zlecenia, raport wykonania i podpis klienta - jeden ślad audytowy pod rozliczenie miesiąca i przekaz danych do ERP."
+    }
   },
   "en": {
     "seoTitle": "get2_FSM - field service management, jobs, costing, and settlement",
@@ -130,6 +134,10 @@
         "answer": "Yes. The system supports role-based work and data visibility, so each group sees the part of the process it owns."
       }
     ],
-    "heroIllustration": "fsm"
+    "heroIllustration": "fsm",
+    "focusDiagram": {
+      "title": "One job: execution, costs, sign-off, ERP-ready close-out",
+      "caption": "Field checklists and evidence, time plus costs and materials on the job, execution report and customer sign-off-one audit trail for month-end settlement and hand-off to ERP."
+    }
   }
 }

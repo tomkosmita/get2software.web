@@ -60,7 +60,7 @@ const formReady = Boolean(workerUrl && turnstileSiteKey);
 <div class="g2-glass p-6 md:p-8">
   <h2 class="font-display text-xl font-semibold text-g2-text">{copy.title}</h2>
   {!formReady && (
-    <div class="mt-3 space-y-3 rounded-lg border border-white/15 bg-white/5 p-4 text-sm text-g2-muted">
+    <div class="mt-3 space-y-3 rounded-lg border border-g2-glass-border bg-g2-muted/5 p-4 text-sm text-g2-muted">
       <p>{copy.configErr}</p>
       <p class="text-xs text-g2-muted/90">{copy.mailtoHint}</p>
       <a
@@ -76,7 +76,7 @@ const formReady = Boolean(workerUrl && turnstileSiteKey);
       type="text"
       name="company"
       required
-      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      class="w-full rounded-xl border border-g2-glass-border bg-g2-surface px-4 py-3 text-sm text-g2-text shadow-sm placeholder:text-g2-muted/70 focus:border-g2-accent focus:outline-none"
       placeholder={copy.company}
       autocomplete="organization"
     />
@@ -84,14 +84,14 @@ const formReady = Boolean(workerUrl && turnstileSiteKey);
       type="email"
       name="email"
       required
-      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      class="w-full rounded-xl border border-g2-glass-border bg-g2-surface px-4 py-3 text-sm text-g2-text shadow-sm placeholder:text-g2-muted/70 focus:border-g2-accent focus:outline-none"
       placeholder={copy.email}
       autocomplete="email"
     />
     <input
       type="tel"
       name="phone"
-      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      class="w-full rounded-xl border border-g2-glass-border bg-g2-surface px-4 py-3 text-sm text-g2-text shadow-sm placeholder:text-g2-muted/70 focus:border-g2-accent focus:outline-none"
       placeholder={copy.phone}
       autocomplete="tel"
     />
@@ -99,14 +99,14 @@ const formReady = Boolean(workerUrl && turnstileSiteKey);
       type="text"
       name="subject"
       required
-      class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      class="w-full rounded-xl border border-g2-glass-border bg-g2-surface px-4 py-3 text-sm text-g2-text shadow-sm placeholder:text-g2-muted/70 focus:border-g2-accent focus:outline-none"
       placeholder={copy.subject}
     />
     <textarea
       name="message"
       required
       rows={5}
-      class="min-h-32 w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-g2-text placeholder:text-g2-muted/70 backdrop-blur-sm focus:border-g2-accent focus:outline-none"
+      class="min-h-32 w-full rounded-xl border border-g2-glass-border bg-g2-surface px-4 py-3 text-sm text-g2-text shadow-sm placeholder:text-g2-muted/70 focus:border-g2-accent focus:outline-none"
       placeholder={copy.message}
     />
     <!-- Honeypot: ukryte pole antybot - wypełnienie przez spamery blokuje wysyłkę po stronie workera. -->
@@ -115,14 +115,14 @@ const formReady = Boolean(workerUrl && turnstileSiteKey);
       <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" />
     </label>
     <label class="flex items-start gap-3 text-sm text-g2-muted">
-      <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded border-white/20 bg-white/5" />
+      <input type="checkbox" name="consent" required class="mt-1 h-4 w-4 rounded border-g2-glass-border bg-g2-surface text-g2-accent" />
       <span>{copy.consent}</span>
     </label>
     {formReady && (
       <div
         class="cf-turnstile"
         data-sitekey={turnstileSiteKey}
-        data-theme="dark"
+        data-theme="light"
       />
     )}
     <button type="submit" class="g2-btn-primary w-full sm:w-auto" disabled={!formReady}>

@@ -31,11 +31,13 @@ const home = routeMap.home[locale];
 const about = routeMap.about[locale];
 const products = routeMap.products[locale];
 const integrations = routeMap.integrations[locale];
+/** Link do podstrony wsparcia - ta sama sekcja „Firma” co O nas / Kontakt dla spójnej IA. */
+const support = routeMap.support[locale];
 const contact = routeMap.contact[locale];
 const privacy = routeMap.privacy[locale];
 ---
 
-<footer class="mt-auto border-t border-white/10 bg-g2-bg/90 py-12" data-component="site-footer">
+<footer class="mt-auto border-t border-g2-border bg-g2-bg/95 py-12" data-component="site-footer">
   <!-- Stopka: siatka linków + przełącznik języka; cel - szybka nawigacja i zaufanie B2B. -->
   <div class="g2-container grid gap-10 md:grid-cols-3">
     <div>
@@ -50,6 +52,9 @@ const privacy = routeMap.privacy[locale];
         <li><a href={about} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'O nas' : 'About'}</a></li>
         <li><a href={contact} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Kontakt' : 'Contact'}</a></li>
         <li><a href={integrations} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Integracje' : 'Integrations'}</a></li>
+        <li>
+          <a href={support} class="text-g2-muted hover:text-g2-accent">{locale === 'pl' ? 'Wsparcie' : 'Support'}</a>
+        </li>
       </ul>
     </div>
     <div>
@@ -79,13 +84,13 @@ const privacy = routeMap.privacy[locale];
       </ul>
     </div>
   </div>
-  <div class="g2-container mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-sm text-g2-muted md:flex-row md:items-center">
+  <div class="g2-container mt-10 flex flex-col items-start justify-between gap-4 border-t border-g2-border pt-8 text-sm text-g2-muted md:flex-row md:items-center">
     <p>© {new Date().getFullYear()} get2software.com - {t.rights}</p>
     <div class="flex flex-wrap gap-4">
       <a href={privacy} class="hover:text-g2-accent">{t.privacy}</a>
       <a
         href={alternateHref}
-        class="rounded-lg border border-white/15 px-3 py-1 text-xs hover:bg-white/5"
+        class="rounded-lg border border-g2-glass-border px-3 py-1 text-xs hover:bg-g2-hover"
         hreflang={otherLocale}
         lang={otherLocale}
       >

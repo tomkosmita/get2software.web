@@ -1,0 +1,116 @@
+---
+/**
+ * Podstrona usług wsparcia dla wdrożonych systemów operacyjnych (PL).
+ * Cel biznesowy: pokazać ciągłość utrzymania po starcie, indywidualne SLA oraz elastyczność modelu hostingu (SaaS → chmura / DC).
+ * Layout: MarketingLayout + prosty blok prose jak na integracjach/o nas - spójność wizualna serwisu B2B.
+ */
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/pl/wsparcie-systemow/';
+const title = 'Wsparcie systemów - get2software.com';
+const description =
+  'Utrzymanie i rozwój systemów operacyjnych po wdrożeniu: incydenty, zmiany, integracje z ERP. SLA dopasowujemy do potrzeb klienta. SaaS z możliwością przeniesienia do chmury publicznej, prywatnej lub data center.';
+---
+
+<MarketingLayout
+  locale="pl"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(pathname)}
+  hreflangEn={canonicalUrl(routeMap.support.en)}
+  alternateHref={routeMap.support.en}
+  active="support"
+>
+  <!--
+    g2-container: max-width + padding poziomy zgodne z resztą serwisu.
+    py-14 md:py-20: większy odstęp na desktopie pod nagłówkiem H1 (hierarchia wizualna jak na innych podstronach).
+  -->
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Wsparcie dla naszych systemów</h1>
+
+    <!--
+      g2-prose: typografia treści (interlinia, listy, nagłówki sekcji) bez ręcznego stylowania każdego akapitu.
+      max-w-3xl: wąski kolumnowy blok - łatwiejsze czytanie długiego opisu usług B2B.
+      space-y-8: wyraźne rozdzielenie sekcji tematycznych (percepcja „kart” bez osobnych kart UI).
+    -->
+    <div class="g2-prose mt-8 max-w-3xl space-y-8">
+      <p>
+        Po wdrożeniu system operacyjny musi działać niezawodnie: użytkownicy w terenie i w biurze liczą na spójne dane,
+        a finanse i logistyka na to, że informacje trafiają do ERP w uzgodnionym modelu. Wsparcie get2software.com
+        obejmuje utrzymanie działania aplikacji, obsługę zmian procesowych oraz rozwój funkcji tam, gdzie proces się
+        rozszerza.
+      </p>
+
+      <section aria-labelledby="support-scope-heading">
+        <h2 id="support-scope-heading" class="!mt-0 text-balance">Zakres wsparcia</h2>
+        <p>
+          Działamy jak zespół produktowo-wdrożeniowy po starcie produkcyjnym, a nie tylko „helpdesk od licencji”.
+          Typowe obszary współpracy:
+        </p>
+        <ul>
+          <li>
+            <strong>Incydenty i stabilność</strong> — diagnoza, naprawa, komunikacja statusu; priorytety zgodne z
+            uzgodnionym SLA.
+          </li>
+          <li>
+            <strong>Zmiany konfiguracyjne i procesowe</strong> — dostosowanie systemu do nowych zasad pracy, roli,
+            lokalizacji lub etapów procesu.
+          </li>
+          <li>
+            <strong>Rozwój funkcjonalny</strong> — kolejne moduły, raporty, usprawnienia UX tam, gdzie operacja uczy się
+            procesu w praktyce.
+          </li>
+          <li>
+            <strong>Integracje z ERP i systemami sąsiednimi</strong> — utrzymanie eksportów, API i konektorów; zmiany
+            po stronie kontrahenta lub wersji ERP.
+          </li>
+          <li>
+            <strong>Jakość i ciągłość danych</strong> — dbanie o spójność rozliczeń, audytowalność i przewidywalność
+            obiegu informacji operacyjnych.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="support-sla-heading">
+        <h2 id="support-sla-heading" class="text-balance">SLA dopasowane do potrzeb</h2>
+        <p>
+          Nie narzucamy jednego, sztywnego pakietu czasu reakcji dla wszystkich klientów. <strong
+            >SLA dopasowujemy indywidualnie</strong
+          >
+          do krytyczności procesu, skali organizacji, okien serwisowych i tego, czy system pracuje w jednej lokalizacji,
+          czy w sieci oddziałów. Wspólnie ustalamy priorytety incydentów, kanał zgłoszeń oraz oczekiwany czas reakcji i
+          eskalacji — tak, żeby model był realny dla operacji i zrozumiały dla IT po stronie klienta.
+        </p>
+      </section>
+
+      <section aria-labelledby="support-hosting-heading">
+        <h2 id="support-hosting-heading" class="text-balance">SaaS i elastyczność wdrożenia</h2>
+        <p>
+          Aplikacje udostępniamy w modelu <strong>SaaS</strong> jako domyślny, szybki sposób startu. Jednocześnie, dla
+          każdej aplikacji możemy zaplanować i wykonać <strong>przeniesienie do chmury publicznej</strong>, do
+          <strong>prywatnej chmury klienta</strong> albo do <strong>tradycyjnego data center</strong> — w zależności od
+          polityki bezpieczeństwa, umów z dostawcami infrastruktury i wymagań integracyjnych.
+        </p>
+        <p>
+          Taka elastyczność wynika z naszego stacku technologicznego: nie zamykamy klienta w jednym wariancie hostingu;
+          architektura pozwala utrzymać ten sam produkt i proces wsparcia przy zmianie środowiska uruchomieniowego, bez
+          „przepisywania systemu od zera”.
+        </p>
+      </section>
+
+      <p>
+        Jeśli chcesz omówić zakres wsparcia, SLA oraz docelowe środowisko dla swoich systemów — napisz. Przygotujemy
+        propozycję dopasowaną do Twojego procesu i infrastruktury.
+      </p>
+
+      <!--
+        CTA poza flow „prose linków”: przycisk primary jak na karierze/aktualnościach - wyraźna akcja kończąca stronę.
+        routeMap.contact: jedna prawda o URL kontaktu (PL) dla SEO i spójności nawigacji.
+      -->
+      <a href={routeMap.contact.pl} class="g2-btn-primary mt-8 inline-flex">Porozmawiajmy o wsparciu</a>
+    </div>
+  </div>
+</MarketingLayout>

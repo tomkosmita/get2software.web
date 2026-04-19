@@ -64,7 +64,11 @@
         "answer": "Tak. Zużycie części może być przypisane do konkretnej interwencji i dalej przekazane do rozliczeń oraz analiz kosztowych."
       }
     ],
-    "heroIllustration": "maintenance"
+    "heroIllustration": "maintenance",
+    "focusDiagram": {
+      "title": "Od identyfikacji obiektu do zamknięcia zlecenia i historii",
+      "caption": "Zlecenie powiązane z aktywem (np. QR), rejestracja części i czasu pracy na zleceniu, zamknięcie z pełnym śladem - pod MTTR, kontroling i dalsze rozliczenia bez rozproszonych notatek."
+    }
   },
   "en": {
     "seoTitle": "get2_Maintenance - CMMS, QR reporting, and asset history",
@@ -130,6 +134,10 @@
         "answer": "Yes. Spare-part consumption can be linked to a specific intervention and then passed into settlement and cost analysis."
       }
     ],
-    "heroIllustration": "maintenance"
+    "heroIllustration": "maintenance",
+    "focusDiagram": {
+      "title": "From asset identification to closed work order and history",
+      "caption": "Work order tied to the asset (e.g. QR), parts and labour captured on the order, closure with a full trail-for MTTR, controlling, and downstream settlement without scattered notes."
+    }
   }
 }

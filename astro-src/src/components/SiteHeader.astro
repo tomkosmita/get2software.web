@@ -5,7 +5,7 @@ import { routeMap } from '../lib/i18n/routes';
 type Props = {
   locale: Locale;
   /** Aktywny klucz trasy dla podświetlenia (opcjonalnie). */
-  active?: 'home' | 'about' | 'products' | 'integrations' | 'news' | 'careers' | 'contact';
+  active?: 'home' | 'about' | 'products' | 'integrations' | 'support' | 'news' | 'careers' | 'contact';
   /** Pełny URL (ścieżka) do tej samej strony w drugim języku - hreflang UX w menu. */
   alternateHref: string;
 };
@@ -19,6 +19,8 @@ const t =
         about: 'O nas',
         products: 'Produkty',
         integrations: 'Integracje',
+        /** Pozycja menu: utrzymanie systemów po wdrożeniu (spójna etykieta z podstroną /pl/wsparcie-systemow/). */
+        support: 'Wsparcie',
         news: 'Aktualności',
         careers: 'Kariera',
         contact: 'Kontakt',
@@ -39,6 +41,7 @@ const t =
         about: 'About',
         products: 'Products',
         integrations: 'Integrations',
+        support: 'Support',
         news: 'News',
         careers: 'Careers',
         contact: 'Contact',
@@ -57,6 +60,7 @@ const home = routeMap.home[locale];
 const about = routeMap.about[locale];
 const products = routeMap.products[locale];
 const integrations = routeMap.integrations[locale];
+const support = routeMap.support[locale];
 const news = routeMap.news[locale];
 const careers = routeMap.careers[locale];
 const contact = routeMap.contact[locale];
@@ -72,17 +76,17 @@ const otherLocale: Locale = locale === 'pl' ? 'en' : 'pl';
 
 const navAria = locale === 'pl' ? 'Główne' : 'Main';
 
-/** Klasy powtarzalnego linku nawigacji mobilnej - spójne z desktopem (bez „karty w karcie”). */
-const mobileNavLink = 'flex w-full rounded-lg px-3 py-3 text-sm font-medium transition hover:bg-white/5';
+/** Klasy powtarzalnego linku nawigacji mobilnej - hover: „plama” g2-hover (jasny motyw, nie white/5 z dark UI). */
+const mobileNavLink = 'flex w-full rounded-lg px-3 py-3 text-sm font-medium transition hover:bg-g2-hover';
 const mobileProductLink =
-  'flex w-full rounded-lg px-3 py-2.5 text-sm text-g2-muted transition hover:bg-white/5 hover:text-g2-text';
+  'flex w-full rounded-lg px-3 py-2.5 text-sm text-g2-muted transition hover:bg-g2-hover hover:text-g2-text';
 ---
 
 <!--
   sticky: przyklejony pasek + jednocześnie kontekst pozycjonowania dla panelu absolute (bez osobnego relative).
 -->
 <header
-  class="sticky top-0 z-50 border-b border-white/10 bg-g2-bg/80 backdrop-blur-lg"
+  class="sticky top-0 z-50 border-b border-g2-border bg-g2-bg/80 backdrop-blur-lg"
   data-component="site-header"
 >
   <!--
@@ -102,7 +106,7 @@ const mobileProductLink =
       <a
         href={home}
         class:list={[
-          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-white/5',
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
           active === 'home' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
         ]}
       >
@@ -111,7 +115,7 @@ const mobileProductLink =
       <a
         href={about}
         class:list={[
-          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-white/5',
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
           active === 'about' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
         ]}
       >
@@ -122,7 +126,7 @@ const mobileProductLink =
         <button
           type="button"
           class:list={[
-            'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-white/5',
+            'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
             active === 'products' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
           ]}
           aria-expanded="false"
@@ -135,28 +139,28 @@ const mobileProductLink =
         <div
           class="invisible absolute left-0 top-full z-50 min-w-[14rem] pt-1 opacity-0 transition group-hover:visible group-hover:opacity-100"
         >
-          <div class="g2-glass flex flex-col gap-0.5 p-2 shadow-xl">
-            <a href={pBhp} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text">
+          <div class="g2-glass flex flex-col gap-0.5 p-2 shadow-g2-dropdown">
+            <a href={pBhp} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productBhp}
             </a>
-            <a href={pFsm} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text">
+            <a href={pFsm} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productFsm}
             </a>
-            <a href={pComm} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text">
+            <a href={pComm} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productComm}
             </a>
-            <a href={pMaint} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text">
+            <a href={pMaint} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productMaint}
             </a>
-            <a href={pFcm} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text">
+            <a href={pFcm} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productFcm}
             </a>
-            <a href={pFcmRent} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text">
+            <a href={pFcmRent} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productFcmRent}
             </a>
             <a
               href={products}
-              class="mt-1 border-t border-white/10 pt-2 text-center text-xs font-medium text-g2-accent hover:underline"
+              class="mt-1 border-t border-g2-border pt-2 text-center text-xs font-medium text-g2-accent hover:underline"
             >
               {locale === 'pl' ? 'Wszystkie produkty →' : 'All products →'}
             </a>
@@ -167,16 +171,25 @@ const mobileProductLink =
       <a
         href={integrations}
         class:list={[
-          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-white/5',
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
           active === 'integrations' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
         ]}
       >
         {t.integrations}
       </a>
       <a
+        href={support}
+        class:list={[
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
+          active === 'support' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
+        ]}
+      >
+        {t.support}
+      </a>
+      <a
         href={news}
         class:list={[
-          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-white/5',
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
           active === 'news' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
         ]}
       >
@@ -185,7 +198,7 @@ const mobileProductLink =
       <a
         href={careers}
         class:list={[
-          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-white/5',
+          'rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-g2-hover',
           active === 'careers' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
         ]}
       >
@@ -194,15 +207,15 @@ const mobileProductLink =
       <a
         href={contact}
         class:list={[
-          'ml-2 rounded-xl bg-g2-accent px-4 py-2 text-sm font-semibold text-g2-bg hover:brightness-110',
-          active === 'contact' ? 'ring-2 ring-white/30' : ''
+          'ml-2 rounded-xl bg-g2-accent px-4 py-2 text-sm font-semibold text-g2-on-accent hover:brightness-105',
+          active === 'contact' ? 'ring-2 ring-g2-accent/35' : ''
         ]}
       >
         {t.contact}
       </a>
       <a
         href={alternateHref}
-        class="ml-2 rounded-lg border border-white/15 px-3 py-2 text-sm text-g2-muted hover:bg-white/5 hover:text-g2-text"
+        class="ml-2 rounded-lg border border-g2-glass-border px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text"
         hreflang={otherLocale}
         lang={otherLocale}
       >
@@ -215,7 +228,7 @@ const mobileProductLink =
       <button
         type="button"
         id="g2-mobile-nav-toggle"
-        class="g2-mobile-nav-toggle flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 text-g2-text transition hover:bg-white/5"
+        class="g2-mobile-nav-toggle flex h-11 w-11 items-center justify-center rounded-lg border border-g2-glass-border text-g2-text transition hover:bg-g2-hover"
         aria-expanded="false"
         aria-controls="g2-mobile-nav-panel"
         aria-label={t.openMenu}
@@ -240,7 +253,7 @@ const mobileProductLink =
   -->
   <div
     id="g2-mobile-nav-panel"
-    class="absolute left-0 right-0 top-full z-40 hidden border-b border-white/10 bg-g2-bg shadow-[0_20px_50px_rgba(0,0,0,0.55)] lg:hidden"
+    class="absolute left-0 right-0 top-full z-40 hidden border-b border-g2-border bg-g2-bg shadow-g2-dropdown lg:hidden"
     role="region"
     aria-label={locale === 'pl' ? 'Menu nawigacji mobilnej' : 'Mobile navigation menu'}
     aria-hidden="true"
@@ -264,12 +277,12 @@ const mobileProductLink =
         </a>
 
         <!-- Akordeon Produkty: ta sama IA co desktop (bez zmian slugów). -->
-        <div class="border-t border-white/10 pt-1">
+        <div class="border-t border-g2-border pt-1">
           <button
             type="button"
             id="g2-mobile-products-btn"
             class:list={[
-              'flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm font-medium transition hover:bg-white/5',
+              'flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm font-medium transition hover:bg-g2-hover',
               active === 'products' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text'
             ]}
             aria-expanded="false"
@@ -280,7 +293,7 @@ const mobileProductLink =
           </button>
           <div
             id="g2-mobile-products-region"
-            class="hidden flex flex-col gap-0.5 border-t border-white/5 pb-2 pt-1"
+            class="hidden flex flex-col gap-0.5 border-t border-g2-border/60 pb-2 pt-1"
             role="region"
             aria-labelledby="g2-mobile-products-btn"
             aria-hidden="true"
@@ -294,7 +307,7 @@ const mobileProductLink =
             <a href={pFcmRent} class={mobileProductLink}>{t.productFcmRent}</a>
             <a
               href={products}
-              class="mt-1 border-t border-white/10 px-3 pt-3 text-center text-xs font-medium text-g2-accent hover:underline"
+              class="mt-1 border-t border-g2-border px-3 pt-3 text-center text-xs font-medium text-g2-accent hover:underline"
             >
               {locale === 'pl' ? 'Wszystkie produkty →' : 'All products →'}
             </a>
@@ -309,6 +322,12 @@ const mobileProductLink =
           ]}
         >
           {t.integrations}
+        </a>
+        <a
+          href={support}
+          class:list={[mobileNavLink, active === 'support' ? 'text-g2-accent' : 'text-g2-muted hover:text-g2-text']}
+        >
+          {t.support}
         </a>
         <a
           href={news}
@@ -326,15 +345,15 @@ const mobileProductLink =
         <a
           href={contact}
           class:list={[
-            'mt-2 w-full rounded-xl bg-g2-accent px-4 py-3 text-center text-sm font-semibold text-g2-bg hover:brightness-110',
-            active === 'contact' ? 'ring-2 ring-white/30' : ''
+            'mt-2 w-full rounded-xl bg-g2-accent px-4 py-3 text-center text-sm font-semibold text-g2-on-accent hover:brightness-105',
+            active === 'contact' ? 'ring-2 ring-g2-accent/35' : ''
           ]}
         >
           {t.contact}
         </a>
         <a
           href={alternateHref}
-          class="mt-2 w-full rounded-lg border border-white/15 px-3 py-3 text-center text-sm text-g2-muted transition hover:bg-white/5 hover:text-g2-text"
+          class="mt-2 w-full rounded-lg border border-g2-glass-border px-3 py-3 text-center text-sm text-g2-muted transition hover:bg-g2-hover hover:text-g2-text"
           hreflang={otherLocale}
           lang={otherLocale}
         >

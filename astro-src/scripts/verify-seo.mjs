@@ -27,6 +27,8 @@ const PATHNAMES = [
   '/en/products/get2-maintenance/',
   '/pl/integracje/',
   '/en/integrations/',
+  '/pl/wsparcie-systemow/',
+  '/en/system-support/',
   '/pl/aktualnosci/',
   '/en/news/',
   '/pl/kariera/',

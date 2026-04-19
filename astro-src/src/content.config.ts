@@ -27,7 +27,12 @@ const productLocaleSchema = z.object({
   modules: z.array(moduleSchema).min(1),
   integrationsText: z.string().min(1),
   faqs: z.array(faqSchema).optional(),
-  heroIllustration: z.enum(['bhp', 'fsm', 'commissioning', 'maintenance', 'fcm', 'fcmrent'])
+  heroIllustration: z.enum(['bhp', 'fsm', 'commissioning', 'maintenance', 'fcm', 'fcmrent']),
+  /** Drugi mikro-diagram na stronie produktu: nagłówek i podpis (PL/EN) - treść biznesowa obok SVG bez tekstu w grafice. */
+  focusDiagram: z.object({
+    title: z.string().min(1),
+    caption: z.string().min(1)
+  })
 });
 
 /**

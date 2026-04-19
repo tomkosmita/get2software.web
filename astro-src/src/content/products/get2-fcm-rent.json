@@ -64,7 +64,11 @@
         "answer": "Tak. Historia zgłoszeń, czas reakcji i wykonane prace tworzą czytelną podstawę do rozliczeń usług, raportów operacyjnych i dalszej integracji z ERP."
       }
     ],
-    "heroIllustration": "fcmrent"
+    "heroIllustration": "fcmrent",
+    "focusDiagram": {
+      "title": "Zgłoszenie przy nieruchomości → zlecenie → rozliczenie",
+      "caption": "Zgłoszenie najemcy lub obiektu wiąże się z budynkiem i odpowiedzialnym, przechodzi w zlecenie dla konserwatora lub podwykonawcy, a efekt i koszty zostają pod kontrolą SLA i rozliczeń."
+    }
   },
   "en": {
     "seoTitle": "get2_FCMRent - rental operations for homes, apartments, and tenant issues",
@@ -130,6 +134,10 @@
         "answer": "Yes. Issue history, response time, and completed work create a clear basis for service settlement, operational reporting, and further ERP integration."
       }
     ],
-    "heroIllustration": "fcmrent"
+    "heroIllustration": "fcmrent",
+    "focusDiagram": {
+      "title": "Property-side request → work order → settlement",
+      "caption": "Tenant or property issue ties to the building and ownership, becomes an order for the maintainer or subcontractor, with outcomes and costs tracked for SLA and billing."
+    }
   }
 }

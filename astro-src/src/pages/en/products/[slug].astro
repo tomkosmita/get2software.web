@@ -32,6 +32,27 @@ const hreflangPl = canonicalUrl(plPath);
 const alternateHref = plPath;
 
 const ill = data.heroIllustration;
+const slug = Astro.params.slug ?? '';
+const heroTitleId = `product-hero-title-${slug}`;
+const focusCaptionId = `product-focus-caption-${slug}`;
+const focusStepsByProduct: Record<'bhp' | 'fsm' | 'commissioning' | 'maintenance' | 'fcm' | 'fcmrent', string[]> = {
+  bhp: ['Operational document', 'Employee record and balance', 'Cost-centre allocation', 'ERP settlement export'],
+  fsm: ['Job intake', 'On-site execution and checklist', 'Time / cost / material capture', 'Customer sign-off', 'Close-out and ERP'],
+  commissioning: ['On-site issue report', 'Contractor assignment', 'Quality verification', 'PDF handover report'],
+  maintenance: ['Asset identification', 'Parts and labour capture', 'Work-order closure', 'History and KPI (MTTR)'],
+  fcm: ['User ticket', 'Classification and priority', 'FM work order', 'Team / contractor assignment'],
+  fcmrent: ['Tenant or property request', 'Work-order creation', 'Contractor execution', 'SLA and settlement']
+};
+const focusSteps = focusStepsByProduct[ill];
+const heroStepsByProduct: Record<'bhp' | 'fsm' | 'commissioning' | 'maintenance' | 'fcm' | 'fcmrent', string[]> = {
+  bhp: ['Movement document', 'Warehouse availability', 'Employee allocation', 'Cost-centre allocation', 'ERP settlement'],
+  fsm: ['Service request', 'Planning', 'Field execution', 'Customer acceptance', 'ERP settlement'],
+  commissioning: ['Project and zone', 'Issue logging', 'Contractor assignment', 'Quality verification', 'Report and archive'],
+  maintenance: ['Asset identification', 'Service request', 'Work order', 'Execution control', 'Maintenance history'],
+  fcm: ['User ticket', 'Classification', 'FM work order', 'Team execution', 'Closure and history'],
+  fcmrent: ['Tenant request', 'Case registration', 'Contractor work order', 'SLA handling', 'Settlement']
+};
+const heroSteps = heroStepsByProduct[ill];
 
 const structuredData = [
   {
@@ -66,20 +87,35 @@ const structuredData = [
     <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
       <div>
         <p class="text-sm font-medium uppercase tracking-wider text-g2-accent">Product</p>
-        <h1 class="g2-heading-xl mt-2">{data.heroTitle}</h1>
+        <h1 id={heroTitleId} class="g2-heading-xl mt-2">{data.heroTitle}</h1>
         <p class="g2-prose mt-4 text-lg text-g2-muted">{data.heroLead}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/en/contact/" class="g2-btn-primary">Book a demo</a>
           <a href="/en/products/" class="g2-btn-secondary">All products</a>
         </div>
       </div>
-      <div class="g2-glass flex justify-center p-6">
-        <ProductVisuals product={ill} part="hero" class="h-auto w-full max-w-lg text-white/40" />
-      </div>
+      <figure class="g2-glass p-6" aria-labelledby={heroTitleId}>
+        <ProductVisuals product={ill} part="hero" class="h-auto w-full max-w-lg text-g2-text/35" />
+        <figcaption class="mt-5 border-t border-g2-border pt-4">
+          <p class="text-sm text-g2-muted">
+            Simplified end-to-end process flow: <span class="font-medium text-g2-text">{heroSteps.join(' -> ')}</span>.
+          </p>
+          <ol class="mt-3 grid gap-2 text-left text-sm text-g2-muted sm:grid-cols-2">
+            {heroSteps.map((step, idx) => (
+              <li class="flex items-start gap-2 rounded-md border border-g2-border/60 bg-white/40 px-3 py-2">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-g2-border text-[11px] font-semibold text-g2-text">
+                  {idx + 1}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
-  <section class="border-y border-white/10 bg-white/[0.03] py-14">
+  <section class="g2-section-band py-14">
     <div class="g2-container">
       <h2 class="g2-heading-lg">Who it’s for</h2>
       <ul class="mt-6 grid gap-4 md:grid-cols-3">
@@ -103,20 +139,36 @@ const structuredData = [
   </section>
 
   <section class="g2-container pb-14">
-    <h2 class="g2-heading-lg">Diagrams</h2>
+    <h2 class="g2-heading-lg">Core flow</h2>
     <p class="g2-prose mt-3 max-w-3xl">
-      Vector schematics below illustrate flows and surfaces in one consistent monoline style with brand accents.
+      This diagram extends the hero view with a single value chain-from operational event to close-out-aligned with the
+      modules above. Step numbers match the sequence explained in the caption.
     </p>
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s1" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s2" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s3" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s4" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s5" class="w-full max-w-xs" /></div>
-    </div>
+    <figure class="g2-glass mx-auto mt-8 max-w-3xl p-6">
+      <ProductVisuals
+        product={ill}
+        part="focus"
+        focusCaptionId={focusCaptionId}
+        class="mx-auto h-auto w-full max-w-2xl text-g2-text/35"
+      />
+      <figcaption id={focusCaptionId} class="mt-6 border-t border-g2-border pt-4 text-center">
+        <span class="font-display text-lg font-semibold text-g2-text">{data.focusDiagram.title}</span>
+        <p class="g2-prose mx-auto mt-2 max-w-2xl text-base text-g2-muted">{data.focusDiagram.caption}</p>
+        <ol class="mx-auto mt-4 grid max-w-2xl gap-2 text-left text-sm text-g2-muted sm:grid-cols-2">
+          {focusSteps.map((step, idx) => (
+            <li class="flex items-start gap-2 rounded-md border border-g2-border/60 bg-white/40 px-3 py-2">
+              <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-g2-border text-[11px] font-semibold text-g2-text">
+                {idx + 1}
+              </span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </figcaption>
+    </figure>
   </section>
 
-  <section class="border-t border-white/10 bg-white/[0.02] py-14">
+  <section class="g2-section-subtle py-14">
     <div class="g2-container max-w-3xl">
       <h2 class="g2-heading-lg">Integrations</h2>
       <p class="g2-prose mt-3">{data.integrationsText}</p>

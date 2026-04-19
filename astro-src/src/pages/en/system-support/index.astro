@@ -1,0 +1,100 @@
+---
+/**
+ * System support and managed continuity page (EN).
+ * Business goal: mirror PL messaging — post-go-live care, tailored SLA, SaaS default with optional migration to public cloud,
+ * customer private cloud, or traditional data center. Layout matches other informational MarketingLayout pages.
+ */
+import MarketingLayout from '../../../layouts/MarketingLayout.astro';
+import { canonicalUrl } from '../../../lib/seo/site';
+import { routeMap } from '../../../lib/i18n/routes';
+
+const pathname = '/en/system-support/';
+const title = 'System support - get2software.com';
+const description =
+  'Post-go-live support for operational software: incidents, change requests, ERP-side integrations. SLAs tailored to your needs. SaaS by default with optional move to public cloud, private cloud, or a traditional data center.';
+---
+
+<MarketingLayout
+  locale="en"
+  title={title}
+  description={description}
+  pathname={pathname}
+  hreflangPl={canonicalUrl(routeMap.support.pl)}
+  hreflangEn={canonicalUrl(pathname)}
+  alternateHref={routeMap.support.pl}
+  active="support"
+>
+  <!-- Same vertical rhythm as PL/support peers: container width + section padding under sticky header. -->
+  <div class="g2-container py-14 md:py-20">
+    <h1 class="g2-heading-xl">Support for our systems</h1>
+
+    <div class="g2-prose mt-8 max-w-3xl space-y-8">
+      <p>
+        After go-live, operational software must stay dependable: field and office teams need consistent data, while
+        finance and logistics need information delivered to ERP in an agreed data model. get2software.com support
+        covers application continuity, process-driven change, and feature evolution where the operation grows.
+      </p>
+
+      <section aria-labelledby="en-support-scope-heading">
+        <h2 id="en-support-scope-heading" class="!mt-0 text-balance">What we cover</h2>
+        <p>
+          We work as a product and delivery team after production start — not a generic “license-only” helpdesk. Typical
+          collaboration areas:
+        </p>
+        <ul>
+          <li>
+            <strong>Incidents and stability</strong> — triage, remediation, and status communication aligned with the
+            agreed SLA.
+          </li>
+          <li>
+            <strong>Configuration and process changes</strong> — updates when roles, locations, or process stages change.
+          </li>
+          <li>
+            <strong>Functional evolution</strong> — new modules, reporting, and UX improvements informed by real
+            operations.
+          </li>
+          <li>
+            <strong>ERP and adjacent integrations</strong> — maintenance of exports, APIs, and connectors when vendors or
+            ERP versions move.
+          </li>
+          <li>
+            <strong>Data quality and continuity</strong> — predictable operational data flow, traceability, and
+            period-close readiness.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="en-support-sla-heading">
+        <h2 id="en-support-sla-heading" class="text-balance">SLAs tailored to your needs</h2>
+        <p>
+          We do not force a single, rigid response-time package for every customer. <strong>We tailor SLAs</strong> to
+          process criticality, organization scale, maintenance windows, and whether the system runs in one site or
+          across branches. Together we define incident priorities, intake channels, and response and escalation
+          expectations so the model is workable for operations and clear for your IT team.
+        </p>
+      </section>
+
+      <section aria-labelledby="en-support-hosting-heading">
+        <h2 id="en-support-hosting-heading" class="text-balance">SaaS and deployment flexibility</h2>
+        <p>
+          Applications are delivered as <strong>SaaS</strong> by default for a fast, standardized start. For each
+          application we can also plan and execute a <strong>move to a public cloud</strong>, a <strong>customer private
+            cloud</strong>, or a <strong>traditional data center</strong> — driven by security policy, infrastructure
+          contracts, and integration constraints.
+        </p>
+        <p>
+          That flexibility comes from our technology stack: customers are not locked into a single hosting story; the
+          architecture allows the same product and support model when the runtime environment changes, without rebuilding
+          the system from scratch.
+        </p>
+      </section>
+
+      <p>
+        If you want to discuss support scope, SLAs, and the target runtime for your systems, get in touch. We will
+        propose an approach aligned with your process and infrastructure.
+      </p>
+
+      <a href={routeMap.contact.en} class="g2-btn-primary mt-8 inline-flex">Talk to us about support</a>
+    </div>
+  </div>
+</MarketingLayout>

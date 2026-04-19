@@ -1,26 +1,40 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------------------
-   Design tokens: Enterprise Deep Slate + cyan/indigo (get2software.com).
-   Kolory w oklch dla spójnego kontrastu; komentarze PL - cel wizualny i UX.
+   Design tokens: jasny motyw enterprise (get2software.com).
+   Chłodny grafit tekstu + cyan (hue ~200) i indygo-niebieski (~262) - spójna oś barw na białym tle.
+   Kolory w oklch (percepcyjna jednolitość); komentarze PL - cel layoutu i logiki UX (hierarchia, kontrast).
    --------------------------------------------------------------------------- */
 @theme {
-  /* Tło główne - głęboki grafit (nie czysta czerń - mniej „gaming”, lepszy kontrast). */
-  --color-g2-bg: oklch(22% 0.02 250);
-  /* Powierzchnie kart / paneli - nieco jaśniejszy odcień niż bg. */
-  --color-g2-surface: oklch(28% 0.025 250);
-  /* Akcent brand - cyan‑teal (automatyka, dane). */
-  --color-g2-accent: oklch(72% 0.14 195);
-  /* Akcent drugi - indygo (CTA, linki sekcji produktów). */
-  --color-g2-accent-2: oklch(62% 0.18 275);
-  /* Tekst podstawowy - biel z lekkim przygaszeniem. */
-  --color-g2-text: oklch(98% 0.01 250);
-  --color-g2-muted: oklch(78% 0.02 250);
-  /* Obramowania szkła (glass). */
-  --color-g2-border: oklch(100% 0 0 / 0.12);
-  /* Font: Inter - czytelność UI + polskie znaki. */
+  /* Tło strony: prawie biały „cool white” - mniej męczący od #fff na dużych polach. */
+  --color-g2-bg: oklch(99% 0.008 255);
+  /* Karty / pola: czysta biel lub minimalny chłód - odcinamy powierzchnię od tła strony. */
+  --color-g2-surface: oklch(100% 0 0);
+  /* CTA i główne linki akcentowe - świeży cyan-teal; tekst na przycisku = g2-on-accent (biel) dla WCAG. */
+  --color-g2-accent: oklch(60% 0.13 200);
+  /* Drugi akcent: indygo zbliżone do błękitu (diagramy, tytuły produktów) - nie konkuruje z cyanem. */
+  --color-g2-accent-2: oklch(56% 0.11 262);
+  /* Tekst główny: głęboki slate - czytelność na jasnym tle bez czarnej „dziury”. */
+  --color-g2-text: oklch(28% 0.035 255);
+  /* Tekst drugorzędny / prose - wyraźnie podrzędny wobec g2-text. */
+  --color-g2-muted: oklch(48% 0.03 255);
+  /* „Hairline” między sekcjami - barwa tekstu z niską alfą zamiast białych linii z ciemnego motywu. */
+  --color-g2-border: oklch(28% 0.035 255 / 0.12);
+  /* Szkło: obramowanie nieco mocniejsze niż g2-border - ramka kart i inputów. */
+  --color-g2-glass-border: oklch(28% 0.035 255 / 0.14);
+  /* Szkło: półprzezroczysta powierzchnia + blur - lekka głębia na jasnym tle. */
+  --color-g2-glass-bg: oklch(100% 0 0 / 0.88);
+  /* Stan hover na jasnym tle: „plama atramentu” zamiast białego highlightu z dark mode. */
+  --color-g2-hover: oklch(28% 0.035 255 / 0.06);
+  /* Tekst / ikony na wypełnieniu g2-accent (przyciski pierwotne). */
+  --color-g2-on-accent: oklch(100% 0 0);
+  /* Font: Inter - UI + polskie znaki; Space Grotesk - nagłówki display. */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* Cień kart - delikatna elevacja bez ciężkiego „black/20” z dark UI. */
+  --shadow-g2-card: 0 12px 40px oklch(0% 0 0 / 0.08);
+  /* Panel mobilny / dropdown: czytelna separacja od treści bez agresywnego rgba(0,0,0,0.55). */
+  --shadow-g2-dropdown: 0 20px 50px oklch(0% 0 0 / 0.12);
 }
 
 @layer base {
@@ -30,9 +44,10 @@
 
   body {
     @apply min-h-dvh bg-g2-bg text-g2-text font-sans antialiased;
+    /* Delikatne „plamy” brandu - niskie alpha, żeby tło pozostało lekkie i nie konkurenowało z treścią. */
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, oklch(40% 0.12 280 / 0.35), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 0%, oklch(35% 0.1 195 / 0.2), transparent);
+      radial-gradient(ellipse 80% 50% at 50% -20%, oklch(60% 0.1 200 / 0.07), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, oklch(56% 0.08 262 / 0.06), transparent);
     background-attachment: fixed;
   }
 
@@ -42,21 +57,29 @@
 }
 
 @layer components {
-  /* Karta „glass” - spójna z baseline 7omnicom (szkło + obramowanie). */
+  /*
+   * Karta „glass”: na jasnym tle mniej dramatyczne niż white/5 na grafitcie - czytelna ramka + lekki blur.
+   */
   .g2-glass {
-    @apply rounded-2xl border border-white/10 bg-white/5 shadow-lg shadow-black/20 backdrop-blur-md;
+    @apply rounded-2xl border border-g2-glass-border bg-g2-glass-bg shadow-g2-card backdrop-blur-md;
   }
 
   .g2-container {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
+  /*
+   * Przycisk pierwotny: wypełnienie brand + biały label (kontrast AA względem żywszego cyanu).
+   */
   .g2-btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl bg-g2-accent px-5 py-3 text-sm font-semibold text-g2-bg transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-g2-accent;
+    @apply inline-flex items-center justify-center rounded-xl bg-g2-accent px-5 py-3 text-sm font-semibold text-g2-on-accent transition hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-g2-accent;
   }
 
+  /*
+   * Przycisk drugi: obramowanie + powierzchnia - hover jak „tapnięcie” atramentu (g2-hover).
+   */
   .g2-btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-g2-border bg-white/5 px-5 py-3 text-sm font-semibold text-g2-text backdrop-blur-sm transition hover:bg-white/10;
+    @apply inline-flex items-center justify-center rounded-xl border border-g2-glass-border bg-g2-surface px-5 py-3 text-sm font-semibold text-g2-text shadow-sm transition hover:bg-g2-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-g2-accent;
   }
 
   .g2-heading-xl {
@@ -73,5 +96,19 @@
 
   .g2-prose strong {
     @apply font-semibold text-g2-text;
+  }
+
+  /*
+   * Pas sekcji (np. „Co dostarczamy”): subtelna zmiana tonu + linie - rytm bez szarej monotonii.
+   */
+  .g2-section-band {
+    @apply border-y border-g2-border bg-g2-muted/5;
+  }
+
+  /*
+   * Stopka dolnej belki / list - cieńsza separacja niż g2-section-band (tylko górna krawędź w markup).
+   */
+  .g2-section-subtle {
+    @apply border-t border-g2-border bg-g2-muted/[0.035];
   }
 }

@@ -1,6 +1,6 @@
 ---
 /**
- * Szablon podstrony produktu (PL): hero + persony + siatka modułów + diagramy + integracje + FAQ.
+ * Szablon podstrony produktu (PL): hero (1 SVG) + persony + moduły + drugi mikro-diagram z JSON + integracje + FAQ.
  * Treść pochodzi z kolekcji `productBundles` (JSON); pole `modules[].body` może zawierać wiele akapitów (`\n\n`) -
  * renderujemy je w jednym `<p>` z `whitespace-pre-line`, żeby zachować odstępy bez wprowadzania HTML z treści.
  */
@@ -32,6 +32,32 @@ const hreflangEn = canonicalUrl(enPath);
 const alternateHref = enPath;
 
 const ill = data.heroIllustration;
+const slug = Astro.params.slug ?? '';
+/** Stabilne id dla a11y: powiązanie grafiki hero z tytułem oraz diagramu focus z podpisem. */
+const heroTitleId = `product-hero-title-${slug}`;
+const focusCaptionId = `product-focus-caption-${slug}`;
+/**
+ * Jawna legenda kroków dla numerów 1..N na mikro-diagramie.
+ * Dzięki temu grafika jest czytana jako konkretny proces biznesowy, a nie abstrakcyjny kształt.
+ */
+const focusStepsByProduct: Record<'bhp' | 'fsm' | 'commissioning' | 'maintenance' | 'fcm' | 'fcmrent', string[]> = {
+  bhp: ['Dokument operacyjny', 'Kartoteka i saldo pracownika', 'MPK / alokacja kosztu', 'Eksport i rozliczenie ERP'],
+  fsm: ['Przyjęcie zlecenia', 'Realizacja i checklista', 'Czas / koszty / materiały', 'Podpis klienta', 'Zamknięcie i ERP'],
+  commissioning: ['Zgłoszenie z obiektu', 'Przydział wykonawcy', 'Weryfikacja jakości', 'Raport PDF i archiwum'],
+  maintenance: ['Identyfikacja aktywa', 'Rejestr części i czasu', 'Zamknięcie zlecenia', 'Historia i KPI (MTTR)'],
+  fcm: ['Ticket od użytkownika', 'Klasyfikacja i priorytet', 'Zlecenie FM', 'Przypisanie zespołu / wykonawcy'],
+  fcmrent: ['Zgłoszenie najemcy / obiektu', 'Utworzenie zlecenia', 'Realizacja przez wykonawcę', 'SLA i rozliczenie']
+};
+const focusSteps = focusStepsByProduct[ill];
+const heroStepsByProduct: Record<'bhp' | 'fsm' | 'commissioning' | 'maintenance' | 'fcm' | 'fcmrent', string[]> = {
+  bhp: ['Dokument ruchu', 'Magazyn / dostępność', 'Przydział pracownikowi', 'Alokacja MPK', 'Rozliczenie ERP'],
+  fsm: ['Zgłoszenie', 'Planowanie', 'Realizacja terenowa', 'Akceptacja klienta', 'Rozliczenie ERP'],
+  commissioning: ['Projekt i strefa', 'Zgłoszenie usterki', 'Przydział wykonawcy', 'Weryfikacja jakości', 'Raport i archiwum'],
+  maintenance: ['Identyfikacja aktywa', 'Zgłoszenie serwisowe', 'Zlecenie pracy', 'Kontrola wykonania', 'Historia utrzymania'],
+  fcm: ['Ticket użytkownika', 'Klasyfikacja', 'Zlecenie FM', 'Realizacja zespołu', 'Domknięcie i historia'],
+  fcmrent: ['Zgłoszenie najemcy', 'Rejestracja sprawy', 'Zlecenie wykonawcy', 'Obsługa SLA', 'Rozliczenie']
+};
+const heroSteps = heroStepsByProduct[ill];
 
 const structuredData = [
   {
@@ -66,20 +92,35 @@ const structuredData = [
     <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
       <div>
         <p class="text-sm font-medium uppercase tracking-wider text-g2-accent">Produkt</p>
-        <h1 class="g2-heading-xl mt-2">{data.heroTitle}</h1>
+        <h1 id={heroTitleId} class="g2-heading-xl mt-2">{data.heroTitle}</h1>
         <p class="g2-prose mt-4 text-lg text-g2-muted">{data.heroLead}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/pl/kontakt/" class="g2-btn-primary">Umów demo</a>
           <a href="/pl/produkty/" class="g2-btn-secondary">Wszystkie produkty</a>
         </div>
       </div>
-      <div class="g2-glass flex justify-center p-6">
-        <ProductVisuals product={ill} part="hero" class="h-auto w-full max-w-lg text-white/40" />
-      </div>
+      <figure class="g2-glass p-6" aria-labelledby={heroTitleId}>
+        <ProductVisuals product={ill} part="hero" class="h-auto w-full max-w-lg text-g2-text/35" />
+        <figcaption class="mt-5 border-t border-g2-border pt-4">
+          <p class="text-sm text-g2-muted">
+            Uproszczony przebieg procesu end-to-end: <span class="font-medium text-g2-text">{heroSteps.join(' -> ')}</span>.
+          </p>
+          <ol class="mt-3 grid gap-2 text-left text-sm text-g2-muted sm:grid-cols-2">
+            {heroSteps.map((step, idx) => (
+              <li class="flex items-start gap-2 rounded-md border border-g2-border/60 bg-white/40 px-3 py-2">
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-g2-border text-[11px] font-semibold text-g2-text">
+                  {idx + 1}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
-  <section class="border-y border-white/10 bg-white/[0.03] py-14">
+  <section class="g2-section-band py-14">
     <div class="g2-container">
       <h2 class="g2-heading-lg">Dla kogo</h2>
       <ul class="mt-6 grid gap-4 md:grid-cols-3">
@@ -103,21 +144,36 @@ const structuredData = [
   </section>
 
   <section class="g2-container pb-14">
-    <h2 class="g2-heading-lg">Schematy i procesy</h2>
+    <h2 class="g2-heading-lg">Kluczowy przepływ</h2>
     <p class="g2-prose mt-3 max-w-3xl">
-      Poniższe grafiki są uproszczonymi diagramami wektorowymi - ilustrują magazyn, dokumenty, portal i rozliczenia w
-      jednym języku wizualnym (monoline + akcent marki).
+      Diagram obok uzupełnia widok z hero: jeden łańcuch wartości od zdarzenia operacyjnego do domknięcia - zgodnie z
+      modułami powyżej. Numery na osi kroków odpowiadają kolejności w podpisie.
     </p>
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s1" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s2" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s3" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s4" class="w-full max-w-xs" /></div>
-      <div class="g2-glass flex flex-col items-center p-4"><ProductVisuals product={ill} part="s5" class="w-full max-w-xs" /></div>
-    </div>
+    <figure class="g2-glass mx-auto mt-8 max-w-3xl p-6">
+      <ProductVisuals
+        product={ill}
+        part="focus"
+        focusCaptionId={focusCaptionId}
+        class="mx-auto h-auto w-full max-w-2xl text-g2-text/35"
+      />
+      <figcaption id={focusCaptionId} class="mt-6 border-t border-g2-border pt-4 text-center">
+        <span class="font-display text-lg font-semibold text-g2-text">{data.focusDiagram.title}</span>
+        <p class="g2-prose mx-auto mt-2 max-w-2xl text-base text-g2-muted">{data.focusDiagram.caption}</p>
+        <ol class="mx-auto mt-4 grid max-w-2xl gap-2 text-left text-sm text-g2-muted sm:grid-cols-2">
+          {focusSteps.map((step, idx) => (
+            <li class="flex items-start gap-2 rounded-md border border-g2-border/60 bg-white/40 px-3 py-2">
+              <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-g2-border text-[11px] font-semibold text-g2-text">
+                {idx + 1}
+              </span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </figcaption>
+    </figure>
   </section>
 
-  <section class="border-t border-white/10 bg-white/[0.02] py-14">
+  <section class="g2-section-subtle py-14">
     <div class="g2-container max-w-3xl">
       <h2 class="g2-heading-lg">Integracje</h2>
       <p class="g2-prose mt-3">{data.integrationsText}</p>

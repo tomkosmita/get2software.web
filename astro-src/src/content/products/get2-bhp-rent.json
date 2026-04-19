@@ -68,7 +68,11 @@
         "answer": "Tak. Struktura danych przygotowuje proces pod dalsze rozszerzenie o identyfikatory, kody QR i RFID bez przebudowy podstawowego obiegu dokumentów."
       }
     ],
-    "heroIllustration": "bhp"
+    "heroIllustration": "bhp",
+    "focusDiagram": {
+      "title": "Od dokumentu operacyjnego do rozliczenia w ERP",
+      "caption": "Każdy ruch ma dokument; kartoteka pracownika utrzymuje saldo i normatywy, a MPK z miesięcznym rozliczeniem daje spójną podstawę pod fakturę i eksport do ERP - bez przepisywania z arkuszy."
+    }
   },
   "en": {
     "seoTitle": "get2_BHPRent - workwear, PPE, rental, and B2B settlement",
@@ -138,6 +142,10 @@
         "answer": "Yes. The data structure keeps the process ready for identifiers, QR, and RFID without rebuilding the core document flow."
       }
     ],
-    "heroIllustration": "bhp"
+    "heroIllustration": "bhp",
+    "focusDiagram": {
+      "title": "From operational document to ERP settlement",
+      "caption": "Every movement is documented; the employee record holds balance and entitlements, and cost centres with monthly settlement provide a consistent basis for invoicing and ERP export-without spreadsheet rework."
+    }
   }
 }
