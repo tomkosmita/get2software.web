@@ -5,7 +5,7 @@
  * Cel biznesowy: pokazać, że klient może zaangażować nas na wybranej fazie wdrożenia albo w całym procesie end-to-end.
  * Layout: hero dwukolumnowy + sekcje kart + pas zdjęć + pas technologii (komponent TechStackMarquee).
  *
- * Grafika: zdjęcia lokalne w /public/images/team/ (JPEG, proporcje 1600×1067) — stabilny URL, bez hotlinkowania.
+ * Grafika: zdjęcia lokalne w /public/images/team/ (JPEG, proporcje 1600×1067) - stabilny URL, bez hotlinkowania.
  */
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
 import TechStackMarquee from '../../../components/TechStackMarquee.astro';
@@ -15,7 +15,7 @@ import { routeMap } from '../../../lib/i18n/routes';
 const pathname = '/pl/zespol/';
 const title = 'Zespół - get2software.com';
 const description =
-  'Zespół produktowo-wdrożeniowy get2software: kompetencje od discovery po utrzymanie. Wspieramy klienta na wybranej fazie wdrożenia lub w całym procesie — integracje, chmura, ERP, jakość i rozwój systemów operacyjnych.';
+  'Zespół produktowo-wdrożeniowy get2software: kompetencje od discovery po utrzymanie. Wspieramy klienta na wybranej fazie wdrożenia lub w całym procesie - integracje, chmura, ERP, jakość i rozwój systemów operacyjnych.';
 
 const imgHero = '/images/team/hero-team.jpg';
 const imgPlanning = '/images/team/phase-planning.jpg';
@@ -52,12 +52,12 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
         <div class="g2-prose mt-6 max-w-xl space-y-4">
           <p class="!mt-0">
             Budujemy i wdrażamy oprogramowanie operacyjne dla procesów, które muszą być rozliczalne i gotowe do pracy z
-            ERP. Możesz zaprosić nas do <strong>jednej wybranej fazy</strong> — albo poprosić o prowadzenie
+            ERP. Możesz zaprosić nas do <strong>jednej wybranej fazy</strong> - albo poprosić o prowadzenie
             <strong>całego procesu</strong> od discovery po utrzymanie po starcie produkcyjnym.
           </p>
           <p>
             Dzięki temu dopasowujemy skład kompetencji do Twojej sytuacji: czasem najpierw potrzebujesz twardych
-            integracji i architektury, czasem — szybkiego domknięcia wdrożenia i wsparcia operacyjnego.
+            integracji i architektury, czasem - szybkiego domknięcia wdrożenia i wsparcia operacyjnego.
           </p>
         </div>
         <a href={routeMap.contact.pl} class="g2-btn-primary mt-8 inline-flex">Porozmawiajmy o zakresie</a>
@@ -68,7 +68,7 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
       >
         <img
           src={imgHero}
-          alt="Zespół przy wspólnej pracy przy komputerach — metafora współpracy produktowej i wdrożeniowej"
+          alt="Zespół przy wspólnej pracy przy komputerach - metafora współpracy produktowej i wdrożeniowej"
           width={1600}
           height={1067}
           class="aspect-[4/3] w-full object-cover"
@@ -78,7 +78,7 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
       </div>
     </header>
 
-    <!-- Sekcja merytoryczna: model pracy — cross-functional, bez „tylko devów”. -->
+    <!-- Sekcja merytoryczna: model pracy - cross-functional, bez „tylko devów”. -->
     <section aria-labelledby="team-how-heading" class="max-w-3xl">
       <h2 id="team-how-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
         Jak pracujemy
@@ -90,13 +90,13 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
           utrzymanie i rozwój po wdrożeniu.
         </p>
         <p>
-          Nie sprzedajemy samej licencji — pracujemy jak zespół odpowiedzialny za rezultat operacyjny: dane, które zamykają
+          Nie sprzedajemy samej licencji - pracujemy jak zespół odpowiedzialny za rezultat operacyjny: dane, które zamykają
           pracę w terenie, rozliczenia i raportowanie do ERP.
         </p>
       </div>
     </section>
 
-    <!-- Kompetencje: siatka kart — czytelny skan dla decydenta B2B (kto „kupuje” wdrożenie). -->
+    <!-- Kompetencje: siatka kart - czytelny skan dla decydenta B2B (kto „kupuje” wdrożenie). -->
     <section aria-labelledby="team-skills-heading" class="space-y-8">
       <h2 id="team-skills-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
         Kompetencje zespołu
@@ -105,28 +105,28 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
         <article class="g2-glass p-6">
           <h3 class="font-display text-lg font-semibold text-g2-text">Discovery i proces</h3>
           <p class="mt-3 text-sm leading-relaxed text-g2-muted">
-            Tłumaczymy operację na wymagania: role, statusy, rozliczenia, wyjątki — tak, żeby system wspierał realny
+            Tłumaczymy operację na wymagania: role, statusy, rozliczenia, wyjątki - tak, żeby system wspierał realny
             przepływ pracy, a nie odwrotnie.
           </p>
         </article>
         <article class="g2-glass p-6">
           <h3 class="font-display text-lg font-semibold text-g2-text">Architektura i integracje</h3>
           <p class="mt-3 text-sm leading-relaxed text-g2-muted">
-            Projektujemy granice modułów i integracji z ERP oraz systemami sąsiednimi (API, kolejki, eksporty) — z myślą o
+            Projektujemy granice modułów i integracji z ERP oraz systemami sąsiednimi (API, kolejki, eksporty) - z myślą o
             utrzymaniu i zmianach po stronie klienta.
           </p>
         </article>
         <article class="g2-glass p-6">
           <h3 class="font-display text-lg font-semibold text-g2-text">Development i jakość</h3>
           <p class="mt-3 text-sm leading-relaxed text-g2-muted">
-            Budujemy aplikacje operacyjne z naciskiem na stabilność, audytowalność danych i testowalność zmian — to
+            Budujemy aplikacje operacyjne z naciskiem na stabilność, audytowalność danych i testowalność zmian - to
             fundament wdrożeń w wielu lokalizacjach.
           </p>
         </article>
         <article class="g2-glass p-6">
           <h3 class="font-display text-lg font-semibold text-g2-text">Wdrożenie i szkolenie</h3>
           <p class="mt-3 text-sm leading-relaxed text-g2-muted">
-            Prowadzimy start produkcyjny: konfiguracja, migracja danych, pilotaż, komunikacja z użytkownikami — tak, żeby
+            Prowadzimy start produkcyjny: konfiguracja, migracja danych, pilotaż, komunikacja z użytkownikami - tak, żeby
             „dzień pierwszy” był przewidywalny dla operacji.
           </p>
         </article>
@@ -141,20 +141,20 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
           <h3 class="font-display text-lg font-semibold text-g2-text">Bezpieczeństwo i zgodność</h3>
           <p class="mt-3 text-sm leading-relaxed text-g2-muted">
             Projektujemy rozwiązania z uwzględnieniem podziału danych, rozliczalności i integracji z politykami IT klienta
-            — szczególnie w B2B i przy rozproszonych zespołach.
+            - szczególnie w B2B i przy rozproszonych zespołach.
           </p>
         </article>
       </div>
     </section>
 
-    <!-- Etapy: komunikat B2B — wsparcie na wybranej fazie lub w całym łańcuchu; każda karta max 2 zdania (czytelność + treść merytoryczna). -->
+    <!-- Etapy: komunikat B2B - wsparcie na wybranej fazie lub w całym łańcuchu; każda karta max 2 zdania (czytelność + treść merytoryczna). -->
     <section aria-labelledby="team-phases-heading" class="g2-section-band -mx-4 px-4 py-14 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div class="g2-container !px-0">
         <h2 id="team-phases-heading" class="font-display text-2xl font-semibold text-g2-text md:text-3xl">
           Na jakim etapie możemy Państwa wesprzeć
         </h2>
         <p class="g2-prose mt-4 max-w-3xl">
-          Możliwy jest zakres pojedynczej fazy albo pełnego procesu — zakres prac, odpowiedzialność oraz model współpracy z
+          Możliwy jest zakres pojedynczej fazy albo pełnego procesu - zakres prac, odpowiedzialność oraz model współpracy z
           zespołem IT oraz interesariuszami biznesowymi ustalamy na wstępie i utrwalamy w uzgodnieniach projektowych.
         </p>
 
@@ -204,7 +204,7 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
           <div class="g2-glass p-6">
             <p class="font-display text-lg font-semibold text-g2-text">Wsparcie w wybranym obszarze</p>
             <p class="mt-2 text-sm leading-relaxed text-g2-muted">
-              Gdy organizacja posiada własny zespół, możemy wesprzeć wybrany obszar — np. integracje, testy przed startem produkcyjnym lub audyt gotowości do wdrożenia.
+              Gdy organizacja posiada własny zespół, możemy wesprzeć wybrany obszar - np. integracje, testy przed startem produkcyjnym lub audyt gotowości do wdrożenia.
               Zakres odpowiedzialności, harmonogram oraz granice współpracy są każdorazowo uzgadniane i dokumentowane.
             </p>
           </div>
@@ -212,7 +212,7 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
       </div>
     </section>
 
-    <!-- Pas wizualny: zmiana rytmu (obraz + tekst / obraz) — buduje zaufanie bez „ścianki tekstu”. -->
+    <!-- Pas wizualny: zmiana rytmu (obraz + tekst / obraz) - buduje zaufanie bez „ścianki tekstu”. -->
     <section
       aria-labelledby="team-visuals-heading"
       class="grid gap-10 lg:grid-cols-2 lg:items-center"
@@ -221,7 +221,7 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
       <div class="not-prose order-2 overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card lg:order-1">
         <img
           src={imgPlanning}
-          alt="Spotkanie zespołu przy planowaniu projektu — doprecyzowanie zakresu i harmonogramu wdrożenia"
+          alt="Spotkanie zespołu przy planowaniu projektu - doprecyzowanie zakresu i harmonogramu wdrożenia"
           width={1600}
           height={1067}
           class="aspect-[4/3] w-full object-cover"
@@ -236,7 +236,7 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
         <p>
           Dobieramy sposób pracy do skali projektu: od intensywnego discovery po wdrożenia rozłożone w czasie. Ważne jest,
           żeby <strong>jedno zespół odpowiadało za spójność danych</strong> między ludźmi w terenie, systemem operacyjnym
-          a ERP — niezależnie od tego, czy jesteśmy z Tobą na jednym etapie, czy na całej ścieżce.
+          a ERP - niezależnie od tego, czy jesteśmy z Tobą na jednym etapie, czy na całej ścieżce.
         </p>
       </div>
     </section>
@@ -245,14 +245,14 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
       <div class="g2-prose max-w-xl">
         <h2 class="font-display text-2xl font-semibold text-g2-text">Od decyzji do stabilnego działania</h2>
         <p>
-          Dobre wdrożenie to nie tylko kod — to także komunikacja, szkolenie i utrzymanie porządku danych po starcie.
+          Dobre wdrożenie to nie tylko kod - to także komunikacja, szkolenie i utrzymanie porządku danych po starcie.
           Dlatego nasz zespół myśli jak <strong>partner wdrożeniowy</strong>, nie jak dostawca „jednej paczki”.
         </p>
       </div>
       <div class="not-prose overflow-hidden rounded-2xl border border-g2-glass-border bg-g2-surface shadow-g2-card">
         <img
           src={imgDelivery}
-          alt="Uścisk dłoni w biurze — domknięcie ustaleń i partnerstwo wdrożeniowe"
+          alt="Uścisk dłoni w biurze - domknięcie ustaleń i partnerstwo wdrożeniowe"
           width={1600}
           height={1067}
           class="aspect-[4/3] w-full object-cover"
@@ -262,24 +262,24 @@ const imgDelivery = '/images/team/delivery-collab.jpg';
       </div>
     </section>
 
-    <!-- Komponent: technologie — osobny plik, żeby utrzymać czytelność strony i reużywalność pasa. -->
+    <!-- Komponent: technologie - osobny plik, żeby utrzymać czytelność strony i reużywalność pasa. -->
     <TechStackMarquee locale="pl" />
 
     <footer class="max-w-3xl space-y-6 border-t border-g2-border pt-10 not-prose">
       <p class="g2-prose text-g2-muted">
-        Chcesz omówić zakres: jedna faza, pełny proces, czy wzmocnienie w konkretnym obszarze? Napisz — przygotujemy
+        Chcesz omówić zakres: jedna faza, pełny proces, czy wzmocnienie w konkretnym obszarze? Napisz - przygotujemy
         propozycję dopasowaną do Twojej organizacji i procesu.
       </p>
       <a href={routeMap.contact.pl} class="g2-btn-primary inline-flex">Kontakt</a>
     </footer>
 
-    <!-- Atrybucja zdjęć stock (Unsplash) — transparentność licencyjna dla odbiorcy B2B. -->
+    <!-- Atrybucja zdjęć stock (Unsplash) - transparentność licencyjna dla odbiorcy B2B. -->
     <p class="pb-2 pt-8 text-xs text-g2-muted">
       Zdjęcia ilustracyjne:
       <a href="https://unsplash.com/license" class="text-g2-accent underline-offset-2 hover:underline" rel="noopener">
         Unsplash License
       </a>
-      — źródło: Unsplash.
+      - źródło: Unsplash.
     </p>
   </div>
 </MarketingLayout>

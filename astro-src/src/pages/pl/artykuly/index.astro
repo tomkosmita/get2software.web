@@ -1,6 +1,6 @@
 ---
 /**
- * Lista artykułów (PL-only): karty jak na /produkty/, ale z filarem tematycznym i datą — bliżej „mapy treści” niż katalogu SKU.
+ * Lista artykułów (PL-only): karty jak na /produkty/, ale z filarem tematycznym i datą - bliżej „mapy treści” niż katalogu SKU.
  */
 import { getCollection } from 'astro:content';
 import MarketingLayout from '../../../layouts/MarketingLayout.astro';
@@ -22,7 +22,7 @@ const collectionLd: Record<string, unknown> = {
   description,
   url: canonicalUrl(pathname),
   isPartOf: { '@type': 'WebSite', name: 'get2software.com', url: canonicalUrl('/pl/') },
-  /** Lista pozycji — uproszczona (tytuł + URL); pełne Article jest na stronie wpisu. */
+  /** Lista pozycji - uproszczona (tytuł + URL); pełne Article jest na stronie wpisu. */
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: sorted.map((entry, index) => ({
@@ -47,10 +47,10 @@ const collectionLd: Record<string, unknown> = {
   structuredData={[collectionLd]}
 >
   <div class="g2-container py-14 md:py-20">
-    <!-- Nagłówek sekcji: prosty, jak w typowych centrach treści B2B — bez hasła marketingowego w H1, lead w 3. osobie / bezosobowo. -->
+    <!-- Nagłówek sekcji: prosty, jak w typowych centrach treści B2B - bez hasła marketingowego w H1, lead w 3. osobie / bezosobowo. -->
     <h1 class="g2-heading-xl">Artykuły</h1>
     <p class="g2-prose mt-4 max-w-3xl text-lg">
-      Publikacje porządkują zagadnienia przydatne przy planowaniu i utrzymaniu wdrożeń oprogramowania operacyjnego — m.in.
+      Publikacje porządkują zagadnienia przydatne przy planowaniu i utrzymaniu wdrożeń oprogramowania operacyjnego - m.in.
       architekturę wymiany danych z systemami klasy ERP i narzędziami towarzyszącymi, organizację pracy na obiektach,
       odbiory techniczne oraz obieg dokumentacji przy zamykaniu etapów projektowych. Treść ma charakter informacyjny;
       decyzje inwestycyjne, wdrożeniowe i formalnoprawne wymagają samodzielnej oceny w danej organizacji.

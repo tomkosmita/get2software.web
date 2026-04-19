@@ -1,6 +1,6 @@
 # Cloudflare Pages - przekierowanie root na domyślny język (PL).
 / /pl/ 302
 
-# Usunięta sekcja Aktualności — przekierowanie na sekcję Artykuły (treść wiedzy pod nowym adresem).
+# Usunięta sekcja Aktualności - przekierowanie na sekcję Artykuły (treść wiedzy pod nowym adresem).
 /pl/aktualnosci/ /pl/artykuly/ 301
 /en/news/ /en/ 301

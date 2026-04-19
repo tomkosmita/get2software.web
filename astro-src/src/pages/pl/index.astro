@@ -11,6 +11,107 @@ const productsPl = productSlugOrder
   .map((slug) => productBundles.find((e) => e.data.slug === slug))
   .filter((e): e is NonNullable<typeof e> => Boolean(e));
 
+/**
+ * Sekcje prowadzące z homepage do najważniejszych podstron.
+ *
+ * Cel biznesowy:
+ * - strona główna ma nie tylko „otworzyć” ofertę, ale też pomóc szybko wybrać właściwy kierunek rozmowy,
+ * - każda karta rozwija inny wątek: firma, model pracy, integracje, wsparcie i rekrutacja,
+ * - wszystkie CTA kierują do istniejących podstron, więc homepage staje się realnym hubem nawigacyjnym, a nie krótkim teaserem.
+ *
+ * Cel layoutu:
+ * - sekcje są zapisane jako dane, żeby można było łatwo zmieniać kolejność albo copy bez przebudowy markupu,
+ * - `tone` steruje subtelnym zróżnicowaniem tła i szerokości, żeby kolejne bloki nie zlewały się wizualnie.
+ */
+const homepageSections = [
+  {
+    eyebrow: 'O firmie',
+    title: 'Budujemy systemy tam, gdzie kończy się standardowy ERP',
+    description:
+      'Na stronie O firmie pokazujemy, jak pracujemy z procesami, które muszą być rozliczalne, audytowalne i gotowe do integracji z ERP. To dobre miejsce, jeśli chcesz najpierw zrozumieć, czym różni się nasze podejście od klasycznego dostawcy licencji.',
+    href: routeMap.about.pl,
+    ctaLabel: 'Przejdź do O firmie',
+    tone: 'default'
+  },
+  {
+    eyebrow: 'Zespół',
+    title: 'Łączymy analizę, architekturę, wdrożenie i utrzymanie w jednym modelu pracy',
+    description:
+      'Podstrona Zespół wyjaśnia, jak wspieramy klienta punktowo albo end-to-end: od discovery, przez projekt rozwiązania i integracje, aż po rollout i stabilizację po starcie. To właściwa ścieżka, gdy chcesz ocenić, jak wygląda współpraca operacyjna i kompetencyjna.',
+    href: routeMap.team.pl,
+    ctaLabel: 'Zobacz model pracy zespołu',
+    tone: 'band'
+  },
+  {
+    eyebrow: 'Integracje ERP',
+    title: 'Domykamy pracę operacyjną w danych gotowych dla finansów, logistyki i kontrolingu',
+    description:
+      'Na podstronie Integracje pokazujemy, jak łączymy aplikacje operacyjne z ERP bez ręcznego przepisywania danych. Jeśli dziś największym problemem są rozjazdy słowników, eksporty, brak spójności danych albo zbyt ciężki UX po stronie ERP, zacznij właśnie od tego obszaru.',
+    href: routeMap.integrations.pl,
+    ctaLabel: 'Poznaj podejście do integracji',
+    tone: 'default'
+  },
+  {
+    eyebrow: 'Wsparcie po wdrożeniu',
+    title: 'Po starcie produkcyjnym dbamy o ciągłość działania, zmiany procesowe i rozwój systemu',
+    description:
+      'Podstrona Wsparcie systemów opisuje model utrzymania po wdrożeniu: incydenty, SLA, rozwój funkcji i elastyczność hostingu. To właściwy kierunek, gdy rozwiązanie już działa, ale potrzebujesz uporządkowanego modelu wsparcia zamiast reaktywnego gaszenia pożarów.',
+    href: routeMap.support.pl,
+    ctaLabel: 'Sprawdź zakres wsparcia',
+    tone: 'band'
+  }
+] as const;
+
+/**
+ * Sekcja rekrutacyjna na homepage ma dwa zadania:
+ * - dać szybki sygnał, że firma rozwija zespół i aktywnie szuka ludzi do konkretnych ról,
+ * - skierować kandydata do pełnej podstrony „Kariera”, gdzie rozpisaliśmy już szerszy kontekst i oczekiwania.
+ */
+const recruitmentTracks = [
+  {
+    title: 'Analitycy i konsultanci wdrożeniowi',
+    description:
+      'Szukamy osób, które rozumieją proces klienta, potrafią uporządkować wymagania i przeprowadzić organizację przez realny start systemu.'
+  },
+  {
+    title: 'Project Managerowie i role delivery',
+    description:
+      'Rozwijamy kompetencje, które spinają komunikację, harmonogram i odpowiedzialność między klientem, zespołem produktowym i wdrożeniem.'
+  },
+  {
+    title: 'Sprzedaż konsultacyjna B2B i praktyki studenckie',
+    description:
+      'Zapraszamy zarówno osoby rozwijające sprzedaż wartości, jak i studentów, którzy chcą wejść w projekty operacyjne, integracje oraz wdrożenia.'
+  }
+] as const;
+
+/**
+ * FAQ na stronie głównej odpowiada na pytania typowe dla pierwszej wizyty.
+ * Te pytania domykają podstawowe obiekcje i jednocześnie wzmacniają czytelność oferty dla użytkownika oraz dla SEO.
+ */
+const faqs = [
+  {
+    question: 'Czy wdrażacie własne produkty, czy tworzycie też rozwiązania dopasowane do procesu klienta?',
+    answer:
+      'Punktem wyjścia są nasze produkty dla procesów operacyjnych, ale każde wdrożenie dopasowujemy do konkretnego modelu pracy, ról biznesowych, danych oraz integracji po stronie klienta.'
+  },
+  {
+    question: 'Czy Wasze systemy integrują się z ERP?',
+    answer:
+      'Tak. Projektujemy integracje tak, aby dane z operacji były kompletne, spójne i gotowe do rozliczeń, raportowania oraz dalszego obiegu w ERP i systemach sąsiednich.'
+  },
+  {
+    question: 'Czy możecie przejąć wsparcie systemu po wdrożeniu?',
+    answer:
+      'Tak. Oferujemy utrzymanie po starcie produkcyjnym, obsługę incydentów, zmiany procesowe, rozwój funkcji oraz model SLA dopasowany do krytyczności procesu.'
+  },
+  {
+    question: 'Czy prowadzicie rekrutację i praktyki studenckie?',
+    answer:
+      'Tak. Rozwijamy zespół w obszarach analizy, wdrożeń, delivery i sprzedaży B2B, a równolegle zapraszamy studentów zainteresowanych praktykami blisko realnych projektów operacyjnych.'
+  }
+] as const;
+
 const pathname = '/pl/';
 const hreflangPl = canonicalUrl(pathname);
 const hreflangEn = canonicalUrl(routeMap.home.en);
@@ -32,6 +133,18 @@ const structuredData = [
     name: 'get2software.com',
     url: canonicalUrl('/pl/'),
     inLanguage: 'pl-PL'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
   }
 ];
 
@@ -81,6 +194,10 @@ const description =
 
   <section class="g2-container py-16">
     <h2 class="g2-heading-lg">Produkty</h2>
+    <p class="g2-prose mt-4 max-w-3xl">
+      Poniżej znajdziesz produkty odpowiadające na najczęstsze klasy procesów operacyjnych. Każda podstrona pokazuje nie
+      tylko funkcje, ale też logikę pracy, role użytkowników i sposób domknięcia procesu w danych gotowych do rozliczeń.
+    </p>
     <div class="mt-8 grid gap-6 md:grid-cols-2">
       {productsPl.map((entry) => {
         const titleShort = entry.data.pl.heroTitle.split(' - ')[0];
@@ -94,6 +211,93 @@ const description =
           </a>
         );
       })}
+    </div>
+  </section>
+
+  <!--
+    Sekcje wprowadzające:
+    - każda sekcja rozwija osobny temat obecny w głównym menu,
+    - tekst jest dłuższy niż w klasycznych kartach „feature”, bo homepage ma teraz pełnić rolę przewodnika po ofercie,
+    - CTA zostaje uproszczone do pojedynczego przycisku pod opisem, żeby sekcja była lżejsza i mniej gęsta wizualnie.
+  -->
+  {homepageSections.map((section, index) => (
+    <section class:list={['py-16 md:py-20', section.tone === 'band' && 'g2-section-band']} aria-labelledby={`home-intro-${index}`}>
+      <div class="g2-container">
+        <div class="max-w-3xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.22em] text-g2-accent">{section.eyebrow}</p>
+            <h2 id={`home-intro-${index}`} class="g2-heading-lg mt-3 text-balance">
+              {section.title}
+            </h2>
+            <p class="g2-prose mt-5">{section.description}</p>
+            <a href={section.href} class="g2-btn-secondary mt-8 inline-flex">{section.ctaLabel}</a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!--
+    Sekcja rekrutacyjna na stronie głównej:
+    - musi być wyraźnie widoczna, bo użytkownik poprosił o osobny blok „z rekrutacjami”,
+    - zawiera szybki przegląd kierunków naboru, ale nie zastępuje pełnej podstrony `kariera`,
+    - dwa CTA rozdzielają osoby zainteresowane pełną ścieżką rekrutacji od tych, które wolą po prostu napisać.
+  -->
+  <section class="g2-section-band py-16 md:py-20" aria-labelledby="home-careers-heading">
+    <div class="g2-container">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-g2-accent">Rekrutacje</p>
+          <h2 id="home-careers-heading" class="g2-heading-lg mt-3 text-balance">
+            Rozwijamy zespół wokół analizy, wdrożeń, delivery i sprzedaży B2B
+          </h2>
+          <div class="g2-prose mt-5 space-y-4">
+            <p class="!mt-0">
+              Szukamy osób, które chcą pracować blisko realnych procesów klienta i brać odpowiedzialność za efekt końcowy:
+              od uporządkowania wymagań, przez wdrożenie i komunikację projektową, aż po rozwój relacji biznesowej.
+            </p>
+            <p>
+              Na osobnej podstronie szerzej opisujemy aktualne role, styl pracy zespołu oraz ścieżkę dla praktyk
+              studenckich. Tutaj zostawiamy szybki sygnał, że jesteśmy w fazie wzrostu i aktywnie budujemy kolejne
+              kompetencje.
+            </p>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={routeMap.careers.pl} class="g2-btn-primary">Zobacz rekrutacje</a>
+            <a href={routeMap.contact.pl} class="g2-btn-secondary">Napisz do nas</a>
+          </div>
+        </div>
+
+        <div class="grid gap-4">
+          {recruitmentTracks.map((track) => (
+            <article class="g2-glass p-6">
+              <h3 class="font-display text-xl font-semibold text-g2-text">{track.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-g2-muted">{track.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    FAQ na samym dole:
+    - użytkownik wprost o to poprosił, więc blok umieszczamy po wszystkich sekcjach sprzedażowych i produktowych,
+    - prosty układ `dl` jest spójny ze stylem FAQ na podstronach produktów,
+    - pytania odpowiadają na pierwsze decyzje: zakres współpracy, ERP, wsparcie i rekrutacja.
+  -->
+  <section class="g2-container py-16 md:py-20" aria-labelledby="home-faq-heading">
+    <div class="max-w-4xl">
+      <h2 id="home-faq-heading" class="g2-heading-lg">FAQ</h2>
+      <p class="g2-prose mt-4 max-w-3xl">
+        Krótkie odpowiedzi na pytania, które najczęściej pojawiają się podczas pierwszego kontaktu z naszą ofertą.
+      </p>
+      <dl class="mt-8 space-y-4">
+        {faqs.map((faq) => (
+          <div class="g2-glass rounded-xl p-5">
+            <dt class="font-medium text-g2-text">{faq.question}</dt>
+            <dd class="mt-2 text-sm leading-relaxed text-g2-muted">{faq.answer}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 </MarketingLayout>

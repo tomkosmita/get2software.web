@@ -39,7 +39,8 @@ const PATHNAMES = [
   '/en/privacy-policy/',
   '/pl/artykuly/',
   '/pl/artykuly/enova365-integracje-przewodnik/',
-  '/pl/artykuly/proces-zdawczo-odbiorczy-linia-produkcyjna-get2-commissioning/'
+  '/pl/artykuly/proces-zdawczo-odbiorczy-linia-produkcyjna-get2-commissioning/',
+  '/pl/artykuly/migracja-danych-miedzy-systemami-przewodnik/'
 ];
 
 function pathnameToFile(pathname) {

@@ -96,7 +96,7 @@ function navAction(locale: Locale, key: NavigationKey): CtaAction {
  * Wykrywamy ją po ścieżce, żeby nie rozbudowywać wszystkich istniejących stron o nowy prop.
  */
 /**
- * Artykuły żyją pod `/pl/artykuly/...` — nawet jeśli `active` nie został przekazany, wykrywamy ścieżkę,
+ * Artykuły żyją pod `/pl/artykuly/...` - nawet jeśli `active` nie został przekazany, wykrywamy ścieżkę,
  * żeby CTA nie pokazywało domyślnego „home”.
  */
 const pageKey: ActivePage | 'privacy' =
@@ -217,7 +217,7 @@ const ctaConfigByLocale: Record<Locale, Record<ActivePage | 'privacy', CtaConfig
       eyebrow: 'Wdrożenie i kontekst',
       title: 'Chcesz omówić integrację ERP albo odbiór techniczny w praktyce?',
       description:
-        'Artykuły są punktem wyjścia — kolejnym krokiem jest rozmowa o konkretnym procesie, zakresie integracji lub wdrożeniu narzędzia do listy usterek i raportów odbiorowych.',
+        'Artykuły są punktem wyjścia - kolejnym krokiem jest rozmowa o konkretnym procesie, zakresie integracji lub wdrożeniu narzędzia do listy usterek i raportów odbiorowych.',
       actions: [
         { href: routeMap.contact.pl, label: 'Porozmawiajmy', tone: 'primary' },
         navAction('pl', 'integrations'),
@@ -329,7 +329,7 @@ const ctaConfigByLocale: Record<Locale, Record<ActivePage | 'privacy', CtaConfig
       eyebrow: 'Next step',
       title: 'Want to discuss ERP integration or commissioning in practice?',
       description:
-        'These articles are Polish-only for now — if the topic fits your rollout, continue to ERP integrations or the commissioning product, or contact us for a scoped conversation.',
+        'These articles are Polish-only for now - if the topic fits your rollout, continue to ERP integrations or the commissioning product, or contact us for a scoped conversation.',
       actions: [
         { href: routeMap.contact.en, label: 'Contact us', tone: 'primary' },
         navAction('en', 'integrations'),

@@ -16,11 +16,11 @@ type Props = {
     | 'contact'
     | 'articles';
   /**
-   * Pełny URL do odpowiednika w drugim języku — gdy brak (np. treść PL-only), ukrywamy przełącznik języka,
+   * Pełny URL do odpowiednika w drugim języku - gdy brak (np. treść PL-only), ukrywamy przełącznik języka,
    * żeby nie kierować użytkownika na „pustą” stronę EN.
    */
   alternateHref?: string;
-  /** Domyślnie true — wyłącz dla sekcji bez wersji językowej. */
+  /** Domyślnie true - wyłącz dla sekcji bez wersji językowej. */
   showLanguageSwitch?: boolean;
 };
 
@@ -39,7 +39,7 @@ const t =
         support: 'Wsparcie',
         careers: 'Kariera',
         contact: 'Kontakt',
-        /** Sekcja wiedzy — link do polskich artykułów (treść na start wyłącznie PL). */
+        /** Sekcja wiedzy - link do polskich artykułów (treść na start wyłącznie PL). */
         articles: 'Artykuły',
         langSwitch: 'English',
         productBhp: 'get2_BHPRent',
@@ -62,7 +62,7 @@ const t =
         support: 'Support',
         careers: 'Careers',
         contact: 'Contact',
-        /** Ten sam URL co PL — czytelnik widzi, że materiały są po polsku. */
+        /** Ten sam URL co PL - czytelnik widzi, że materiały są po polsku. */
         articles: 'Articles (PL)',
         langSwitch: 'Polski',
         productBhp: 'get2_BHPRent',

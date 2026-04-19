@@ -12,8 +12,8 @@ type Props = {
   pathname: string;
   /**
    * Tryb hreflang:
-   * - `bilingual` (domyślnie): `hreflangPl` + `hreflangEn` — strona ma odpowiednik w drugim języku.
-   * - `pl-only`: treść wyłącznie po polsku — emitujemy tylko `pl` + `x-default` na kanoniczny URL (bez fałszywego `en`).
+   * - `bilingual` (domyślnie): `hreflangPl` + `hreflangEn` - strona ma odpowiednik w drugim języku.
+   * - `pl-only`: treść wyłącznie po polsku - emitujemy tylko `pl` + `x-default` na kanoniczny URL (bez fałszywego `en`).
    */
   hreflangMode?: 'bilingual' | 'pl-only';
   /** Pełne URL alternatywne dla hreflang (PL i EN tej samej treści). Przy `pl-only` ignorowane w `<head>`. */

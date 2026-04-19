@@ -20,7 +20,7 @@ export const routeMap: Record<
   /** Wsparcie utrzymaniowe systemów po wdrożeniu (PL/EN) - hreflang i przełącznik języka. */
   support: { pl: '/pl/wsparcie-systemow/', en: '/en/system-support/' },
   /**
-   * Artykuły / blog — na start treść wyłącznie po polsku; EN menu linkuje do tego samego URL,
+   * Artykuły / blog - na start treść wyłącznie po polsku; EN menu linkuje do tego samego URL,
    * żeby nie budować „pustej” podstrony `/en/...` bez treści.
    */
   articles: { pl: '/pl/artykuly/', en: '/pl/artykuly/' },

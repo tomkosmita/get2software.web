@@ -14,9 +14,13 @@ npm run preview
 - **Statyczny Astro** (`output: static`), `trailingSlash: 'always'`.
 - **i18n:** ścieżki `/pl/...` i `/en/...` (osobne slugi legalne, np. polityka).
 - **Treść produktów:** kolekcja `productBundles` - plik `*.json` na produkt, pola `pl` i `en`.
-- **Artykuły (PL-only):** kolekcja `articles` — pliki `*.md` w `astro-src/src/content/articles/`, routing `/pl/artykuly/` i `/pl/artykuly/[slug]/` (bez odpowiednika EN; przełącznik języka ukryty na tych stronach).
+- **Artykuły (PL-only):** kolekcja `articles` - pliki `*.md` w `astro-src/src/content/articles/`, routing `/pl/artykuly/` i `/pl/artykuly/[slug]/` (bez odpowiednika EN; przełącznik języka ukryty na tych stronach).
 - **SEO:** `MarketingLayout` dokleja JSON-LD `WebPage`; strony produktów dodają `SoftwareApplication`.
 - **Formularz kontaktowy:** wymaga `PUBLIC_CONTACT_FORM_WORKER_URL` + `PUBLIC_TURNSTILE_SITE_KEY` (Worker + Resend - wzorzec jak w projekcie wroclaw-psychoterapia).
+
+## Styl zapisu
+
+- Zakaz używania znaku em dash w treści, komentarzach i copy. Zawsze używaj zwykłego `-`.
 
 ## Obowiązkowo przed commitem
 

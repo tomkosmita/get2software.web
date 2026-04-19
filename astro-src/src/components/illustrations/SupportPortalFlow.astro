@@ -1,9 +1,9 @@
 ---
 /**
- * Diagram wektorowy (SVG) — uproszczony przepływ zgłoszenia przez portal wewnętrzny do wsparcia.
+ * Diagram wektorowy (SVG) - uproszczony przepływ zgłoszenia przez portal wewnętrzny do wsparcia.
  * Cel wizualny: ten sam „język” co ProductVisuals (węzły 1→N, strzałki, ikony w prostokątach, kolory marki),
  * ale osobna semantyka procesu utrzymaniowego (portal → ticket → triage → zespół → SLA).
- * Layout: viewBox liczony jak w ProductVisuals — skalowanie przez class w=full h-auto.
+ * Layout: viewBox liczony jak w ProductVisuals - skalowanie przez class w=full h-auto.
  */
 type Locale = 'pl' | 'en';
 
@@ -22,7 +22,7 @@ const strokeSoft = '#64748b';
 const acc = 'oklch(60% 0.13 200)';
 const acc2 = 'oklch(56% 0.11 262)';
 
-/** Kolejność kroków na osi — zgodna z numeracją w legendzie poniżej SVG. */
+/** Kolejność kroków na osi - zgodna z numeracją w legendzie poniżej SVG. */
 const steps = ['portal', 'ticket', 'classify', 'team', 'sla'] as const;
 
 const legend =
@@ -44,8 +44,8 @@ const legend =
 
 const lead =
   locale === 'pl'
-    ? 'Uproszczony łańcuch od zalogowania użytkownika do zamknięcia sprawy — numery na diagramie odpowiadają opisowi kroków.'
-    : 'A simplified chain from portal access to case closure — numbers on the diagram match the step list below.';
+    ? 'Uproszczony łańcuch od zalogowania użytkownika do zamknięcia sprawy - numery na diagramie odpowiadają opisowi kroków.'
+    : 'A simplified chain from portal access to case closure - numbers on the diagram match the step list below.';
 
 const nodeW = 96;
 const nodeH = 78;
@@ -114,7 +114,7 @@ const markerId = 'support-portal-flow-arrow';
 
             {step === 'portal' && (
               <g stroke={iconColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                {/* Okno „przeglądarki” z paskiem adresu — metafora portalu webowego (bez tekstu w SVG). */}
+                {/* Okno „przeglądarki” z paskiem adresu - metafora portalu webowego (bez tekstu w SVG). */}
                 <rect x={x + 28} y={topY + 22} width="40" height="38" rx="7" />
                 <rect x={x + 32} y={topY + 26} width="32" height="5" rx="1.5" opacity="0.9" />
                 <rect x={x + 34} y={topY + 36} width="12" height="10" rx="1.5" opacity="0.85" />

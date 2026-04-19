@@ -11,12 +11,12 @@ type Props = {
   title: string;
   description: string;
   pathname: string;
-  /** Patrz `BaseLayout` — dla sekcji wyłącznie PL (artykuły) ustaw `pl-only`. */
+  /** Patrz `BaseLayout` - dla sekcji wyłącznie PL (artykuły) ustaw `pl-only`. */
   hreflangMode?: 'bilingual' | 'pl-only';
   hreflangPl: string;
   hreflangEn: string;
   /**
-   * Docelowy URL przełącznika języka (ta sama strona w EN). Dla `hreflangMode=pl-only` pomijamy —
+   * Docelowy URL przełącznika języka (ta sama strona w EN). Dla `hreflangMode=pl-only` pomijamy -
    * użytkownik nie powinien widzieć linku „English”, skoro treści nie ma w EN.
    */
   alternateHref?: string;
@@ -38,7 +38,7 @@ type Props = {
 };
 
 const props = Astro.props as Props;
-/** `showLanguageSwitch` nie jest atrybutem `BaseLayout` — wyłączamy z spreadu. */
+/** `showLanguageSwitch` nie jest atrybutem `BaseLayout` - wyłączamy z spreadu. */
 const { structuredData: pageStructuredData, showLanguageSwitch: showLanguageSwitchProp, ...baseProps } = props;
 const hreflangMode = props.hreflangMode ?? 'bilingual';
 const showLanguageSwitch = showLanguageSwitchProp ?? hreflangMode !== 'pl-only';

@@ -104,7 +104,7 @@
   }
 
   /**
-   * Treść artykułów Markdown: hierarchia nagłówków + listy — bez importu `@tailwindcss/typography` (lekki zestaw klas).
+   * Treść artykułów Markdown: hierarchia nagłówków + listy - bez importu `@tailwindcss/typography` (lekki zestaw klas).
    * Cel: długie teksty pozostają czytelne w ramach istniejącego design systemu (Inter + Space Grotesk).
    */
   .g2-article-prose :where(h2) {
@@ -145,6 +145,28 @@
 
   .g2-article-prose :where(blockquote) {
     @apply border-l-4 border-g2-accent/50 bg-g2-muted/[0.06] py-3 pl-4 pr-3 text-sm italic text-g2-muted;
+  }
+
+  /**
+   * Figurki i media w artykułach:
+   * - pozwalają osadzać zdjęcia i diagramy bez rozjechania rytmu tekstu,
+   * - zdjęcie ma wyglądać jak redakcyjny blok między sekcjami,
+   * - diagram dostaje jaśniejsze tło i delikatną ramkę, żeby czytelnie oddzielić schemat od prose.
+   */
+  .g2-article-figure {
+    @apply my-8 overflow-hidden rounded-2xl border border-g2-border bg-g2-surface shadow-sm;
+  }
+
+  .g2-article-media {
+    @apply block h-auto w-full bg-g2-bg object-cover;
+  }
+
+  .g2-article-media--diagram {
+    @apply bg-g2-bg p-2 md:p-3;
+  }
+
+  .g2-article-caption {
+    @apply border-t border-g2-border bg-g2-muted/[0.035] px-4 py-3 text-sm leading-relaxed text-g2-muted;
   }
 
   /*
