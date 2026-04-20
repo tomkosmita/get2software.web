@@ -22,6 +22,11 @@ npm run preview
 
 - Zakaz używania znaku em dash w treści, komentarzach i copy. Zawsze używaj zwykłego `-`.
 
+## Zdjęcia i assety
+
+- Nie wyświetlaj publicznie informacji o źródle stockowych zdjęć, chyba że wymaga tego konkretna licencja.
+- Źródła, status weryfikacji i notatki licencyjne trzymaj wyłącznie wewnętrznie w `IMAGE_ASSET_REGISTER.md`.
+
 ## Obowiązkowo przed commitem
 
 `npm run build` oraz `npm run verify-seo` muszą przejść bez błędów.

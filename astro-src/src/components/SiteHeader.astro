@@ -164,11 +164,15 @@ const mobileProductLink =
           {t.products}
           <span class="text-xs opacity-70" aria-hidden="true">▾</span>
         </button>
-        <!-- Dropdown: pozycjonowanie absolutne; group-hover pokazuje listę produktów (desktop). -->
+        <!--
+          Dropdown desktop:
+          tło jest prawie nieprzezroczyste i ma mocniejszy blur niż standardowe `g2-glass`,
+          żeby teksty z hero / sekcji pod spodem nie przebijały przez panel produktów.
+        -->
         <div
           class="invisible absolute left-0 top-full z-50 min-w-[14rem] pt-1 opacity-0 transition group-hover:visible group-hover:opacity-100"
         >
-          <div class="g2-glass flex flex-col gap-0.5 p-2 shadow-g2-dropdown">
+          <div class="flex flex-col gap-0.5 rounded-2xl border border-g2-glass-border bg-g2-surface/96 p-2 shadow-g2-dropdown backdrop-blur-xl">
             <a href={pBhp} class="rounded-lg px-3 py-2 text-sm text-g2-muted hover:bg-g2-hover hover:text-g2-text">
               {t.productBhp}
             </a>
